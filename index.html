@@ -1,0 +1,555 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Enlighten - Interactive Learning Platform</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiIgZmlsbD0iIzNiODJmNiI+PHBhdGggZD0iTTIyMC4xOCwzOS4zOUExMTEuMTIsMTExLjEyLDAsMCwwLDEyOCw4QTExMiwxMTIsMCwwLDAsNDMuMywxOTIuNzhjMTQuOTMsMTQuOTEsNDEuNjMsMzMuMjUsNzcuMiw0Ny4yNmExNiwxNiwwLDAsMCwxNSwwYzM1LjU4LTE0LDYyLjI4LTMyLjM1LDc3LjItNDcuMjZBMTEyLDExMiwwLDAsMCwyMjAuMTgsMzkuMzlaTTY4LDkySDE4OHY0MEg2NFptNTIsMTI4YTgsOCwwLDEsMSw4LThBOCw4LDAsMCwxLDEyMCwyMjBabTQwLTY4YTE2LDE2LDAsMCwwLDE2LTE2Vjc2YTE2LDE2LDAsMCwwLTE2LTE2SDY0QTE2LDE2LDAsMCwwLDQ4LDc2djYwYTE2LDE2LDAsMCwwLDE2LDE2WiI+PC9wYXRoPjwvc3ZnPg==">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="/" class="logo">
+      <i class="ph ph-graduation-cap"></i>
+      <span>Enlighten</span>
+    </a>
+    <div class="nav-controls">
+      <div class="search">
+        <i class="ph ph-magnifying-glass"></i>
+        <input type="text" placeholder="Search courses and videos..." id="searchInput">
+      </div>
+      <button id="coursesBtn" class="courses-btn active">
+        <i class="ph ph-books"></i>
+        <span>Courses</span>
+      </button>
+      <button id="videosBtn" class="courses-btn">
+        <i class="ph ph-video"></i>
+        <span>Videos</span>
+      </button>
+      <button id="testsBtn" class="tests-btn">
+        <i class="ph ph-exam"></i>
+        <span>Tests</span>
+      </button>
+      <button id="progressBtn" class="progress-btn">
+        <i class="ph ph-chart-line"></i>
+        <span>Progress</span>
+      </button>
+      <button id="settingsBtn" class="settings-btn">
+        <i class="ph ph-gear"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav-bar">
+    <a href="#" class="mobile-nav-item active" data-section="courses">
+      <i class="ph ph-books"></i>
+      <span>Courses</span>
+    </a>
+    <a href="#" class="mobile-nav-item" data-section="media">
+      <i class="ph ph-video"></i>
+      <span>Videos</span>
+    </a>
+    <a href="#" class="mobile-nav-item" data-section="tests">
+      <i class="ph ph-exam"></i>
+      <span>Tests</span>
+    </a>
+    <a href="#" class="mobile-nav-item" data-section="progress">
+      <i class="ph ph-chart-line"></i>
+      <span>Progress</span>
+    </a>
+    <a href="#" class="mobile-nav-item" data-section="profile">
+      <i class="ph ph-user-circle"></i>
+      <span>Profile</span>
+    </a>
+  </div>
+
+  <main>
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+      <h1>Welcome back, <span id="userGreeting">Student</span>!</h1>
+      <p>Continue your learning journey today</p>
+      <div class="progress-overview">
+        <div class="progress-stat">
+          <div class="stat-value" id="completedLessons">0</div>
+          <div class="stat-label">Lessons Completed</div>
+        </div>
+        <div class="progress-stat">
+          <div class="stat-value" id="completedTests">0</div>
+          <div class="stat-label">Tests Taken</div>
+        </div>
+        <div class="progress-stat">
+          <div class="stat-value" id="avgScore">0%</div>
+          <div class="stat-label">Average Score</div>
+        </div>
+        <div class="progress-stat">
+          <div class="stat-value" id="streakDays">0</div>
+          <div class="stat-label">Day Streak</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Sections -->
+    <section id="coursesSection" class="content-section active">
+      <div class="section-header">
+        <h2><i class="ph ph-books"></i> Courses</h2>
+        <div class="filter-controls">
+          <div class="filter-chips">
+            <div class="filter-chip active" data-subject="all">All Subjects</div>
+            <div class="filter-chip" data-subject="math">Mathematics</div>
+            <div class="filter-chip" data-subject="science">Science</div>
+            <div class="filter-chip" data-subject="history">History</div>
+            <div class="filter-chip" data-subject="language">Language Arts</div>
+            <div class="filter-chip" data-subject="computer">Computer Science</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="course-grid" id="courseGrid">
+        <!-- Will be populated with JS -->
+      </div>
+    </section>
+
+    <section id="mediaSection" class="content-section">
+      <div class="section-header">
+        <h2><i class="ph ph-video"></i> Educational Videos</h2>
+        <div class="filter-controls">
+          <div class="filter-chips">
+            <div class="filter-chip active" data-subject="all">All</div>
+            <div class="filter-chip" data-subject="math">Mathematics</div>
+            <div class="filter-chip" data-subject="science">Science</div>
+            <div class="filter-chip" data-subject="history">History</div>
+            <div class="filter-chip" data-subject="language">Language Arts</div>
+            <div class="filter-chip" data-subject="computer">Computer Science</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="media-types">
+        <button id="videoTypeBtn" class="media-type-btn active">
+          <i class="ph ph-video"></i> Educational Videos
+        </button>
+      </div>
+      
+      <div class="media-container" id="mediaContainer">
+        <!-- Will be populated with JS -->
+      </div>
+    </section>
+
+    <section id="testsSection" class="content-section">
+      <div class="section-header">
+        <h2><i class="ph ph-exam"></i> Tests</h2>
+        <div class="filter-controls">
+          <div class="filter-chips">
+            <div class="filter-chip active" data-test-type="all">All Tests</div>
+            <div class="filter-chip" data-test-type="quiz">Quizzes</div>
+            <div class="filter-chip" data-test-type="exam">Exams</div>
+            <div class="filter-chip" data-test-type="practice">Practice</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tests-grid" id="testsGrid">
+        <!-- Will be populated with JS -->
+      </div>
+    </section>
+
+    <section id="progressSection" class="content-section">
+      <div class="section-header">
+        <h2><i class="ph ph-chart-line"></i> Your Progress</h2>
+      </div>
+      
+      <div class="progress-dashboard">
+        <div class="progress-chart-container">
+          <h3>Learning Activity</h3>
+          <div class="chart-placeholder">
+            <canvas id="activityChart"></canvas>
+          </div>
+        </div>
+        
+        <div class="progress-chart-container">
+          <h3>Subject Performance</h3>
+          <div class="chart-placeholder">
+            <canvas id="performanceChart"></canvas>
+          </div>
+        </div>
+        
+        <div class="achievements-container">
+          <h3>Recent Achievements</h3>
+          <div class="achievements-list" id="achievementsList">
+            <!-- Will be populated with JS -->
+          </div>
+        </div>
+        
+        <div class="test-history-container">
+          <h3>Test History</h3>
+          <div class="test-history-list" id="testHistoryList">
+            <!-- Will be populated with JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Course Modal -->
+  <div id="courseModal" class="modal">
+    <div class="modal-content lesson-modal">
+      <div class="modal-header">
+        <h2 id="lessonTitle">Lesson Title</h2>
+        <div class="modal-controls">
+          <button class="close-btn" id="closeLessonBtn">
+            <i class="ph ph-x"></i>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="lesson-content" id="lessonContent">
+          <!-- Will be populated with lesson content -->
+        </div>
+        
+        <div class="video-container" id="videoContainer">
+          <iframe id="lessonVideo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        
+        <div class="lesson-navigation">
+          <button id="prevLessonBtn" class="nav-btn"><i class="ph ph-arrow-left"></i> Previous</button>
+          <div class="lesson-progress">
+            <span id="currentLessonNum">1</span>/<span id="totalLessons">5</span>
+          </div>
+          <button id="nextLessonBtn" class="nav-btn">Next <i class="ph ph-arrow-right"></i></button>
+        </div>
+      </div>
+      
+      <div class="lesson-quiz" id="lessonQuiz">
+        <h3>Knowledge Check</h3>
+        <div id="quizQuestions">
+          <!-- Will be populated with quiz questions -->
+        </div>
+        <button id="submitQuizBtn" class="primary-btn">Submit Answers</button>
+      </div>
+      
+      <div class="lesson-result" id="lessonResult" style="display: none;">
+        <div class="result-header">
+          <i class="ph ph-check-circle"></i>
+          <h3>Lesson Complete!</h3>
+        </div>
+        <div class="result-score">
+          <div class="score-circle">
+            <span id="quizScore">85%</span>
+          </div>
+        </div>
+        <p id="resultFeedback">Great job! You've mastered this lesson.</p>
+        <div class="result-actions">
+          <button id="retryQuizBtn" class="secondary-btn">Retry Quiz</button>
+          <button id="nextLessonBtnResult" class="primary-btn">Next Lesson</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Test Modal -->
+  <div id="testModal" class="modal">
+    <div class="modal-content test-modal">
+      <div class="modal-header">
+        <h2 id="testTitle">Test Title</h2>
+        <div class="modal-controls">
+          <div id="testTimer" class="test-timer">
+            <i class="ph ph-timer"></i>
+            <span id="timerDisplay">00:00</span>
+          </div>
+          <button class="close-btn" id="closeTestBtn">
+            <i class="ph ph-x"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="modal-body">
+        <div class="test-intro" id="testIntro">
+          <div class="test-info">
+            <div class="test-detail">
+              <i class="ph ph-question"></i>
+              <div>
+                <h4>Questions</h4>
+                <p id="questionCount">10 questions</p>
+              </div>
+            </div>
+            <div class="test-detail">
+              <i class="ph ph-timer"></i>
+              <div>
+                <h4>Time Limit</h4>
+                <p id="timeLimit">20 minutes</p>
+              </div>
+            </div>
+            <div class="test-detail">
+              <i class="ph ph-trophy"></i>
+              <div>
+                <h4>Passing Score</h4>
+                <p id="passingScore">70%</p>
+              </div>
+            </div>
+          </div>
+          <div class="test-description" id="testDescription">
+            <p>Test description will appear here.</p>
+          </div>
+          <button id="startTestBtn" class="primary-btn">Begin Test</button>
+        </div>
+        
+        <div class="test-questions" id="testQuestions" style="display: none;">
+          <!-- Will be populated with test questions -->
+          <div class="question-navigation">
+            <div class="question-indicators" id="questionIndicators">
+              <!-- Will be populated with question indicators -->
+            </div>
+          </div>
+          <div id="questionContainer">
+            <!-- Current question will be displayed here -->
+          </div>
+          <div class="test-navigation">
+            <button id="prevQuestionBtn" class="nav-btn"><i class="ph ph-arrow-left"></i> Previous</button>
+            <button id="nextQuestionBtn" class="nav-btn">Next <i class="ph ph-arrow-right"></i></button>
+            <button id="finishTestBtn" class="primary-btn" style="display: none;">Finish Test</button>
+          </div>
+        </div>
+        
+        <div class="test-result" id="testResult" style="display: none;">
+          <div class="result-header">
+            <div id="resultIcon"></div>
+            <h3 id="resultTitle">Test Complete!</h3>
+          </div>
+          <div class="result-score">
+            <div class="score-circle large">
+              <span id="testScore">85%</span>
+            </div>
+          </div>
+          <div class="score-breakdown">
+            <div class="score-item">
+              <span class="score-label">Correct</span>
+              <span class="score-value" id="correctAnswers">8/10</span>
+            </div>
+            <div class="score-item">
+              <span class="score-label">Time Taken</span>
+              <span class="score-value" id="timeTaken">12:45</span>
+            </div>
+          </div>
+          <p id="testFeedback">Great job! You've passed this test with excellence.</p>
+          <div class="result-actions">
+            <button id="reviewTestBtn" class="secondary-btn">Review Answers</button>
+            <button id="retakeTestBtn" class="secondary-btn">Retake Test</button>
+            <button id="backToTestsBtn" class="primary-btn">Back to Tests</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Media Modal -->
+  <div id="mediaModal" class="modal">
+    <div class="modal-content media-modal">
+      <div class="modal-header">
+        <h2 id="mediaTitle">Video Title</h2>
+        <div class="modal-controls">
+          <button class="close-btn" id="closeMediaBtn">
+            <i class="ph ph-x"></i>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <!-- Custom Video Player -->
+        <div id="customVideoPlayer" class="custom-video-player"></div>
+        
+        <!-- YouTube/iframe player for movies -->
+        <div class="video-container full-width">
+          <iframe id="mediaPlayer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="media-controls">
+          <button class="media-action-btn" id="shareMediaBtn">
+            <i class="ph ph-share-network"></i> Share with Friends
+          </button>
+          <button class="media-action-btn" id="saveMediaBtn">
+            <i class="ph ph-bookmark-simple"></i> Save for Later
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settingsModal" class="modal">
+    <div class="modal-content settings-modal">
+      <div class="modal-header">
+        <h2><i class="ph ph-gear"></i> Settings</h2>
+        <button class="close-btn" id="closeSettingsBtn">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      
+      <div class="settings-panel">
+        <div class="settings-tabs">
+          <div class="settings-tab active" data-tab="account">
+            <i class="ph ph-user-circle"></i>
+            Account
+          </div>
+          <div class="settings-tab" data-tab="appearance">
+            <i class="ph ph-paint-brush"></i>
+            Appearance
+          </div>
+          <div class="settings-tab" data-tab="notifications">
+            <i class="ph ph-bell"></i>
+            Notifications
+          </div>
+          <div class="settings-tab" data-tab="accessibility">
+            <i class="ph ph-wheelchair"></i>
+            Accessibility
+          </div>
+        </div>
+        
+        <div class="settings-tab-content active" data-tab-content="account">
+          <div class="settings-section">
+            <h3>Profile Information</h3>
+            <div class="setting-item">
+              <label for="displayName">Display Name</label>
+              <input type="text" id="displayName" value="Student">
+            </div>
+            <div class="setting-item">
+              <label for="emailAddress">Email Address</label>
+              <input type="email" id="emailAddress" value="student@example.com">
+            </div>
+            <button id="updateProfileBtn" class="primary-btn">Save Changes</button>
+          </div>
+          
+          <div class="settings-section">
+            <h3>Account Management</h3>
+            <div class="setting-actions">
+              <button id="exportDataBtn" class="secondary-btn">
+                <i class="ph ph-download"></i> Export Learning Data
+              </button>
+              <button id="logoutBtn" class="warning-btn">
+                <i class="ph ph-sign-out"></i> Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="settings-tab-content" data-tab-content="appearance">
+          <div class="settings-section">
+            <h3>Theme</h3>
+            <div class="setting-item">
+              <label>Color Scheme</label>
+              <div class="theme-options">
+                <div class="theme-option active" data-theme="light">
+                  <div class="theme-preview light"></div>
+                  <span>Light</span>
+                </div>
+                <div class="theme-option" data-theme="dark">
+                  <div class="theme-preview dark"></div>
+                  <span>Dark</span>
+                </div>
+                <div class="theme-option" data-theme="system">
+                  <div class="theme-preview system"></div>
+                  <span>System</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="setting-item">
+              <label>Accent Color</label>
+              <div class="color-options">
+                <div class="color-option active" data-color="blue" style="background-color: #3b82f6;"></div>
+                <div class="color-option" data-color="purple" style="background-color: #8b5cf6;"></div>
+                <div class="color-option" data-color="pink" style="background-color: #ec4899;"></div>
+                <div class="color-option" data-color="green" style="background-color: #10b981;"></div>
+                <div class="color-option" data-color="orange" style="background-color: #f97316;"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="settings-section">
+            <h3>Layout</h3>
+            <div class="setting-item">
+              <div class="setting-option">
+                <label for="compactMode">Compact Mode</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="compactMode">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="settings-tab-content" data-tab-content="notifications">
+          <div class="settings-section">
+            <h3>Notification Preferences</h3>
+            <div class="setting-item">
+              <div class="setting-option">
+                <label for="emailNotifs">Email Notifications</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="emailNotifs" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-option">
+                <label for="reminderNotifs">Learning Reminders</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="reminderNotifs" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-option">
+                <label for="testNotifs">Test Updates</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="testNotifs" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="settings-tab-content" data-tab-content="accessibility">
+          <div class="settings-section">
+            <h3>Reading & Display</h3>
+            <div class="setting-item">
+              <label for="fontSize">Font Size</label>
+              <div class="range-slider">
+                <input type="range" id="fontSize" min="80" max="120" value="100">
+                <span id="fontSizeValue">100%</span>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-option">
+                <label for="highContrast">High Contrast Mode</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="highContrast">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-option">
+                <label for="reduceMotion">Reduce Animations</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="reduceMotion">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification System -->
+  <div id="notificationContainer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="enlighten.js"></script>
+</body>
+</html>
