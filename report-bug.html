@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Report a Bug - GameHub Pro</title>
+  <title>Report a Bug - Enlighten</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiIgZmlsbD0iIzdDM0FFRiI+CiAgPHBhdGggZD0iTTE4OCAxMDRhMTIgMTIgMCAwIDEtMTIgMTJoLTU2vjU2YTEyIDEyIDAgMCAxLTI0IDB2LTU2SDIwYTEyIDEyIDAgMCAxIDAtMjRoNTZWMjhhMTIgMTIgMCAwIDEgMjQgMHY1Mmg1NmExMiAxMiAwIDAgMSAxMiAxMnptNjguNTYgMTAuNjktODBhMTYgMTYgMCAwIDAtMjIuNTYgMGwtODAuMDcgODBhMTYgMTYgMCAwIDAgMjIuNTYgMjIuNTdMMTI4IDE1Mi41N2w2OS40NyA2OS40OWExNiAxNiAwIDAgMCAyMi41Ni0yMi41N3oiPjwvcGF0aD4KPC9zdmc+">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiIgZmlsbD0iIzNiODJmNiI+PHBhdGggZD0iTTIyMC4xOCwzOS4zOUExMTEuMTIsMTExLjEyLDAsMCwwLDEyOCw4QTExMiwxMTIsMCwwLDAsNDMuMywxOTIuNzhjMTQuOTMsMTQuOTEsNDEuNjMsMzMuMjUsNzcuMiw0Ny4yNmExNiwxNiwwLDAsMCwxNSwwYzM1LjU4LTE0LDYyLjI4LTMyLjM1LDc3LjItNDcuMjZBMTEyLDExMiwwLDAsMCwyMjAuMTgsMzkuMzlaTTY4LDkySDE4OHY0MEg2NFptNTIsMTI4YTgsOCwwLDEsMSw4LThBOCw4LDAsMCwxLDEyMCwyMjBabTQwLTY4YTE2LDE2LDAsMCwwLDE2LTE2Vjc2YTE2LDE2LDAsMCwwLTE2LTE2SDY0QTE2LDE2LDAsMCwwLDQ4LDc2djYwYTE2LDE2LDAsMCwwLDE2LDE2WiI+PC9wYXRoPjwvc3ZnPg==">
 </head>
 <body>
   <div class="bug-report-container" style="max-width: 800px; margin: 0 auto; padding: 20px; min-height: 100vh;">
     <div class="bug-report-header" style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border);">
       <a href="/" class="back-btn" style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); text-decoration: none; transition: var(--transition); width: max-content;">
         <i class="ph ph-arrow-left"></i>
-        Back to GameHub
+        Back to Enlighten
       </a>
       <h1 style="display: flex; align-items: center; gap: 0.8rem; color: var(--primary);">
         <i class="ph ph-bug"></i> Report a Bug
@@ -36,11 +36,15 @@
           </div>
           
           <div>
-            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary);">Game Name</label>
-            <select name="game" required style="width: 100%; padding: 0.8rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text);">
-              <option value="">Select a game</option>
-              <option value="general">General Website Issue</option>
-              <!-- Games will be populated via JavaScript -->
+            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary);">Platform Area</label>
+            <select name="area" required style="width: 100%; padding: 0.8rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text);">
+              <option value="">Select an area</option>
+              <option value="courses">Courses</option>
+              <option value="tests">Tests</option>
+              <option value="videos">Educational Videos</option>
+              <option value="account">Account & Settings</option>
+              <option value="performance">Progress Tracking</option>
+              <option value="general">General Platform Issue</option>
             </select>
           </div>
           
@@ -48,11 +52,11 @@
             <label style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary);">Type of Bug</label>
             <select name="bugType" required style="width: 100%; padding: 0.8rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text);">
               <option value="">Select bug type</option>
-              <option value="game">Game Not Loading</option>
-              <option value="performance">Performance Issues</option>
-              <option value="graphics">Graphics/Visual Bugs</option>
-              <option value="controls">Control Issues</option>
-              <option value="sound">Sound Problems</option>
+              <option value="functionality">Functionality Issue</option>
+              <option value="loading">Content Not Loading</option>
+              <option value="performance">Performance Problems</option>
+              <option value="visual">Visual/UI Problems</option>
+              <option value="account">Account/Login Issues</option>
               <option value="other">Other</option>
             </select>
           </div>
@@ -67,7 +71,12 @@
             <textarea name="steps" required rows="3" style="width: 100%; padding: 0.8rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); resize: vertical;" placeholder="List the steps to reproduce this bug."></textarea>
           </div>
           
-          <button type="submit" style="background: var(--primary); color: white; padding: 0.8rem; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: 500; transition: var(--transition);">Submit Bug Report</button>
+          <div>
+            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary);">Device & Browser Information</label>
+            <input type="text" name="deviceInfo" placeholder="e.g., iPhone 13, Chrome 98" style="width: 100%; padding: 0.8rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text);">
+          </div>
+          
+          <button type="submit" style="background: var(--primary); color: white; padding: 0.8rem; border: none; border-radius: var(--radius-md); cursor: pointer; font-weight: 500; transition: var(--transition); margin-top: 0.5rem;">Submit Bug Report</button>
         </form>
       </section>
       
@@ -76,7 +85,7 @@
         <ul style="list-style-type: none; padding: 0;">
           <li style="display: flex; align-items: start; gap: 0.8rem; margin-bottom: 0.8rem;">
             <i class="ph ph-check-circle" style="color: var(--primary); margin-top: 0.2rem;"></i>
-            <span>Check if your browser and game are up to date</span>
+            <span>Make sure your browser and device are up to date</span>
           </li>
           <li style="display: flex; align-items: start; gap: 0.8rem; margin-bottom: 0.8rem;">
             <i class="ph ph-check-circle" style="color: var(--primary); margin-top: 0.2rem;"></i>
@@ -93,17 +102,13 @@
         <h3 style="color: var(--primary); margin-bottom: 0.8rem;">Alternative Contact Methods</h3>
         <p style="margin-bottom: 1rem;">You can also report bugs through these channels:</p>
         <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-          <a href="mailto:briansubirat6@gmail.com" style="display: flex; align-items: center; gap: 0.5rem; color: var(--primary); text-decoration: none;">
+          <a href="mailto:support@enlighten.edu" style="display: flex; align-items: center; gap: 0.5rem; color: var(--primary); text-decoration: none;">
             <i class="ph ph-envelope"></i>
             Email Support
           </a>
-          <a href="https://discord.com/users/bmthluv" target="_blank" style="display: flex; align-items: center; gap: 0.5rem; color: var(--primary); text-decoration: none;">
+          <a href="https://discord.com/users/enlightensupport" target="_blank" style="display: flex; align-items: center; gap: 0.5rem; color: var(--primary); text-decoration: none;">
             <i class="ph ph-discord-logo"></i>
             Discord Support
-          </a>
-          <a href="https://github.com/BrianSubirat" target="_blank" style="display: flex; align-items: center; gap: 0.5rem; color: var(--primary); text-decoration: none;">
-            <i class="ph ph-github-logo"></i>
-            GitHub Issues
           </a>
         </div>
       </section>
@@ -112,17 +117,10 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Populate games dropdown if window.games is available
-      if (window.games) {
-        const gameSelect = document.querySelector('select[name="game"]');
-        if (gameSelect) {
-          window.games.forEach(game => {
-            const option = document.createElement('option');
-            option.value = game.id;
-            option.textContent = game.title;
-            gameSelect.appendChild(option);
-          });
-        }
+      // Automatically fill in device info
+      const deviceInfo = document.querySelector('input[name="deviceInfo"]');
+      if (deviceInfo) {
+        deviceInfo.value = `${navigator.platform}, ${navigator.userAgent.match(/(?:firefox|chrome|safari)\/(\d+)/i)?.[0] || 'Unknown Browser'}`;
       }
 
       // Handle form submission
@@ -135,10 +133,11 @@
           const formData = new FormData(e.target);
           const name = formData.get('name') || 'Anonymous';
           const email = formData.get('email') || 'Not provided';
-          const game = formData.get('game');
+          const area = formData.get('area');
           const bugType = formData.get('bugType');
           const description = formData.get('description');
           const steps = formData.get('steps');
+          const deviceInfo = formData.get('deviceInfo');
           
           // Prepare email body
           const emailBody = `
@@ -146,8 +145,9 @@ Bug Report Details:
 
 Reporter: ${name}
 Email: ${email}
-Game: ${game}
+Platform Area: ${area}
 Bug Type: ${bugType}
+Device Info: ${deviceInfo}
 
 Description:
 ${description}
@@ -157,7 +157,7 @@ ${steps}
           `;
           
           // Open email client
-          window.location.href = `mailto:briansubirat6@gmail.com?subject=Bug Report: ${game}&body=${encodeURIComponent(emailBody)}`;
+          window.location.href = `mailto:support@enlighten.edu?subject=Bug Report: ${area}&body=${encodeURIComponent(emailBody)}`;
           
           // Clear form
           e.target.reset();

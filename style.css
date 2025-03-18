@@ -523,13 +523,32 @@ main {
 }
 
 .course-thumbnail {
-  height: 150px;
+  height: 180px;
   background: var(--primary-light);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-size: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.course-thumbnail-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.course-card:hover .course-thumbnail-overlay {
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .course-content {
@@ -1155,7 +1174,6 @@ main {
 .warning-btn:hover {
   background: #dc2626;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
 .lesson-result {
@@ -1338,7 +1356,14 @@ main {
 
 /* Settings Modal */
 .settings-modal .modal-content {
-  max-width: 900px;
+  max-width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 0;
+}
+
+.settings-modal {
+  padding: 0;
 }
 
 .settings-panel {
@@ -2407,5 +2432,73 @@ main {
     max-height: 70vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Footer Styles */
+.site-footer {
+  background: var(--surface);
+  padding: 2rem 0 1rem;
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  padding: 0 2rem 2rem;
+}
+
+.footer-section h3 {
+  color: var(--text);
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.footer-section p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.footer-section ul {
+  padding: 0;
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.footer-section ul li a:hover {
+  color: var(--primary);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    padding: 0 1rem 1rem;
+  }
+  
+  .site-footer {
+    margin-bottom: 60px; /* Space for mobile nav */
   }
 }

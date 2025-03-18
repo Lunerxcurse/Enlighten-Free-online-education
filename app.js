@@ -474,8 +474,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (settingsBtn && settingsModal) {
     settingsBtn.addEventListener('click', () => {
       updateAccountSettingsDisplay();
+      settingsModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // Prevent scrolling behind modal
     });
   }
+  
+  document.getElementById('closeSettingsBtn')?.addEventListener('click', () => {
+    settingsModal.style.display = 'none';
+    document.body.style.overflow = ''; // Restore scrolling
+  });
 
   setupAccountActionButtons();
 

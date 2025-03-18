@@ -28,8 +28,8 @@ class Auth {
 
   checkAuth() {
     if (!this.isLoggedIn()) {
-      // Create guest session instead of redirecting
-      this.createGuestSession();
+      // Redirect to login page instead of creating guest session
+      window.location.href = 'login.html';
     }
   }
 
@@ -45,8 +45,7 @@ class Auth {
   }
 
   initializeGuestSession() {
-    // Don't automatically create guest session if no session exists
-    // Only create guest sessions when explicitly requested from login page
+    // Guest sessions are only created when explicitly requested from login page
   }
 
   setupEventListeners() {

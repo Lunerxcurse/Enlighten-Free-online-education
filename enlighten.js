@@ -154,8 +154,42 @@ const enlightenData = {
           question: "Simplify: 2(x + 3) - 4",
           options: ["2x + 6 - 4", "2x + 2", "2x + 6", "2x"],
           correctAnswer: 1
+        },
+        {
+          question: "What is the square root of 64?",
+          options: ["6", "8", "7", "9"],
+          correctAnswer: 1
+        },
+        {
+          question: "Find the slope of the line passing through points (2,3) and (5,9)",
+          options: ["2", "3", "4", "6"],
+          correctAnswer: 0
+        },
+        {
+          question: "What is 15% of 200?",
+          options: ["20", "30", "40", "50"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the next number in the sequence: 2, 4, 8, 16, ___?",
+          options: ["24", "32", "64", "128"],
+          correctAnswer: 1
+        },
+        {
+          question: "Solve for x: x² = 25",
+          options: ["x = ±5", "x = 5", "x = 25", "x = ±25"],
+          correctAnswer: 0
+        },
+        {
+          question: "What is the volume of a cube with side length 4?",
+          options: ["16", "32", "64", "128"],
+          correctAnswer: 2
+        },
+        {
+          question: "If 3x + 7 = 22, what is the value of 5x - 2?",
+          options: ["23", "33", "43", "53"],
+          correctAnswer: 0
         }
-        // More questions would be added for a real implementation
       ]
     },
     {
@@ -246,6 +280,132 @@ const enlightenData = {
         }
         // More questions would be added for a real implementation
       ]
+    },
+    {
+      id: "language-quiz1",
+      title: "English Grammar Quiz",
+      subject: "language",
+      type: "quiz",
+      description: "Test your understanding of English grammar, punctuation, and sentence structure.",
+      questionCount: 10,
+      timeLimit: "15 minutes",
+      passingScore: "70%",
+      completed: false,
+      questions: [
+        {
+          question: "Which of the following is a proper noun?",
+          options: ["car", "city", "London", "happiness"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the past tense of 'write'?",
+          options: ["writed", "wrote", "writen", "writed"],
+          correctAnswer: 1
+        },
+        {
+          question: "Identify the adverb in the sentence: 'She sings beautifully.'",
+          options: ["she", "sings", "beautifully", "there is no adverb"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which punctuation mark ends an interrogative sentence?",
+          options: ["period", "exclamation mark", "question mark", "comma"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the comparative form of 'good'?",
+          options: ["gooder", "more good", "better", "best"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which of these is a compound sentence?",
+          options: ["He ran quickly.", "He ran quickly and won the race.", "Although he ran quickly, he lost the race.", "Quickly, he ran."],
+          correctAnswer: 1
+        },
+        {
+          question: "Which word is a preposition?",
+          options: ["run", "beautiful", "under", "quickly"],
+          correctAnswer: 2
+        },
+        {
+          question: "What type of pronoun is 'themselves'?",
+          options: ["personal", "relative", "reflexive", "possessive"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which sentence uses the correct form of 'there/their/they're'?",
+          options: ["Their going to the store.", "They're car is red.", "There going to be late.", "They're not coming tonight."],
+          correctAnswer: 3
+        },
+        {
+          question: "What is the subject in this sentence: 'The big dog barked loudly.'?",
+          options: ["The", "big", "dog", "The big dog"],
+          correctAnswer: 3
+        }
+      ]
+    },
+    {
+      id: "geography-quiz1",
+      title: "World Geography Quiz",
+      subject: "history",
+      type: "quiz",
+      description: "Test your knowledge of world geography, countries, capitals, and landmarks.",
+      questionCount: 10,
+      timeLimit: "15 minutes",
+      passingScore: "70%",
+      completed: false,
+      questions: [
+        {
+          question: "What is the capital of France?",
+          options: ["Rome", "Berlin", "Paris", "Madrid"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which is the largest ocean on Earth?",
+          options: ["Atlantic", "Indian", "Arctic", "Pacific"],
+          correctAnswer: 3
+        },
+        {
+          question: "The Great Barrier Reef is located in which country?",
+          options: ["Brazil", "Australia", "Thailand", "Mexico"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which continent is Egypt located in?",
+          options: ["Asia", "Europe", "Africa", "Australia"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the longest river in the world?",
+          options: ["Amazon", "Nile", "Mississippi", "Yangtze"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which mountain range separates Europe and Asia?",
+          options: ["Alps", "Andes", "Urals", "Himalayas"],
+          correctAnswer: 2
+        },
+        {
+          question: "Tokyo is the capital of which country?",
+          options: ["China", "South Korea", "Thailand", "Japan"],
+          correctAnswer: 3
+        },
+        {
+          question: "The Panama Canal connects which two oceans?",
+          options: ["Atlantic and Pacific", "Pacific and Indian", "Atlantic and Indian", "Arctic and Atlantic"],
+          correctAnswer: 0
+        },
+        {
+          question: "Which desert is the largest in the world?",
+          options: ["Gobi", "Kalahari", "Sahara", "Arabian"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which is the smallest continent?",
+          options: ["Europe", "Australia", "Antarctica", "South America"],
+          correctAnswer: 1
+        }
+      ]
     }
   ],
   
@@ -311,7 +471,8 @@ const enlightenData = {
           thumbnail: 'algebra',
           duration: '15:24',
           url: 'https://www.youtube.com/embed/LwCRRUa8yTU',
-          description: 'Learn the core concepts of algebra with clear examples and practice problems.'
+          description: 'Learn the core concepts of algebra with clear examples and practice problems.',
+          image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=500&auto=format&fit=crop&q=60'
         },
         {
           id: 'science-video-1',
@@ -320,7 +481,8 @@ const enlightenData = {
           thumbnail: 'cells',
           duration: '18:36',
           url: 'https://www.youtube.com/embed/URUJD5NEXC8',
-          description: 'Dive into the world of cells, their structures, and functions in this comprehensive guide.'
+          description: 'Dive into the world of cells, their structures, and functions in this comprehensive guide.',
+          image: 'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=500&auto=format&fit=crop&q=60'
         },
         {
           id: 'history-video-1',
@@ -329,7 +491,8 @@ const enlightenData = {
           thumbnail: 'mesopotamia',
           duration: '22:15',
           url: 'https://www.youtube.com/embed/C2RxY02wr8Y',
-          description: 'Explore the cradle of civilization and discover how ancient Mesopotamia shaped human history.'
+          description: 'Explore the cradle of civilization and discover how ancient Mesopotamia shaped human history.',
+          image: 'https://images.unsplash.com/photo-1603695248929-304770ebabb2?w=500&auto=format&fit=crop&q=60'
         },
         {
           id: 'language-video-1',
@@ -338,7 +501,8 @@ const enlightenData = {
           thumbnail: 'writing',
           duration: '13:42',
           url: 'https://www.youtube.com/embed/R4FQ8jEbGEw',
-          description: 'Learn powerful creative writing techniques to enhance your storytelling abilities.'
+          description: 'Learn powerful creative writing techniques to enhance your storytelling abilities.',
+          image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=500&auto=format&fit=crop&q=60'
         },
         {
           id: 'computer-video-1',
@@ -347,7 +511,8 @@ const enlightenData = {
           thumbnail: 'python',
           duration: '26:18',
           url: 'https://www.youtube.com/embed/kqtD5dpn9C8',
-          description: 'Start your programming journey with this beginner-friendly Python tutorial.'
+          description: 'Start your programming journey with this beginner-friendly Python tutorial.',
+          image: 'https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?w=500&auto=format&fit=crop&q=60'
         },
         {
           id: 'math-video-2',
@@ -356,7 +521,8 @@ const enlightenData = {
           thumbnail: 'calculus',
           duration: '20:10',
           url: 'https://www.youtube.com/embed/EKvHQc3QEow',
-          description: 'A comprehensive guide to understanding and working with derivatives in calculus.'
+          description: 'A comprehensive guide to understanding and working with derivatives in calculus.',
+          image: 'https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?w=500&auto=format&fit=crop&q=60'
         },
         {
           id: 'science-video-2',
@@ -365,7 +531,8 @@ const enlightenData = {
           thumbnail: 'chemistry',
           duration: '17:45',
           url: 'https://www.youtube.com/embed/rz4Dd1I_fX0',
-          description: 'Learn about the elements and structure of the periodic table in this fascinating video.'
+          description: 'Learn about the elements and structure of the periodic table in this fascinating video.',
+          image: 'https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=500&auto=format&fit=crop&q=60'
         },
         {
           id: 'computer-video-2',
@@ -374,7 +541,8 @@ const enlightenData = {
           thumbnail: 'webdev',
           duration: '28:52',
           url: 'https://www.youtube.com/embed/qz0aGYrrlhU',
-          description: 'Build a solid foundation in HTML, CSS, and JavaScript for web development.'
+          description: 'Build a solid foundation in HTML, CSS, and JavaScript for web development.',
+          image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&auto=format&fit=crop&q=60'
         }
       ]
     };
@@ -391,11 +559,7 @@ const enlightenData = {
       const subjectLabel = getSubjectName(item.subject);
       
       mediaCard.innerHTML = `
-        <div class="media-thumbnail">
-          <i class="${item.subject === 'math' ? 'ph-function' : 
-                       item.subject === 'science' ? 'ph-atom' : 
-                       item.subject === 'history' ? 'ph-scroll' :
-                       item.subject === 'language' ? 'ph-pen-nib' : 'ph-code'}"></i>
+        <div class="media-thumbnail" style="background-image: url('${item.image}'); background-size: cover; background-position: center;">
           <span class="media-duration">${item.duration}</span>
         </div>
         <div class="media-content">
@@ -445,37 +609,57 @@ const enlightenData = {
       // All content is now treated as videos, not movies
       mediaPlayer.style.display = 'none';
       customVideoPlayer.style.display = 'block';
-      customVideoPlayer.innerHTML = `
-        <div class="custom-video-container">
-          <video id="mainVideo" controls>
-            <source src="${media.url}" type="video/mp4">
-            Your browser does not support HTML5 video.
-          </video>
-          <div class="custom-video-controls">
-            <button class="custom-play-btn"><i class="ph ph-play"></i></button>
-            <div class="custom-progress">
-              <div class="custom-progress-bar"></div>
-            </div>
-            <div class="custom-time">00:00 / ${media.duration}</div>
-            <button class="custom-volume-btn"><i class="ph ph-speaker-high"></i></button>
-            <button class="custom-fullscreen-btn"><i class="ph ph-arrows-out"></i></button>
-          </div>
-        </div>
-      `;
       
-      // Setup custom video controls
-      setupCustomVideoPlayer();
-      
-      // Update loading indicator removal
-      const video = document.getElementById('mainVideo');
-      if (video) {
-        video.addEventListener('loadeddata', () => {
+      // Use iframe for YouTube videos
+      if (media.url.includes('youtube.com/embed')) {
+        customVideoPlayer.innerHTML = `
+          <iframe width="100%" height="500" src="${media.url}" frameborder="0" 
+           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+           allowfullscreen></iframe>
+        `;
+        
+        // Remove loading indicator after a short delay
+        setTimeout(() => {
           const indicator = document.querySelector('.media-loading-indicator');
           if (indicator) {
             indicator.classList.add('fade-out');
             setTimeout(() => indicator.remove(), 500);
           }
-        });
+        }, 1000);
+      } else {
+        // Custom video player setup for non-YouTube videos
+        customVideoPlayer.innerHTML = `
+          <div class="custom-video-container">
+            <video id="mainVideo" controls>
+              <source src="${media.url}" type="video/mp4">
+              Your browser does not support HTML5 video.
+            </video>
+            <div class="custom-video-controls">
+              <button class="custom-play-btn"><i class="ph ph-play"></i></button>
+              <div class="custom-progress">
+                <div class="custom-progress-bar"></div>
+              </div>
+              <div class="custom-time">00:00 / ${media.duration}</div>
+              <button class="custom-volume-btn"><i class="ph ph-speaker-high"></i></button>
+              <button class="custom-fullscreen-btn"><i class="ph ph-arrows-out"></i></button>
+            </div>
+          </div>
+        `;
+        
+        // Setup custom video controls
+        setupCustomVideoPlayer();
+        
+        // Update loading indicator removal
+        const video = document.getElementById('mainVideo');
+        if (video) {
+          video.addEventListener('loadeddata', () => {
+            const indicator = document.querySelector('.media-loading-indicator');
+            if (indicator) {
+              indicator.classList.add('fade-out');
+              setTimeout(() => indicator.remove(), 500);
+            }
+          });
+        }
       }
     }
 
@@ -954,10 +1138,15 @@ function loadAllCourses() {
   let html = '';
   
   enlightenData.courses.forEach(course => {
+    // Generate a random image URL for the course background
+    const courseImage = generateCourseImage(course.subject);
+    
     html += `
       <div class="course-card" data-course-id="${course.id}">
-        <div class="course-thumbnail">
-          <i class="${course.icon}"></i>
+        <div class="course-thumbnail" style="background-image: url('${courseImage}'); background-size: cover; background-position: center;">
+          <div class="course-thumbnail-overlay">
+            <i class="${course.icon}"></i>
+          </div>
         </div>
         <div class="course-content">
           <span class="course-subject">${getSubjectName(course.subject)}</span>
@@ -966,7 +1155,7 @@ function loadAllCourses() {
           <div class="course-meta">
             <div class="course-meta-item">
               <i class="ph ph-book-open"></i>
-              <span>${course.lessons.length} lessons</span>
+              <span>${course.lessons || 10} lessons</span>
             </div>
             <div class="course-meta-item">
               <i class="ph ph-clock"></i>
@@ -987,14 +1176,17 @@ function loadAllCourses() {
       const courseId = this.getAttribute('data-course-id');
       const course = enlightenData.courses.find(c => c.id === courseId);
       
-      if (course) {
-        // If course has progress, open the current lesson
-        if (course.progress > 0) {
-          openLesson(courseId, `${courseId}-${course.currentLesson}`);
-        } else {
-          // Otherwise, open the first lesson
-          openLesson(courseId, `${courseId}-1`);
-        }
+      if (!course) {
+        showNotification('Error', 'Course not found.', 'error');
+        return;
+      }
+      
+      // If course has progress, open the current lesson
+      if (course.progress > 0) {
+        openLesson(courseId, `${courseId}-${course.currentLesson}`);
+      } else {
+        // Otherwise, open the first lesson
+        openLesson(courseId, `${courseId}-1`);
       }
     });
   });
@@ -1302,17 +1494,415 @@ function openLesson(courseId, lessonId) {
     return;
   }
   
+  // Default lesson content with questions
+  const lessonContent = {
+    math101: {
+      title: "Mathematics Fundamentals",
+      content: "<h3>Key Mathematics Concepts</h3><p>This lesson covers important mathematical principles and problem-solving techniques.</p>",
+      quiz: [
+        {
+          question: "What is the derivative of x²?",
+          options: ["2x", "x", "x³", "2"],
+          correctAnswer: 0
+        },
+        {
+          question: "Which of the following is a quadratic equation?",
+          options: ["y = 2x + 3", "y = x² + 2x - 1", "y = 3/x", "y = √x"],
+          correctAnswer: 1
+        },
+        {
+          question: "Simplify: 2(x + 3) - 4",
+          options: ["2x + 6 - 4", "2x + 2", "2x + 6", "2x"],
+          correctAnswer: 1
+        }
+        // More questions would be added for a real implementation
+      ]
+    },
+    science201: {
+      title: "Introduction to Biology",
+      content: "<h3>Key Biology Concepts</h3><p>This lesson covers important biological principles and concepts about living organisms.</p>",
+      quiz: [
+        {
+          question: "Which organelle is known as the 'powerhouse of the cell'?",
+          options: ["Nucleus", "Mitochondria", "Ribosome", "Endoplasmic Reticulum"],
+          correctAnswer: 1
+        },
+        {
+          question: "DNA replication occurs during which phase of the cell cycle?",
+          options: ["G1 phase", "S phase", "G2 phase", "M phase"],
+          correctAnswer: 1,
+          image: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGluZWFyJTIwZXF1YXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          question: "Which of the following is NOT a nucleotide found in DNA?",
+          options: ["Adenine", "Thymine", "Uracil", "Guanine"],
+          correctAnswer: 2
+        }
+        // More questions would be added for a real implementation
+      ]
+    },
+    history101: {
+      title: "Ancient Civilizations",
+      content: "<h3>Key Historical Concepts</h3><p>This lesson explores the ancient civilizations that laid the foundations for modern society.</p>",
+      quiz: [
+        {
+          question: "Which ancient civilization built the pyramids at Giza?",
+          options: ["Romans", "Greeks", "Egyptians", "Mesopotamians"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which river is known as the 'cradle of civilization'?",
+          options: ["Nile", "Tigris-Euphrates", "Indus", "Yellow River"],
+          correctAnswer: 1
+        },
+        {
+          question: "Who was the first emperor of unified China?",
+          options: ["Qin Shi Huang", "Kublai Khan", "Sun Tzu", "Confucius"],
+          correctAnswer: 0
+        },
+        {
+          question: "What ancient wonder was located in the city of Alexandria?",
+          options: ["Hanging Gardens", "Colossus", "Lighthouse", "Temple of Artemis"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which empire was founded by Cyrus the Great?",
+          options: ["Roman", "Greek", "Persian", "Babylonian"],
+          correctAnswer: 2
+        },
+        {
+          question: "What was the main language of ancient Rome?",
+          options: ["Greek", "Latin", "Hebrew", "Sanskrit"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which city was the center of the Minoan civilization?",
+          options: ["Athens", "Sparta", "Knossos", "Troy"],
+          correctAnswer: 2
+        },
+        {
+          question: "What material did ancient Egyptians use to write on?",
+          options: ["Paper", "Parchment", "Papyrus", "Clay tablets"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which of these was NOT an ancient Mesopotamian civilization?",
+          options: ["Sumerian", "Akkadian", "Aztec", "Babylonian"],
+          correctAnswer: 2
+        },
+        {
+          question: "Who is considered the founder of Buddhism?",
+          options: ["Confucius", "Siddhartha Gautama", "Lao Tzu", "Muhammad"],
+          correctAnswer: 1
+        }
+      ]
+    },
+    language101: {
+      title: "Creative Writing",
+      content: "<h3>Key Language Concepts</h3><p>This lesson covers important language arts concepts and creative writing techniques.</p>",
+      quiz: [
+        {
+          question: "What is a metaphor?",
+          options: ["A comparison using 'like' or 'as'", "A direct comparison between unlike things", "An exaggeration for effect", "A reference to another work"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which literary device uses words like 'boom', 'splash', or 'buzz'?",
+          options: ["Alliteration", "Onomatopoeia", "Personification", "Hyperbole"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the main character in a story called?",
+          options: ["Protagonist", "Antagonist", "Narrator", "Foil"],
+          correctAnswer: 0
+        },
+        {
+          question: "Which of these is a type of poem with 14 lines?",
+          options: ["Haiku", "Limerick", "Sonnet", "Epic"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the turning point in a story called?",
+          options: ["Exposition", "Climax", "Resolution", "Rising action"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which point of view uses 'I' and 'we'?",
+          options: ["First person", "Second person", "Third person limited", "Third person omniscient"],
+          correctAnswer: 0
+        },
+        {
+          question: "What is a simile?",
+          options: ["A direct comparison", "A comparison using 'like' or 'as'", "A figure of speech using human qualities", "An exaggeration"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which of these is NOT a type of conflict in literature?",
+          options: ["Character vs. Self", "Character vs. Nature", "Character vs. Society", "Character vs. Grammar"],
+          correctAnswer: 3
+        },
+        {
+          question: "What is foreshadowing?",
+          options: ["The conclusion of a story", "Hints about future events", "Character development", "The moral of a story"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which genre focuses on solving a crime or mystery?",
+          options: ["Romance", "Science Fiction", "Detective Fiction", "Fantasy"],
+          correctAnswer: 2
+        }
+      ]
+    },
+    computer101: {
+      title: "Introduction to Programming",
+      content: "<h3>Key Programming Concepts</h3><p>This lesson covers important computer science and programming fundamentals.</p>",
+      quiz: [
+        {
+          question: "What does HTML stand for?",
+          options: ["Hyper Text Markup Language", "High Tech Modern Language", "Hyperlink and Text Markup Language", "Home Tool Markup Language"],
+          correctAnswer: 0
+        },
+        {
+          question: "Which of these is NOT a programming language?",
+          options: ["Java", "Python", "HTTP", "C++"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is an algorithm?",
+          options: ["A type of variable", "A step-by-step procedure to solve a problem", "A programming error", "A hardware component"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which symbol is used for single-line comments in JavaScript?",
+          options: ["#", "//", "/*", "<!--"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the binary representation of the decimal number 9?",
+          options: ["1001", "1010", "1100", "1110"],
+          correctAnswer: 0
+        },
+        {
+          question: "Which data structure follows Last-In-First-Out (LIFO) principle?",
+          options: ["Queue", "Stack", "Array", "Tree"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the main function of a database?",
+          options: ["To create websites", "To store and organize data", "To run applications", "To connect to the internet"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which programming paradigm uses 'objects' to represent data?",
+          options: ["Functional Programming", "Object-Oriented Programming", "Procedural Programming", "Logic Programming"],
+          correctAnswer: 1
+        },
+        {
+          question: "What does CSS stand for?",
+          options: ["Computer Style Sheets", "Creative Style System", "Cascading Style Sheets", "Colorful Style Sheets"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which of these is NOT a web browser?",
+          options: ["Chrome", "Firefox", "Safari", "Oracle"],
+          correctAnswer: 3
+        }
+      ]
+    },
+    // Additional courses
+    science301: {
+      title: "Physics: Forces and Motion",
+      content: "<h3>Key Physics Concepts</h3><p>This lesson explores the fundamental laws of physics related to forces and motion.</p>",
+      quiz: [
+        {
+          question: "What is Newton's First Law of Motion?",
+          options: ["F = ma", "Objects in motion stay in motion unless acted upon by a force", "Every action has an equal and opposite reaction", "Energy cannot be created or destroyed"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the SI unit of force?",
+          options: ["Watt", "Newton", "Joule", "Pascal"],
+          correctAnswer: 1
+        },
+        {
+          question: "What causes objects to fall toward Earth?",
+          options: ["Magnetic force", "Gravitational force", "Electromagnetic force", "Nuclear force"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which of these is a vector quantity?",
+          options: ["Mass", "Time", "Velocity", "Temperature"],
+          correctAnswer: 2
+        },
+        {
+          question: "What does the equation F = ma represent?",
+          options: ["Newton's First Law", "Newton's Second Law", "Newton's Third Law", "Law of Conservation of Energy"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is inertia?",
+          options: ["A measure of how fast an object moves", "The force pulling objects toward Earth", "An object's resistance to change in motion", "The transfer of energy between objects"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which scientist is known for the law of universal gravitation?",
+          options: ["Albert Einstein", "Isaac Newton", "Galileo Galilei", "Niels Bohr"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the formula for kinetic energy?",
+          options: ["KE = mgh", "KE = 1/2mv²", "KE = Fd", "KE = mc²"],
+          correctAnswer: 1
+        },
+        {
+          question: "When a car accelerates, what force propels it forward?",
+          options: ["Normal force", "Friction between tires and road", "Gravitational force", "Air resistance"],
+          correctAnswer: 1
+        },
+        {
+          question: "What happens to the weight of an object in free fall?",
+          options: ["It increases", "It decreases", "It becomes zero", "It remains the same"],
+          correctAnswer: 2
+        }
+      ]
+    },
+    math201: {
+      title: "Statistics and Probability",
+      content: "<h3>Key Statistical Concepts</h3><p>This lesson introduces fundamental concepts in statistics and probability theory.</p>",
+      quiz: [
+        {
+          question: "What is the mean of the numbers 2, 4, 6, 8, 10?",
+          options: ["5", "6", "8", "10"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the median of the numbers 1, 3, 5, 7, 9?",
+          options: ["3", "5", "7", "9"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the probability of rolling a 6 on a standard die?",
+          options: ["1/6", "1/3", "1/2", "1/4"],
+          correctAnswer: 0
+        },
+        {
+          question: "Which measure tells you how spread out the data is?",
+          options: ["Mean", "Median", "Mode", "Standard deviation"],
+          correctAnswer: 3
+        },
+        {
+          question: "What is the probability of getting heads in a fair coin toss?",
+          options: ["0.25", "0.5", "0.75", "1"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the mode of the dataset: 2, 3, 3, 4, 5, 3, 6?",
+          options: ["2", "3", "4", "5"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which graph is best for showing the relationship between two numerical variables?",
+          options: ["Bar chart", "Pie chart", "Scatter plot", "Histogram"],
+          correctAnswer: 2
+        },
+        {
+          question: "In a normal distribution, what percentage of data falls within one standard deviation of the mean?",
+          options: ["50%", "68%", "95%", "99.7%"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the range of the dataset: 5, 8, 3, 9, 12?",
+          options: ["3", "5", "9", "12"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which of these is NOT a measure of central tendency?",
+          options: ["Mean", "Median", "Mode", "Range"],
+          correctAnswer: 3
+        }
+      ]
+    },
+    history201: {
+      title: "Modern World History",
+      content: "<h3>Key Modern Historical Events</h3><p>This lesson covers the major events and movements that shaped the modern world.</p>",
+      quiz: [
+        {
+          question: "When did World War II end?",
+          options: ["1943", "1945", "1947", "1950"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which event marked the beginning of World War I?",
+          options: ["The Treaty of Versailles", "The assassination of Franz Ferdinand", "The invasion of Poland", "The bombing of Pearl Harbor"],
+          correctAnswer: 1
+        },
+        {
+          question: "What was the Cold War?",
+          options: ["A military conflict in Antarctica", "A period of geopolitical tension between the US and USSR", "A global pandemic", "A war over natural resources"],
+          correctAnswer: 1
+        },
+        {
+          question: "When did the Berlin Wall fall?",
+          options: ["1979", "1989", "1991", "1999"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which revolution began in 1789?",
+          options: ["American Revolution", "French Revolution", "Russian Revolution", "Industrial Revolution"],
+          correctAnswer: 1
+        },
+        {
+          question: "Who was the first president of the United States?",
+          options: ["Thomas Jefferson", "John Adams", "George Washington", "Abraham Lincoln"],
+          correctAnswer: 2
+        },
+        {
+          question: "What was the Renaissance?",
+          options: ["A period of artistic and intellectual rebirth", "A military alliance", "An economic depression", "A religious movement"],
+          correctAnswer: 0
+        },
+        {
+          question: "When did the Industrial Revolution begin?",
+          options: ["16th century", "17th century", "18th century", "19th century"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which of these was NOT a cause of World War I?",
+          options: ["Militarism", "Alliances", "Imperialism", "The Great Depression"],
+          correctAnswer: 3
+        },
+        {
+          question: "What international organization was formed after World War II to maintain peace?",
+          options: ["League of Nations", "United Nations", "European Union", "NATO"],
+          correctAnswer: 1
+        }
+      ]
+    }
+  };
+  
+  // For tests that might not have specific content, fallback to general subject-based content
+  if (!lessonContent[courseId]) {
+    const subjectContent = lessonContent[course.subject];
+    if (subjectContent) {
+      // Use the subject's content as fallback
+      lessonContent[courseId] = { ...subjectContent };
+    }
+  }
+  
   // Parse lesson number
   const lessonNumber = lessonId.includes('-') 
     ? parseInt(lessonId.split('-')[1]) 
-    : parseInt(lessonId);
+    : 1;
   
-  const lesson = course.lessons[lessonNumber - 1];
+  // Get lesson content based on course id or subject
+  const lesson = lessonContent[courseId] || lessonContent[course.subject] || {
+    title: "Course Lesson",
+    content: "<h3>Lesson Content</h3><p>This lesson covers important concepts related to this subject.</p>",
+    quiz: []
+  };
   
-  if (!lesson) {
-    showNotification('Error', `Lesson ${lessonNumber} not found in ${course.title}.`, 'error');
-    return;
-  }
+  // Update lesson title to include lesson number
+  lesson.title = `Lesson ${lessonNumber}: ${lesson.title}`;
   
   // Update modal title and content
   document.getElementById('lessonTitle').textContent = lesson.title;
@@ -1334,7 +1924,7 @@ function openLesson(courseId, lessonId) {
       let question = lesson.quiz[index];
       
       let quizHtml = `
-        <div class="quiz-question" data-question-index="${index}">
+        <div class="quiz-question">
           <h4 class="question-text">${index + 1}. ${question.question}</h4>
           <div class="answer-options">
             ${question.options.map((option, optIndex) => `
@@ -1407,7 +1997,7 @@ function openLesson(courseId, lessonId) {
       
       // Check if all questions are answered
       if (userAnswers.includes(null)) {
-        showNotification('Incomplete Quiz', 'Please answer all questions before submitting.', 'warning');
+        showNotification('Please Answer All Questions', 'You need to answer all questions before submitting.', 'warning');
         return;
       }
       
@@ -1467,7 +2057,58 @@ function openTest(testId) {
 function startTest(test) {
   // Ensure test has at least 10 questions
   if (!test.questions || test.questions.length < 10) {
-    const additionalQuestions = [];
+    const additionalQuestions = [
+      {
+        question: "What is the square root of 64?",
+        options: ["6", "8", "7", "9"],
+        correctAnswer: 1
+      },
+      {
+        question: "Which planet is known as the Red Planet?",
+        options: ["Venus", "Jupiter", "Mars", "Saturn"],
+        correctAnswer: 2
+      },
+      {
+        question: "Who wrote 'Romeo and Juliet'?",
+        options: ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"],
+        correctAnswer: 1
+      },
+      {
+        question: "What is the chemical symbol for gold?",
+        options: ["Go", "Gd", "Au", "Ag"],
+        correctAnswer: 2
+      },
+      {
+        question: "Which country is home to the Great Barrier Reef?",
+        options: ["Brazil", "Mexico", "New Zealand", "Australia"],
+        correctAnswer: 3
+      },
+      {
+        question: "What is the largest organ in the human body?",
+        options: ["Heart", "Liver", "Brain", "Skin"],
+        correctAnswer: 3
+      },
+      {
+        question: "Which famous scientist developed the theory of relativity?",
+        options: ["Isaac Newton", "Albert Einstein", "Galileo Galilei", "Nikola Tesla"],
+        correctAnswer: 1
+      },
+      {
+        question: "What is the smallest prime number?",
+        options: ["0", "1", "2", "3"],
+        correctAnswer: 2
+      },
+      {
+        question: "Which of these is not a programming language?",
+        options: ["Java", "Python", "HTML", "Photoshop"],
+        correctAnswer: 3
+      },
+      {
+        question: "Which ocean is the largest?",
+        options: ["Atlantic", "Indian", "Arctic", "Pacific"],
+        correctAnswer: 3
+      }
+    ];
     
     // Initialize or ensure questions array
     test.questions = test.questions || [];
@@ -1984,155 +2625,6 @@ function setupCustomVideoPlayer() {
   });
 }
 
-// Update course lessons to remove video and focus on questions
-enlightenData.courses.forEach(course => {
-  course.lessons = course.lessons.map((lesson, lessonIndex) => ({
-    id: `${course.id}-${lessonIndex + 1}`,
-    title: `Lesson ${lessonIndex + 1}: ${lesson.title || 'Untitled'}`,
-    content: `
-      <h3>${lesson.title || 'Lesson Content'}</h3>
-      <p>Key concepts for ${course.title}</p>
-    `,
-    quiz: {
-      math: [
-        {
-          question: "What is the derivative of x²?",
-          options: ["2x", "x", "x³", "2"],
-          correctAnswer: 0
-        },
-        {
-          question: "Solve the equation: 3x + 7 = 22",
-          options: ["x = 5", "x = 6", "x = 4", "x = 3"],
-          correctAnswer: 0
-        },
-        {
-          question: "What is the area of a circle with radius 5?",
-          options: ["25π", "10π", "50π", "15π"],
-          correctAnswer: 0
-        },
-        {
-          question: "Simplify: 2(x + 3) - 4",
-          options: ["2x + 2", "2x + 6", "2x + 1", "2x + 5"],
-          correctAnswer: 1
-        },
-        {
-          question: "What is the square root of 64?",
-          options: ["6", "8", "7", "9"],
-          correctAnswer: 1
-        },
-        {
-          question: "Find the slope of the line passing through points (2,3) and (5,9)",
-          options: ["2", "3", "4", "6"],
-          correctAnswer: 1
-        },
-        {
-          question: "What is 15% of 200?",
-          options: ["20", "30", "40", "50"],
-          correctAnswer: 1
-        },
-        {
-          question: "What is the next number in the sequence: 2, 4, 8, 16, ___?",
-          options: ["24", "32", "64", "128"],
-          correctAnswer: 1
-        },
-        {
-          question: "Solve for x: x² = 25",
-          options: ["x = ±5", "x = 5", "x = 25", "x = ±25"],
-          correctAnswer: 0
-        },
-        {
-          question: "What is the volume of a cube with side length 4?",
-          options: ["16", "32", "64", "128"],
-          correctAnswer: 2
-        }
-      ],
-      science: [
-        {
-          question: "What is the powerhouse of the cell?",
-          options: ["Nucleus", "Mitochondria", "Ribosome", "Chloroplast"],
-          correctAnswer: 1
-        },
-        {
-          question: "Which planet is known as the Red Planet?",
-          options: ["Venus", "Jupiter", "Mars", "Saturn"],
-          correctAnswer: 2
-        },
-        {
-          question: "What is the chemical symbol for water?",
-          options: ["Wa", "H2O", "O2", "H2"],
-          correctAnswer: 1
-        },
-        {
-          question: "What is the process by which plants make their own food?",
-          options: ["Respiration", "Photosynthesis", "Fermentation", "Digestion"],
-          correctAnswer: 1
-        },
-        {
-          question: "What is the hardest natural substance on Earth?",
-          options: ["Gold", "Iron", "Diamond", "Platinum"],
-          correctAnswer: 2
-        },
-        {
-          question: "Which of these is NOT a state of matter?",
-          options: ["Solid", "Liquid", "Gas", "Plasma"],
-          correctAnswer: 3
-        },
-        {
-          question: "What is the largest organ in the human body?",
-          options: ["Heart", "Brain", "Liver", "Skin"],
-          correctAnswer: 3
-        },
-        {
-          question: "What is the primary gas in Earth's atmosphere?",
-          options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
-          correctAnswer: 2
-        },
-        {
-          question: "Which type of radiation has the longest wavelength?",
-          options: ["Gamma rays", "X-rays", "Ultraviolet", "Radio waves"],
-          correctAnswer: 3
-        },
-        {
-          question: "What is the process of a liquid turning into a gas called?",
-          options: ["Melting", "Freezing", "Evaporation", "Condensation"],
-          correctAnswer: 2
-        }
-      ],
-      history: [
-        {
-          question: "In what year did World War II end?",
-          options: ["1943", "1945", "1947", "1950"],
-          correctAnswer: 1
-        }
-      ],
-      language: [
-        {
-          question: "What is a metaphor?",
-          options: [
-            "A comparison using 'like' or 'as'",
-            "A direct comparison",
-            "A figure of speech that describes something by stating it is something else",
-            "A type of verb"
-          ],
-          correctAnswer: 2
-        }
-      ],
-      computer: [
-        {
-          question: "What does HTML stand for?",
-          options: [
-            "Hyper Text Markup Language",
-            "High Tech Modern Language",
-            "Hyperlink and Text Markup Language",
-            "Home Tool Markup Language"
-          ],
-          correctAnswer: 0
-        }
-      ]
-    }[course.subject] || []
-  }));
-});
-
 // Show section function
 function showSection(sectionName) {
   // Hide all content sections
@@ -2181,4 +2673,16 @@ function showSection(sectionName) {
   if (sectionName === 'media') {
     enlightenData.updateMediaSection('video');
   }
+}
+
+function generateCourseImage(subject) {
+  const imageUrls = {
+    math: 'https://images.unsplash.com/photo-1635372722656-389f87a941db?q=80&w=500&auto=format&fit=crop',
+    science: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=500&auto=format&fit=crop',
+    history: 'https://images.unsplash.com/photo-1461360228754-6e81c478b882?q=80&w=500&auto=format&fit=crop',
+    language: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=500&auto=format&fit=crop',
+    computer: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=500&auto=format&fit=crop'
+  };
+  
+  return imageUrls[subject] || 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=500&auto=format&fit=crop';
 }

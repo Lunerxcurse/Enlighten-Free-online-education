@@ -193,6 +193,42 @@
     </section>
   </main>
 
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Enlighten</h3>
+        <p>Your interactive learning platform for educational growth</p>
+      </div>
+      <div class="footer-section">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="report-bug.html">Report a Bug</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="terms-of-use.html">Terms of Use</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="status.html">System Status</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Account</h3>
+        <ul>
+          <li><a href="login.html" id="loginFooterLink">Sign In</a></li>
+          <li><a href="signup.html">Create Account</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Enlighten. All rights reserved.</p>
+    </div>
+  </footer>
+
   <!-- Course Modal -->
   <div id="courseModal" class="modal">
     <div class="modal-content lesson-modal">
@@ -227,7 +263,9 @@
         <div id="quizQuestions">
           <!-- Will be populated with quiz questions -->
         </div>
-        <button id="submitQuizBtn" class="primary-btn">Submit Answers</button>
+        <button id="submitQuizBtn" class="primary-btn">
+          <i class="ph ph-check"></i> Submit Answers
+        </button>
       </div>
       
       <div class="lesson-result" id="lessonResult" style="display: none;">
@@ -550,6 +588,31 @@
   <div id="notificationContainer"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="auth.js"></script>
   <script src="enlighten.js"></script>
+  <script>
+    // Fix for account link in footer
+    document.addEventListener('DOMContentLoaded', function() {
+      const loginFooterLink = document.getElementById('loginFooterLink');
+      if (loginFooterLink) {
+        loginFooterLink.addEventListener('click', function(e) {
+          // Check if user is already logged in
+          if (window.auth && window.auth.isLoggedIn()) {
+            e.preventDefault();
+            // Open settings modal instead of navigating to login.html
+            const settingsModal = document.getElementById('settingsModal');
+            if (settingsModal) {
+              settingsModal.style.display = 'flex';
+              // Switch to account tab
+              const accountTab = document.querySelector('.settings-tab[data-tab="account"]');
+              if (accountTab) {
+                accountTab.click();
+              }
+            }
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
