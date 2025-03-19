@@ -123,6 +123,118 @@ const enlightenData = {
       progress: 0,
       currentLesson: 0,
       lessons: []
+    },
+    {
+      id: "language201",
+      title: "Public Speaking Mastery",
+      subject: "language",
+      description: "Learn techniques to overcome stage fright, structure effective presentations, and engage any audience with confidence.",
+      thumbnail: "language",
+      icon: "ph-microphone-stage",
+      level: "intermediate",
+      lessons: 12,
+      duration: "14 hours",
+      progress: 0,
+      currentLesson: 0,
+      lessons: []
+    },
+    {
+      id: "computer201",
+      title: "Web Development Fundamentals",
+      subject: "computer",
+      description: "Build responsive websites from scratch using HTML, CSS, and JavaScript with modern development practices.",
+      thumbnail: "computer",
+      icon: "ph-code",
+      level: "intermediate",
+      lessons: 16,
+      duration: "22 hours",
+      progress: 0,
+      currentLesson: 0,
+      lessons: []
+    },
+    {
+      id: "math301",
+      title: "Advanced Calculus",
+      subject: "math",
+      description: "Deepen your understanding of calculus with topics like multiple integrals, vector calculus, and differential equations.",
+      thumbnail: "math",
+      icon: "ph-function",
+      level: "advanced",
+      lessons: 18,
+      duration: "24 hours",
+      progress: 0,
+      currentLesson: 0,
+      lessons: []
+    },
+    {
+      id: "science401",
+      title: "Quantum Physics",
+      subject: "science",
+      description: "Explore the fascinating world of quantum mechanics, from wave-particle duality to quantum computing applications.",
+      thumbnail: "science",
+      icon: "ph-atom",
+      level: "advanced",
+      lessons: 15,
+      duration: "20 hours",
+      progress: 0,
+      currentLesson: 0,
+      lessons: []
+    },
+    {
+      id: "history301",
+      title: "American History",
+      subject: "history",
+      description: "Trace the development of the United States from colonial times through major historical events to the present day.",
+      thumbnail: "history",
+      icon: "ph-flag",
+      level: "intermediate",
+      lessons: 14,
+      duration: "16 hours",
+      progress: 0,
+      currentLesson: 0,
+      lessons: []
+    },
+    {
+      id: "language301",
+      title: "Advanced Grammar & Composition",
+      subject: "language",
+      description: "Perfect your writing with advanced grammar concepts, stylistic techniques, and composition strategies for academic and professional contexts.",
+      thumbnail: "language",
+      icon: "ph-book-open-text",
+      level: "advanced",
+      lessons: 16,
+      duration: "18 hours",
+      progress: 0,
+      currentLesson: 0,
+      lessons: []
+    },
+    {
+      id: "computer301",
+      title: "Data Science Essentials",
+      subject: "computer",
+      description: "Learn to analyze and visualize data using Python libraries like Pandas, NumPy, and Matplotlib for real-world applications.",
+      thumbnail: "computer",
+      icon: "ph-chart-scatter",
+      level: "advanced",
+      lessons: 20,
+      duration: "28 hours",
+      progress: 0,
+      currentLesson: 0,
+      lessons: []
+    },
+    {
+      id: "science501",
+      title: "Environmental Science",
+      subject: "science",
+      description: "Understand environmental systems, climate science, conservation, and sustainable practices for addressing global challenges.",
+      thumbnail: "science",
+      icon: "ph-tree",
+      level: "intermediate",
+      lessons: 12,
+      duration: "14 hours",
+      progress: 0,
+      currentLesson: 0,
+      lessons: []
     }
   ],
   
@@ -1356,9 +1468,7 @@ function loadProgress() {
         },
         scales: {
           r: {
-            angleLines: {
-              display: true
-            },
+            angleLines: { display: true },
             suggestedMin: 0,
             suggestedMax: 100
           }
@@ -1501,8 +1611,8 @@ function openLesson(courseId, lessonId) {
       content: "<h3>Key Mathematics Concepts</h3><p>This lesson covers important mathematical principles and problem-solving techniques.</p>",
       quiz: [
         {
-          question: "What is the derivative of x²?",
-          options: ["2x", "x", "x³", "2"],
+          question: "Solve for x: 3x + 5 = 20",
+          options: ["x = 5", "x = 15", "x = 7", "x = 5/3"],
           correctAnswer: 0
         },
         {
@@ -1664,48 +1774,48 @@ function openLesson(courseId, lessonId) {
         },
         {
           question: "Which of these is NOT a programming language?",
-          options: ["Java", "Python", "HTTP", "C++"],
+          options: ["Java", "Python", "HTTP", "Photoshop"],
           correctAnswer: 2
         },
         {
-          question: "What is an algorithm?",
-          options: ["A type of variable", "A step-by-step procedure to solve a problem", "A programming error", "A hardware component"],
+          question: "Which tag is used to create a hyperlink in HTML?",
+          options: ["<link>", "<a>", "<href>", "<url>"],
           correctAnswer: 1
         },
         {
-          question: "Which symbol is used for single-line comments in JavaScript?",
-          options: ["#", "//", "/*", "<!--"],
-          correctAnswer: 1
-        },
-        {
-          question: "What is the binary representation of the decimal number 9?",
-          options: ["1001", "1010", "1100", "1110"],
-          correctAnswer: 0
-        },
-        {
-          question: "Which data structure follows Last-In-First-Out (LIFO) principle?",
-          options: ["Queue", "Stack", "Array", "Tree"],
-          correctAnswer: 1
-        },
-        {
-          question: "What is the main function of a database?",
-          options: ["To create websites", "To store and organize data", "To run applications", "To connect to the internet"],
-          correctAnswer: 1
-        },
-        {
-          question: "Which programming paradigm uses 'objects' to represent data?",
-          options: ["Functional Programming", "Object-Oriented Programming", "Procedural Programming", "Logic Programming"],
-          correctAnswer: 1
-        },
-        {
-          question: "What does CSS stand for?",
-          options: ["Computer Style Sheets", "Creative Style System", "Cascading Style Sheets", "Colorful Style Sheets"],
+          question: "Which property is used to change the text color in CSS?",
+          options: ["font-color", "text-color", "color", "font-style"],
           correctAnswer: 2
         },
         {
-          question: "Which of these is NOT a web browser?",
-          options: ["Chrome", "Firefox", "Safari", "Oracle"],
+          question: "What is the correct HTML element for the largest heading?",
+          options: ["<h6>", "<heading>", "<head>", "<h1>"],
           correctAnswer: 3
+        },
+        {
+          question: "Which JavaScript method is used to select an HTML element by its id?",
+          options: ["querySelector()", "getElementById()", "getElementByClass()", "selectElement()"],
+          correctAnswer: 1
+        },
+        {
+          question: "What does the 'box-sizing: border-box' CSS property do?",
+          options: ["Adds a border to all boxes", "Removes padding from elements", "Includes padding and border in element's width", "Creates a box shadow"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which of these is a JavaScript framework?",
+          options: ["HTML5", "Bootstrap", "React", "SASS"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the purpose of media queries in CSS?",
+          options: ["To embed videos", "To create responsive designs", "To query databases", "To link to social media"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which symbol is used to start a CSS id selector?",
+          options: [".", "#", "@", "&"],
+          correctAnswer: 1
         }
       ]
     },
@@ -1730,7 +1840,7 @@ function openLesson(courseId, lessonId) {
           correctAnswer: 1
         },
         {
-          question: "Which of these is a vector quantity?",
+          question: "Which of the following is a vector quantity?",
           options: ["Mass", "Time", "Velocity", "Temperature"],
           correctAnswer: 2
         },
@@ -1837,7 +1947,7 @@ function openLesson(courseId, lessonId) {
           correctAnswer: 1
         },
         {
-          question: "What was the Cold War?",
+          question: "What is the Cold War?",
           options: ["A military conflict in Antarctica", "A period of geopolitical tension between the US and USSR", "A global pandemic", "A war over natural resources"],
           correctAnswer: 1
         },
@@ -1877,15 +1987,206 @@ function openLesson(courseId, lessonId) {
           correctAnswer: 1
         }
       ]
+    },
+    language201: {
+      title: "Public Speaking",
+      content: "<h3>Effective Public Speaking Techniques</h3><p>This lesson covers essential techniques for delivering engaging presentations and speeches.</p>",
+      quiz: [
+        {
+          question: "What is the most common fear among public speakers?",
+          options: ["Forgetting content", "Technical failures", "Stage fright", "Audience questions"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which of these is NOT a recommended technique for managing speech anxiety?",
+          options: ["Deep breathing", "Visualization", "Memorizing every word", "Practice"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the 'rule of three' in public speaking?",
+          options: ["Three jokes per speech", "Dividing speeches into three parts", "Presenting three main points", "Three seconds of eye contact"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which technique involves telling a personal story to connect with the audience?",
+          options: ["Technical analysis", "Data visualization", "Narrative approach", "Socratic method"],
+          correctAnswer: 2
+        },
+        {
+          question: "How should a speaker respond to a question they don't know the answer to?",
+          options: ["Make up an answer", "Ignore the question", "Honestly acknowledge and offer to follow up", "Change the subject"],
+          correctAnswer: 2
+        },
+        {
+          question: "What percentage of communication is nonverbal, according to research?",
+          options: ["25%", "50%", "65%", "93%"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which of these is most important in the opening of a speech?",
+          options: ["Telling a joke", "Capturing attention", "Listing credentials", "Thanking the host"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the recommended approach for slide presentations?",
+          options: ["Text-heavy slides", "Minimalist design with key points", "Reading directly from slides", "As many slides as possible"],
+          correctAnswer: 1
+        },
+        {
+          question: "How can a speaker best connect with a diverse audience?",
+          options: ["Using technical jargon", "Speaking quickly to fit in content", "Using inclusive language and relatable examples", "Focusing only on the most important people"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the most effective way to conclude a speech?",
+          options: ["Introducing new ideas", "Summarizing key points and providing a call to action", "Apologizing for any mistakes", "Ending abruptly when time runs out"],
+          correctAnswer: 1
+        }
+      ]
+    },
+    computer201: {
+      title: "Web Development",
+      content: "<h3>Web Development Foundations</h3><p>This lesson introduces the core technologies used in modern web development.</p>",
+      quiz: [
+        {
+          question: "Which language is used for web page structure?",
+          options: ["CSS", "HTML", "JavaScript", "Python"],
+          correctAnswer: 1
+        },
+        {
+          question: "What does CSS stand for?",
+          options: ["Computer Style Sheets", "Creative Style System", "Cascading Style Sheets", "Colorful Style Sheets"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which tag is used to create a hyperlink in HTML?",
+          options: ["<link>", "<a>", "<href>", "<url>"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which property is used to change the text color in CSS?",
+          options: ["font-color", "text-color", "color", "font-style"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the correct HTML element for the largest heading?",
+          options: ["<h6>", "<heading>", "<head>", "<h1>"],
+          correctAnswer: 3
+        },
+        {
+          question: "Which JavaScript method is used to select an HTML element by its id?",
+          options: ["querySelector()", "getElementById()", "getElementByClass()", "selectElement()"],
+          correctAnswer: 1
+        },
+        {
+          question: "What does the 'box-sizing: border-box' CSS property do?",
+          options: ["Adds a border to all boxes", "Removes padding from elements", "Includes padding and border in element's width", "Creates a box shadow"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which of these is a JavaScript framework?",
+          options: ["HTML5", "Bootstrap", "React", "SASS"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the purpose of media queries in CSS?",
+          options: ["To embed videos", "To create responsive designs", "To query databases", "To link to social media"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which symbol is used to start a CSS id selector?",
+          options: [".", "#", "@", "&"],
+          correctAnswer: 1
+        }
+      ]
+    },
+    math301: {
+      title: "Advanced Calculus",
+      content: "<h3>Advanced Calculus Concepts</h3><p>This lesson covers higher-level calculus concepts and applications.</p>",
+      quiz: [
+        {
+          question: "What is the derivative of e^x?",
+          options: ["e^x", "xe^(x-1)", "xe^x", "1/x"],
+          correctAnswer: 0
+        },
+        {
+          question: "Which of the following is true for a function to be continuous at a point?",
+          options: ["It must be differentiable", "The limit must exist and equal the function value", "It must be monotonic", "It must be bounded"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the integral of 1/x?",
+          options: ["ln|x| + C", "e^x + C", "x ln|x| + C", "1/ln|x| + C"],
+          correctAnswer: 0
+        },
+        {
+          question: "What does the Mean Value Theorem state?",
+          options: ["Every continuous function has at least one root", "For any continuous function on a closed interval, there exists a point where the derivative equals the average rate of change", "Every differentiable function is continuous", "The integral of a function equals the sum of its derivatives"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the order of a differential equation with the highest derivative being the third derivative?",
+          options: ["First order", "Second order", "Third order", "Fourth order"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the Taylor series expansion of a function?",
+          options: ["A power series that approximates the function near a specific point", "The antiderivative of the function", "The limit of the function as x approaches infinity", "The product of all derivatives"],
+          correctAnswer: 0
+        },
+        {
+          question: "What is the Jacobian used for in multivariable calculus?",
+          options: ["Finding critical points", "Determining if a matrix is invertible", "Changing variables in multiple integrals", "Solving differential equations"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which of these is a second-order partial derivative notation?",
+          options: ["∂f/∂x", "∂²f/∂x²", "d²f/dx", "∫f dx"],
+          correctAnswer: 1
+        },
+        {
+          question: "What does the divergence theorem relate?",
+          options: ["Line integrals and surface integrals", "Volume integrals and surface integrals", "Point values and line integrals", "Surface integrals and point values"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is a necessary condition for a function to have a local extremum?",
+          options: ["The function must be continuous", "The function must be differentiable", "The derivative equals zero or does not exist", "The second derivative must be positive"],
+          correctAnswer: 2
+        }
+      ]
     }
   };
   
   // For tests that might not have specific content, fallback to general subject-based content
   if (!lessonContent[courseId]) {
-    const subjectContent = lessonContent[course.subject];
+    const subjectContent = lessonContent[course.subject + '101']; // Try to find a default course by subject
     if (subjectContent) {
       // Use the subject's content as fallback
       lessonContent[courseId] = { ...subjectContent };
+    } else {
+      // Create a generic content with questions if nothing else works
+      lessonContent[courseId] = {
+        title: course.title,
+        content: `<h3>Key Concepts in ${course.title}</h3><p>This lesson covers important concepts related to this subject.</p>`,
+        quiz: [
+          {
+            question: "What is the primary focus of this course?",
+            options: ["Understanding basic concepts", "Advanced applications", "Historical development", "Practical implementations"],
+            correctAnswer: 0
+          },
+          {
+            question: "Which skill is most important for succeeding in this field?",
+            options: ["Critical thinking", "Memorization", "Physical coordination", "Artistic ability"],
+            correctAnswer: 0
+          },
+          {
+            question: "How does this subject relate to real-world applications?",
+            options: ["Direct practical applications", "Theoretical foundation only", "No real-world applications", "Only in specialized fields"],
+            correctAnswer: 0
+          }
+        ]
+      };
     }
   }
   
@@ -1908,6 +2209,9 @@ function openLesson(courseId, lessonId) {
   document.getElementById('lessonTitle').textContent = lesson.title;
   document.getElementById('lessonContent').innerHTML = lesson.content;
   
+  // Hide video container by default - we'll only show videos when needed
+  document.getElementById('videoContainer').style.display = 'none';
+  
   // Setup quiz for the lesson
   const quizContainer = document.getElementById('quizQuestions');
   const lessonQuiz = document.getElementById('lessonQuiz');
@@ -1928,7 +2232,7 @@ function openLesson(courseId, lessonId) {
           <h4 class="question-text">${index + 1}. ${question.question}</h4>
           <div class="answer-options">
             ${question.options.map((option, optIndex) => `
-              <label class="answer-option ${userAnswers[index] === optIndex ? 'selected' : ''}">
+              <label class="answer-option">
                 <input type="radio" name="question_${index}" value="${optIndex}" ${userAnswers[index] === optIndex ? 'checked' : ''}>
                 ${option}
               </label>
@@ -2090,7 +2394,7 @@ function startTest(test) {
       },
       {
         question: "Which famous scientist developed the theory of relativity?",
-        options: ["Isaac Newton", "Albert Einstein", "Galileo Galilei", "Nikola Tesla"],
+        options: ["Isaac Newton", "Albert Einstein", "Galileo Galilei", "Niels Bohr"],
         correctAnswer: 1
       },
       {
@@ -2678,8 +2982,8 @@ function showSection(sectionName) {
 function generateCourseImage(subject) {
   const imageUrls = {
     math: 'https://images.unsplash.com/photo-1635372722656-389f87a941db?q=80&w=500&auto=format&fit=crop',
-    science: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=500&auto=format&fit=crop',
-    history: 'https://images.unsplash.com/photo-1461360228754-6e81c478b882?q=80&w=500&auto=format&fit=crop',
+    science: 'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?q=80&w=500&auto=format&fit=crop',
+    history: 'https://images.unsplash.com/photo-1461360228754-543bc11b234d?q=80&w=500&auto=format&fit=crop',
     language: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=500&auto=format&fit=crop',
     computer: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=500&auto=format&fit=crop'
   };
