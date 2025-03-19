@@ -123,118 +123,6 @@ const enlightenData = {
       progress: 0,
       currentLesson: 0,
       lessons: []
-    },
-    {
-      id: "language201",
-      title: "Public Speaking Mastery",
-      subject: "language",
-      description: "Learn techniques to overcome stage fright, structure effective presentations, and engage any audience with confidence.",
-      thumbnail: "language",
-      icon: "ph-microphone-stage",
-      level: "intermediate",
-      lessons: 12,
-      duration: "14 hours",
-      progress: 0,
-      currentLesson: 0,
-      lessons: []
-    },
-    {
-      id: "computer201",
-      title: "Web Development Fundamentals",
-      subject: "computer",
-      description: "Build responsive websites from scratch using HTML, CSS, and JavaScript with modern development practices.",
-      thumbnail: "computer",
-      icon: "ph-code",
-      level: "intermediate",
-      lessons: 16,
-      duration: "22 hours",
-      progress: 0,
-      currentLesson: 0,
-      lessons: []
-    },
-    {
-      id: "math301",
-      title: "Advanced Calculus",
-      subject: "math",
-      description: "Deepen your understanding of calculus with topics like multiple integrals, vector calculus, and differential equations.",
-      thumbnail: "math",
-      icon: "ph-function",
-      level: "advanced",
-      lessons: 18,
-      duration: "24 hours",
-      progress: 0,
-      currentLesson: 0,
-      lessons: []
-    },
-    {
-      id: "science401",
-      title: "Quantum Physics",
-      subject: "science",
-      description: "Explore the fascinating world of quantum mechanics, from wave-particle duality to quantum computing applications.",
-      thumbnail: "science",
-      icon: "ph-atom",
-      level: "advanced",
-      lessons: 15,
-      duration: "20 hours",
-      progress: 0,
-      currentLesson: 0,
-      lessons: []
-    },
-    {
-      id: "history301",
-      title: "American History",
-      subject: "history",
-      description: "Trace the development of the United States from colonial times through major historical events to the present day.",
-      thumbnail: "history",
-      icon: "ph-flag",
-      level: "intermediate",
-      lessons: 14,
-      duration: "16 hours",
-      progress: 0,
-      currentLesson: 0,
-      lessons: []
-    },
-    {
-      id: "language301",
-      title: "Advanced Grammar & Composition",
-      subject: "language",
-      description: "Perfect your writing with advanced grammar concepts, stylistic techniques, and composition strategies for academic and professional contexts.",
-      thumbnail: "language",
-      icon: "ph-book-open-text",
-      level: "advanced",
-      lessons: 16,
-      duration: "18 hours",
-      progress: 0,
-      currentLesson: 0,
-      lessons: []
-    },
-    {
-      id: "computer301",
-      title: "Data Science Essentials",
-      subject: "computer",
-      description: "Learn to analyze and visualize data using Python libraries like Pandas, NumPy, and Matplotlib for real-world applications.",
-      thumbnail: "computer",
-      icon: "ph-chart-scatter",
-      level: "advanced",
-      lessons: 20,
-      duration: "28 hours",
-      progress: 0,
-      currentLesson: 0,
-      lessons: []
-    },
-    {
-      id: "science501",
-      title: "Environmental Science",
-      subject: "science",
-      description: "Understand environmental systems, climate science, conservation, and sustainable practices for addressing global challenges.",
-      thumbnail: "science",
-      icon: "ph-tree",
-      level: "intermediate",
-      lessons: 12,
-      duration: "14 hours",
-      progress: 0,
-      currentLesson: 0,
-      lessons: []
     }
   ],
   
@@ -516,6 +404,331 @@ const enlightenData = {
           question: "Which is the smallest continent?",
           options: ["Europe", "Australia", "Antarctica", "South America"],
           correctAnswer: 1
+        }
+      ]
+    },
+    {
+      id: "physics-quiz1",
+      title: "Physics Forces Quiz",
+      subject: "science",
+      type: "quiz",
+      description: "Test your understanding of physics forces and their applications.",
+      questionCount: 10,
+      timeLimit: "15 minutes",
+      passingScore: "70%",
+      completed: false,
+      questions: [
+        {
+          question: "What is Newton's First Law of Motion?",
+          options: ["F = ma", "Objects in motion stay in motion unless acted upon by a force", "Every action has an equal and opposite reaction", "Energy cannot be created or destroyed"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the SI unit of force?",
+          options: ["Watt", "Newton", "Joule", "Pascal"],
+          correctAnswer: 1
+        },
+        {
+          question: "What causes objects to fall toward Earth?",
+          options: ["Magnetic force", "Gravitational force", "Electromagnetic force", "Nuclear force"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which of these is a vector quantity?",
+          options: ["Mass", "Time", "Velocity", "Temperature"],
+          correctAnswer: 2
+        },
+        {
+          question: "What does the equation F = ma represent?",
+          options: ["Newton's First Law", "Newton's Second Law", "Newton's Third Law", "Law of Conservation of Energy"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is inertia?",
+          options: ["A measure of how fast an object moves", "The force pulling objects toward Earth", "An object's resistance to change in motion", "The transfer of energy between objects"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which scientist is known for the law of universal gravitation?",
+          options: ["Albert Einstein", "Isaac Newton", "Galileo Galilei", "Niels Bohr"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the formula for kinetic energy?",
+          options: ["KE = mgh", "KE = 1/2mv²", "KE = Fd", "KE = mc²"],
+          correctAnswer: 1
+        },
+        {
+          question: "When a car accelerates, what force propels it forward?",
+          options: ["Normal force", "Friction between tires and road", "Gravitational force", "Air resistance"],
+          correctAnswer: 1
+        },
+        {
+          question: "What happens to the weight of an object in free fall?",
+          options: ["It increases", "It decreases", "It becomes zero", "It remains the same"],
+          correctAnswer: 2
+        }
+      ]
+    },
+    {
+      id: "chemistry-quiz1",
+      title: "Basic Chemistry Concepts",
+      subject: "science",
+      type: "quiz",
+      description: "Test your knowledge of fundamental chemistry concepts and principles.",
+      questionCount: 10,
+      timeLimit: "15 minutes",
+      passingScore: "70%",
+      completed: false,
+      questions: [
+        {
+          question: "What is the atomic number of an element?",
+          options: ["Number of neutrons", "Number of protons", "Number of electrons", "Sum of protons and neutrons"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which of these is a noble gas?",
+          options: ["Oxygen", "Chlorine", "Neon", "Sodium"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is pH a measure of?",
+          options: ["Temperature", "Acidity or alkalinity", "Pressure", "Density"],
+          correctAnswer: 1
+        },
+        {
+          question: "What type of bond forms when electrons are shared between atoms?",
+          options: ["Ionic bond", "Covalent bond", "Hydrogen bond", "Metallic bond"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which subatomic particle has a negative charge?",
+          options: ["Proton", "Neutron", "Electron", "Positron"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the chemical formula for water?",
+          options: ["H2O", "CO2", "NaCl", "CH4"],
+          correctAnswer: 0
+        },
+        {
+          question: "What is the most abundant element in the Earth's atmosphere?",
+          options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the process of changing from a gas to a liquid called?",
+          options: ["Evaporation", "Condensation", "Sublimation", "Melting"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the chemical symbol for gold?",
+          options: ["Go", "Gl", "Au", "Ag"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which of these is NOT a state of matter?",
+          options: ["Solid", "Liquid", "Gas", "Element"],
+          correctAnswer: 3
+        }
+      ]
+    },
+    {
+      id: "literature-quiz1",
+      title: "World Literature Quiz",
+      subject: "language",
+      type: "quiz",
+      description: "Test your knowledge of classic literature from around the world.",
+      questionCount: 10,
+      timeLimit: "20 minutes",
+      passingScore: "65%",
+      completed: false,
+      questions: [
+        {
+          question: "Who wrote 'Pride and Prejudice'?",
+          options: ["Charlotte Brontë", "Jane Austen", "Emily Dickinson", "Virginia Woolf"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which of these is NOT a play by William Shakespeare?",
+          options: ["Hamlet", "Macbeth", "Great Expectations", "Romeo and Juliet"],
+          correctAnswer: 2
+        },
+        {
+          question: "Who is the author of 'One Hundred Years of Solitude'?",
+          options: ["Jorge Luis Borges", "Pablo Neruda", "Gabriel García Márquez", "Isabel Allende"],
+          correctAnswer: 2
+        },
+        {
+          question: "In which country was the author Leo Tolstoy born?",
+          options: ["France", "Russia", "Germany", "England"],
+          correctAnswer: 1
+        },
+        {
+          question: "'The Divine Comedy' was written by which Italian poet?",
+          options: ["Petrarch", "Dante Alighieri", "Boccaccio", "Machiavelli"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which novel begins with the line 'Call me Ishmael'?",
+          options: ["Moby-Dick", "The Great Gatsby", "The Catcher in the Rye", "To Kill a Mockingbird"],
+          correctAnswer: 0
+        },
+        {
+          question: "Who wrote 'Things Fall Apart'?",
+          options: ["Wole Soyinka", "Chinua Achebe", "Ngugi wa Thiong'o", "Ben Okri"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which of these is considered a classic of Japanese literature?",
+          options: ["Romance of the Three Kingdoms", "The Tale of Genji", "Dream of the Red Chamber", "Journey to the West"],
+          correctAnswer: 1
+        },
+        {
+          question: "Franz Kafka was a writer from which country?",
+          options: ["Austria", "Germany", "Czech Republic", "Hungary"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which literary movement was characterized by emotion, individualism, and glorification of nature?",
+          options: ["Realism", "Modernism", "Romanticism", "Naturalism"],
+          correctAnswer: 2
+        }
+      ]
+    },
+    {
+      id: "biology-exam2",
+      title: "Advanced Biology Exam",
+      subject: "science",
+      type: "exam",
+      description: "Comprehensive examination covering advanced topics in cellular biology, genetics, and physiology.",
+      questionCount: 12,
+      timeLimit: "45 minutes",
+      passingScore: "70%",
+      completed: false,
+      questions: [
+        {
+          question: "Which process produces genetically identical daughter cells?",
+          options: ["Mitosis", "Meiosis", "Fertilization", "Binary fission"],
+          correctAnswer: 0
+        },
+        {
+          question: "What is the function of ATP in cells?",
+          options: ["Protein synthesis", "Cell division", "Energy storage", "DNA replication"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the primary function of the Golgi apparatus?",
+          options: ["Protein synthesis", "Cellular respiration", "Processing and packaging proteins", "Breaking down cellular waste"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which of these is NOT involved in photosynthesis?",
+          options: ["Chlorophyll", "Mitochondria", "Carbon dioxide", "Water"],
+          correctAnswer: 1
+        },
+        {
+          question: "What process creates ATP without using oxygen?",
+          options: ["Aerobic respiration", "Anaerobic respiration", "Photosynthesis", "Oxidative phosphorylation"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which structure controls what enters and leaves the cell?",
+          options: ["Cell wall", "Nucleus", "Cell membrane", "Endoplasmic reticulum"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is a codon?",
+          options: ["A type of protein", "A three-nucleotide sequence", "A portion of the cell membrane", "A molecule that transports amino acids"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which of these is a product of the Krebs cycle?",
+          options: ["Glucose", "ATP", "Carbon dioxide", "Oxygen"],
+          correctAnswer: 2
+        },
+        {
+          question: "How many chromosomes do human body cells typically have?",
+          options: ["23", "24", "46", "48"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the function of white blood cells?",
+          options: ["Transport oxygen", "Fight infections", "Clot blood", "Regulate metabolism"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which of these is a sex-linked genetic disorder?",
+          options: ["Down syndrome", "Cystic fibrosis", "Hemophilia", "Tay-Sachs disease"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the primary role of enzymes in biological reactions?",
+          options: ["Provide energy", "Act as catalysts", "Transport molecules", "Store genetic information"],
+          correctAnswer: 1
+        }
+      ]
+    },
+    {
+      id: "computer-science-quiz1",
+      title: "Computer Science Fundamentals",
+      subject: "computer",
+      type: "quiz",
+      description: "Test your knowledge of fundamental computer science concepts, algorithms, and programming principles.",
+      questionCount: 10,
+      timeLimit: "20 minutes",
+      passingScore: "70%",
+      completed: false,
+      questions: [
+        {
+          question: "What does CPU stand for?",
+          options: ["Central Processing Unit", "Computer Personal Unit", "Central Program Utility", "Control Processing Unit"],
+          correctAnswer: 0
+        },
+        {
+          question: "Which of these is NOT a programming paradigm?",
+          options: ["Object-Oriented", "Functional", "Procedural", "Systematic"],
+          correctAnswer: 3
+        },
+        {
+          question: "What is the time complexity of binary search?",
+          options: ["O(n)", "O(n²)", "O(log n)", "O(n log n)"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which data structure operates on a LIFO (Last In First Out) principle?",
+          options: ["Queue", "Stack", "Linked List", "Array"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is encapsulation in object-oriented programming?",
+          options: ["Bundling data and methods that work on that data", "Creating multiple instances of an object", "Inheriting properties from a parent class", "Converting one data type to another"],
+          correctAnswer: 0
+        },
+        {
+          question: "What is the primary function of an operating system?",
+          options: ["Run applications", "Manage hardware resources", "Store data", "Connect to the internet"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which of these is a high-level programming language?",
+          options: ["Assembly", "Machine code", "Python", "Binary"],
+          correctAnswer: 2
+        },
+        {
+          question: "What does SQL stand for?",
+          options: ["Structured Query Language", "Simple Question Language", "System Quality Language", "Standard Query Logic"],
+          correctAnswer: 0
+        },
+        {
+          question: "What is recursion in programming?",
+          options: ["A loop that never ends", "A function that calls itself", "A variable that changes type", "An error in the code"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which protocol is primarily used for secure internet browsing?",
+          options: ["HTTP", "FTP", "HTTPS", "SMTP"],
+          correctAnswer: 2
         }
       ]
     }
@@ -1611,8 +1824,8 @@ function openLesson(courseId, lessonId) {
       content: "<h3>Key Mathematics Concepts</h3><p>This lesson covers important mathematical principles and problem-solving techniques.</p>",
       quiz: [
         {
-          question: "Solve for x: 3x + 5 = 20",
-          options: ["x = 5", "x = 15", "x = 7", "x = 5/3"],
+          question: "What is the derivative of x²?",
+          options: ["2x", "x", "x³", "2"],
           correctAnswer: 0
         },
         {
@@ -1681,7 +1894,7 @@ function openLesson(courseId, lessonId) {
           correctAnswer: 2
         },
         {
-          question: "What was the main language of ancient Rome?",
+          question: "What is the main language of ancient Rome?",
           options: ["Greek", "Latin", "Hebrew", "Sanskrit"],
           correctAnswer: 1
         },
@@ -1769,53 +1982,53 @@ function openLesson(courseId, lessonId) {
       quiz: [
         {
           question: "What does HTML stand for?",
-          options: ["Hyper Text Markup Language", "High Tech Modern Language", "Hyperlink and Text Markup Language", "Home Tool Markup Language"],
+          options: ["Hyper Text Markup Language", "High Tech Modern Language", "System Quality Language", "Standard Query Logic"],
           correctAnswer: 0
         },
         {
           question: "Which of these is NOT a programming language?",
-          options: ["Java", "Python", "HTTP", "Photoshop"],
+          options: ["Java", "Python", "HTTP", "C++"],
           correctAnswer: 2
         },
         {
-          question: "Which tag is used to create a hyperlink in HTML?",
-          options: ["<link>", "<a>", "<href>", "<url>"],
+          question: "What is an algorithm?",
+          options: ["A type of variable", "A step-by-step procedure to solve a problem", "A programming error", "A hardware component"],
           correctAnswer: 1
         },
         {
-          question: "Which property is used to change the text color in CSS?",
-          options: ["font-color", "text-color", "color", "font-style"],
+          question: "Which symbol is used for single-line comments in JavaScript?",
+          options: ["#", "//", "/*", "<!--"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the binary representation of the decimal number 9?",
+          options: ["1001", "1010", "1100", "1110"],
+          correctAnswer: 0
+        },
+        {
+          question: "Which data structure follows Last-In-First-Out (LIFO) principle?",
+          options: ["Queue", "Stack", "Array", "Tree"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the main function of a database?",
+          options: ["To create websites", "To store and organize data", "To run applications", "To connect to the internet"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which programming paradigm uses 'objects' to represent data?",
+          options: ["Functional Programming", "Object-Oriented Programming", "Procedural Programming", "Logic Programming"],
+          correctAnswer: 1
+        },
+        {
+          question: "What does CSS stand for?",
+          options: ["Computer Style Sheets", "Creative Style System", "Cascading Style Sheets", "Colorful Style Sheets"],
           correctAnswer: 2
         },
         {
-          question: "What is the correct HTML element for the largest heading?",
-          options: ["<h6>", "<heading>", "<head>", "<h1>"],
+          question: "Which of these is NOT a web browser?",
+          options: ["Chrome", "Firefox", "Safari", "Oracle"],
           correctAnswer: 3
-        },
-        {
-          question: "Which JavaScript method is used to select an HTML element by its id?",
-          options: ["querySelector()", "getElementById()", "getElementByClass()", "selectElement()"],
-          correctAnswer: 1
-        },
-        {
-          question: "What does the 'box-sizing: border-box' CSS property do?",
-          options: ["Adds a border to all boxes", "Removes padding from elements", "Includes padding and border in element's width", "Creates a box shadow"],
-          correctAnswer: 2
-        },
-        {
-          question: "Which of these is a JavaScript framework?",
-          options: ["HTML5", "Bootstrap", "React", "SASS"],
-          correctAnswer: 2
-        },
-        {
-          question: "What is the purpose of media queries in CSS?",
-          options: ["To embed videos", "To create responsive designs", "To query databases", "To link to social media"],
-          correctAnswer: 1
-        },
-        {
-          question: "Which symbol is used to start a CSS id selector?",
-          options: [".", "#", "@", "&"],
-          correctAnswer: 1
         }
       ]
     },
@@ -1840,7 +2053,7 @@ function openLesson(courseId, lessonId) {
           correctAnswer: 1
         },
         {
-          question: "Which of the following is a vector quantity?",
+          question: "Which of these is a vector quantity?",
           options: ["Mass", "Time", "Velocity", "Temperature"],
           correctAnswer: 2
         },
@@ -1934,7 +2147,7 @@ function openLesson(courseId, lessonId) {
     },
     history201: {
       title: "Modern World History",
-      content: "<h3>Key Modern Historical Events</h3><p>This lesson covers the major events and movements that shaped the modern world.</p>",
+      content: "<h3>Key Modern Historical Events</h3><p>This lesson covers the major events and movements that shaped our world from the Renaissance to the present day.</p>",
       quiz: [
         {
           question: "When did World War II end?",
@@ -1967,7 +2180,7 @@ function openLesson(courseId, lessonId) {
           correctAnswer: 2
         },
         {
-          question: "What was the Renaissance?",
+          question: "What is the Renaissance?",
           options: ["A period of artistic and intellectual rebirth", "A military alliance", "An economic depression", "A religious movement"],
           correctAnswer: 0
         },
@@ -1987,206 +2200,15 @@ function openLesson(courseId, lessonId) {
           correctAnswer: 1
         }
       ]
-    },
-    language201: {
-      title: "Public Speaking",
-      content: "<h3>Effective Public Speaking Techniques</h3><p>This lesson covers essential techniques for delivering engaging presentations and speeches.</p>",
-      quiz: [
-        {
-          question: "What is the most common fear among public speakers?",
-          options: ["Forgetting content", "Technical failures", "Stage fright", "Audience questions"],
-          correctAnswer: 2
-        },
-        {
-          question: "Which of these is NOT a recommended technique for managing speech anxiety?",
-          options: ["Deep breathing", "Visualization", "Memorizing every word", "Practice"],
-          correctAnswer: 2
-        },
-        {
-          question: "What is the 'rule of three' in public speaking?",
-          options: ["Three jokes per speech", "Dividing speeches into three parts", "Presenting three main points", "Three seconds of eye contact"],
-          correctAnswer: 2
-        },
-        {
-          question: "Which technique involves telling a personal story to connect with the audience?",
-          options: ["Technical analysis", "Data visualization", "Narrative approach", "Socratic method"],
-          correctAnswer: 2
-        },
-        {
-          question: "How should a speaker respond to a question they don't know the answer to?",
-          options: ["Make up an answer", "Ignore the question", "Honestly acknowledge and offer to follow up", "Change the subject"],
-          correctAnswer: 2
-        },
-        {
-          question: "What percentage of communication is nonverbal, according to research?",
-          options: ["25%", "50%", "65%", "93%"],
-          correctAnswer: 2
-        },
-        {
-          question: "Which of these is most important in the opening of a speech?",
-          options: ["Telling a joke", "Capturing attention", "Listing credentials", "Thanking the host"],
-          correctAnswer: 1
-        },
-        {
-          question: "What is the recommended approach for slide presentations?",
-          options: ["Text-heavy slides", "Minimalist design with key points", "Reading directly from slides", "As many slides as possible"],
-          correctAnswer: 1
-        },
-        {
-          question: "How can a speaker best connect with a diverse audience?",
-          options: ["Using technical jargon", "Speaking quickly to fit in content", "Using inclusive language and relatable examples", "Focusing only on the most important people"],
-          correctAnswer: 2
-        },
-        {
-          question: "What is the most effective way to conclude a speech?",
-          options: ["Introducing new ideas", "Summarizing key points and providing a call to action", "Apologizing for any mistakes", "Ending abruptly when time runs out"],
-          correctAnswer: 1
-        }
-      ]
-    },
-    computer201: {
-      title: "Web Development",
-      content: "<h3>Web Development Foundations</h3><p>This lesson introduces the core technologies used in modern web development.</p>",
-      quiz: [
-        {
-          question: "Which language is used for web page structure?",
-          options: ["CSS", "HTML", "JavaScript", "Python"],
-          correctAnswer: 1
-        },
-        {
-          question: "What does CSS stand for?",
-          options: ["Computer Style Sheets", "Creative Style System", "Cascading Style Sheets", "Colorful Style Sheets"],
-          correctAnswer: 2
-        },
-        {
-          question: "Which tag is used to create a hyperlink in HTML?",
-          options: ["<link>", "<a>", "<href>", "<url>"],
-          correctAnswer: 1
-        },
-        {
-          question: "Which property is used to change the text color in CSS?",
-          options: ["font-color", "text-color", "color", "font-style"],
-          correctAnswer: 2
-        },
-        {
-          question: "What is the correct HTML element for the largest heading?",
-          options: ["<h6>", "<heading>", "<head>", "<h1>"],
-          correctAnswer: 3
-        },
-        {
-          question: "Which JavaScript method is used to select an HTML element by its id?",
-          options: ["querySelector()", "getElementById()", "getElementByClass()", "selectElement()"],
-          correctAnswer: 1
-        },
-        {
-          question: "What does the 'box-sizing: border-box' CSS property do?",
-          options: ["Adds a border to all boxes", "Removes padding from elements", "Includes padding and border in element's width", "Creates a box shadow"],
-          correctAnswer: 2
-        },
-        {
-          question: "Which of these is a JavaScript framework?",
-          options: ["HTML5", "Bootstrap", "React", "SASS"],
-          correctAnswer: 2
-        },
-        {
-          question: "What is the purpose of media queries in CSS?",
-          options: ["To embed videos", "To create responsive designs", "To query databases", "To link to social media"],
-          correctAnswer: 1
-        },
-        {
-          question: "Which symbol is used to start a CSS id selector?",
-          options: [".", "#", "@", "&"],
-          correctAnswer: 1
-        }
-      ]
-    },
-    math301: {
-      title: "Advanced Calculus",
-      content: "<h3>Advanced Calculus Concepts</h3><p>This lesson covers higher-level calculus concepts and applications.</p>",
-      quiz: [
-        {
-          question: "What is the derivative of e^x?",
-          options: ["e^x", "xe^(x-1)", "xe^x", "1/x"],
-          correctAnswer: 0
-        },
-        {
-          question: "Which of the following is true for a function to be continuous at a point?",
-          options: ["It must be differentiable", "The limit must exist and equal the function value", "It must be monotonic", "It must be bounded"],
-          correctAnswer: 1
-        },
-        {
-          question: "What is the integral of 1/x?",
-          options: ["ln|x| + C", "e^x + C", "x ln|x| + C", "1/ln|x| + C"],
-          correctAnswer: 0
-        },
-        {
-          question: "What does the Mean Value Theorem state?",
-          options: ["Every continuous function has at least one root", "For any continuous function on a closed interval, there exists a point where the derivative equals the average rate of change", "Every differentiable function is continuous", "The integral of a function equals the sum of its derivatives"],
-          correctAnswer: 1
-        },
-        {
-          question: "What is the order of a differential equation with the highest derivative being the third derivative?",
-          options: ["First order", "Second order", "Third order", "Fourth order"],
-          correctAnswer: 2
-        },
-        {
-          question: "What is the Taylor series expansion of a function?",
-          options: ["A power series that approximates the function near a specific point", "The antiderivative of the function", "The limit of the function as x approaches infinity", "The product of all derivatives"],
-          correctAnswer: 0
-        },
-        {
-          question: "What is the Jacobian used for in multivariable calculus?",
-          options: ["Finding critical points", "Determining if a matrix is invertible", "Changing variables in multiple integrals", "Solving differential equations"],
-          correctAnswer: 2
-        },
-        {
-          question: "Which of these is a second-order partial derivative notation?",
-          options: ["∂f/∂x", "∂²f/∂x²", "d²f/dx", "∫f dx"],
-          correctAnswer: 1
-        },
-        {
-          question: "What does the divergence theorem relate?",
-          options: ["Line integrals and surface integrals", "Volume integrals and surface integrals", "Point values and line integrals", "Surface integrals and point values"],
-          correctAnswer: 1
-        },
-        {
-          question: "What is a necessary condition for a function to have a local extremum?",
-          options: ["The function must be continuous", "The function must be differentiable", "The derivative equals zero or does not exist", "The second derivative must be positive"],
-          correctAnswer: 2
-        }
-      ]
     }
   };
   
   // For tests that might not have specific content, fallback to general subject-based content
   if (!lessonContent[courseId]) {
-    const subjectContent = lessonContent[course.subject + '101']; // Try to find a default course by subject
+    const subjectContent = lessonContent[course.subject];
     if (subjectContent) {
       // Use the subject's content as fallback
       lessonContent[courseId] = { ...subjectContent };
-    } else {
-      // Create a generic content with questions if nothing else works
-      lessonContent[courseId] = {
-        title: course.title,
-        content: `<h3>Key Concepts in ${course.title}</h3><p>This lesson covers important concepts related to this subject.</p>`,
-        quiz: [
-          {
-            question: "What is the primary focus of this course?",
-            options: ["Understanding basic concepts", "Advanced applications", "Historical development", "Practical implementations"],
-            correctAnswer: 0
-          },
-          {
-            question: "Which skill is most important for succeeding in this field?",
-            options: ["Critical thinking", "Memorization", "Physical coordination", "Artistic ability"],
-            correctAnswer: 0
-          },
-          {
-            question: "How does this subject relate to real-world applications?",
-            options: ["Direct practical applications", "Theoretical foundation only", "No real-world applications", "Only in specialized fields"],
-            correctAnswer: 0
-          }
-        ]
-      };
     }
   }
   
@@ -2209,9 +2231,6 @@ function openLesson(courseId, lessonId) {
   document.getElementById('lessonTitle').textContent = lesson.title;
   document.getElementById('lessonContent').innerHTML = lesson.content;
   
-  // Hide video container by default - we'll only show videos when needed
-  document.getElementById('videoContainer').style.display = 'none';
-  
   // Setup quiz for the lesson
   const quizContainer = document.getElementById('quizQuestions');
   const lessonQuiz = document.getElementById('lessonQuiz');
@@ -2232,7 +2251,7 @@ function openLesson(courseId, lessonId) {
           <h4 class="question-text">${index + 1}. ${question.question}</h4>
           <div class="answer-options">
             ${question.options.map((option, optIndex) => `
-              <label class="answer-option">
+              <label class="answer-option ${userAnswers[index] === optIndex ? 'selected' : ''}">
                 <input type="radio" name="question_${index}" value="${optIndex}" ${userAnswers[index] === optIndex ? 'checked' : ''}>
                 ${option}
               </label>
@@ -2393,19 +2412,19 @@ function startTest(test) {
         correctAnswer: 3
       },
       {
-        question: "Which famous scientist developed the theory of relativity?",
-        options: ["Isaac Newton", "Albert Einstein", "Galileo Galilei", "Niels Bohr"],
+        question: "Which scientist is known for the law of universal gravitation?",
+        options: ["Albert Einstein", "Isaac Newton", "Galileo Galilei", "Niels Bohr"],
         correctAnswer: 1
       },
       {
-        question: "What is the smallest prime number?",
-        options: ["0", "1", "2", "3"],
-        correctAnswer: 2
+        question: "What is the binary representation of the decimal number 9?",
+        options: ["1001", "1010", "1100", "1110"],
+        correctAnswer: 0
       },
       {
-        question: "Which of these is not a programming language?",
-        options: ["Java", "Python", "HTML", "Photoshop"],
-        correctAnswer: 3
+        question: "Which of these is NOT a programming language?",
+        options: ["Java", "Python", "HTTP", "C++"],
+        correctAnswer: 2
       },
       {
         question: "Which ocean is the largest?",
@@ -2982,11 +3001,11 @@ function showSection(sectionName) {
 function generateCourseImage(subject) {
   const imageUrls = {
     math: 'https://images.unsplash.com/photo-1635372722656-389f87a941db?q=80&w=500&auto=format&fit=crop',
-    science: 'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?q=80&w=500&auto=format&fit=crop',
-    history: 'https://images.unsplash.com/photo-1461360228754-543bc11b234d?q=80&w=500&auto=format&fit=crop',
+    science: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=500&auto=format&fit=crop',
+    history: 'https://images.unsplash.com/photo-1461360228754-8ecded7900cd?q=80&w=500&auto=format&fit=crop',
     language: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=500&auto=format&fit=crop',
     computer: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=500&auto=format&fit=crop'
   };
   
-  return imageUrls[subject] || 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=500&auto=format&fit=crop';
+  return imageUrls[subject] || 'https://images.unsplash.com/photo-1503676260728-72ae9ae6848d?q=80&w=500&auto=format&fit=crop';
 }
