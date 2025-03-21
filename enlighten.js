@@ -123,6 +123,76 @@ const enlightenData = {
       progress: 0,
       currentLesson: 0,
       lessons: []
+    },
+    {
+      id: "chemistry401",
+      title: "Organic Chemistry",
+      subject: "science",
+      description: "Dive into the fascinating world of organic chemistry, studying carbon compounds and their reactions.",
+      thumbnail: "science",
+      icon: "ph-atom",
+      level: "advanced",
+      lessons: 16,
+      duration: "24 hours",
+      progress: 0,
+      currentLesson: 0,
+      lessons: []
+    },
+    {
+      id: "algebra301",
+      title: "Advanced Algebra",
+      subject: "math",
+      description: "Explore complex algebraic concepts, equations, and functions for higher-level mathematics.",
+      thumbnail: "math",
+      icon: "ph-function",
+      level: "advanced",
+      lessons: 14,
+      duration: "20 hours",
+      progress: 0,
+      currentLesson: 0,
+      lessons: []
+    },
+    {
+      id: "literature101",
+      title: "World Literature Classics",
+      subject: "language",
+      description: "Journey through the greatest literary works from around the world, analyzing themes and cultural contexts.",
+      thumbnail: "language",
+      icon: "ph-book-open",
+      level: "intermediate",
+      lessons: 12,
+      duration: "15 hours",
+      progress: 0,
+      currentLesson: 0,
+      lessons: []
+    },
+    {
+      id: "python201",
+      title: "Intermediate Python Programming",
+      subject: "computer",
+      description: "Build on your Python fundamentals with advanced concepts including data structures, algorithms, and object-oriented programming.",
+      thumbnail: "computer",
+      icon: "ph-code",
+      level: "intermediate",
+      lessons: 15,
+      duration: "22 hours",
+      progress: 0,
+      currentLesson: 0,
+      lessons: []
+    },
+    {
+      id: "geography101",
+      title: "Introduction to Geography",
+      subject: "history",
+      description: "Explore physical and human geography, understanding the relationship between people and their environment.",
+      thumbnail: "history",
+      icon: "ph-globe",
+      level: "beginner",
+      lessons: 10,
+      duration: "12 hours",
+      progress: 0,
+      currentLesson: 0,
+      lessons: []
     }
   ],
   
@@ -786,6 +856,9 @@ const enlightenData = {
     // Clear current content
     mediaContainer.innerHTML = '';
     
+    // Define YouTube API key
+    const youtubeApiKey = 'AiZaSyDFko_ouqtmkabLfElMHTU_LAjD35EavUY';
+    
     // Define available media content
     const mediaContent = {
       videos: [
@@ -795,9 +868,11 @@ const enlightenData = {
           subject: 'math',
           thumbnail: 'algebra',
           duration: '15:24',
-          url: 'https://www.youtube.com/embed/LwCRRUa8yTU',
+          youtubeId: 'LwCRRUa8yTU',
           description: 'Learn the core concepts of algebra with clear examples and practice problems.',
-          image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=500&auto=format&fit=crop&q=60'
+          author: 'MathBright',
+          views: '1.2M views',
+          uploadDate: '2 months ago'
         },
         {
           id: 'science-video-1',
@@ -805,39 +880,11 @@ const enlightenData = {
           subject: 'science',
           thumbnail: 'cells',
           duration: '18:36',
-          url: 'https://www.youtube.com/embed/URUJD5NEXC8',
+          youtubeId: 'URUJD5NEXC8',
           description: 'Dive into the world of cells, their structures, and functions in this comprehensive guide.',
-          image: 'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=500&auto=format&fit=crop&q=60'
-        },
-        {
-          id: 'history-video-1',
-          title: 'Ancient Civilizations: Mesopotamia',
-          subject: 'history',
-          thumbnail: 'mesopotamia',
-          duration: '22:15',
-          url: 'https://www.youtube.com/embed/C2RxY02wr8Y',
-          description: 'Explore the cradle of civilization and discover how ancient Mesopotamia shaped human history.',
-          image: 'https://images.unsplash.com/photo-1603695248929-304770ebabb2?w=500&auto=format&fit=crop&q=60'
-        },
-        {
-          id: 'language-video-1',
-          title: 'Creative Writing Techniques',
-          subject: 'language',
-          thumbnail: 'writing',
-          duration: '13:42',
-          url: 'https://www.youtube.com/embed/R4FQ8jEbGEw',
-          description: 'Learn powerful creative writing techniques to enhance your storytelling abilities.',
-          image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=500&auto=format&fit=crop&q=60'
-        },
-        {
-          id: 'computer-video-1',
-          title: 'Introduction to Python Programming',
-          subject: 'computer',
-          thumbnail: 'python',
-          duration: '26:18',
-          url: 'https://www.youtube.com/embed/kqtD5dpn9C8',
-          description: 'Start your programming journey with this beginner-friendly Python tutorial.',
-          image: 'https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?w=500&auto=format&fit=crop&q=60'
+          author: 'Science Hub',
+          views: '856K views',
+          uploadDate: '1 month ago'
         },
         {
           id: 'math-video-2',
@@ -845,9 +892,11 @@ const enlightenData = {
           subject: 'math',
           thumbnail: 'calculus',
           duration: '20:10',
-          url: 'https://www.youtube.com/embed/EKvHQc3QEow',
+          youtubeId: 'EKvHQc3QEow',
           description: 'A comprehensive guide to understanding and working with derivatives in calculus.',
-          image: 'https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?w=500&auto=format&fit=crop&q=60'
+          author: 'MathTutor',
+          views: '500K views',
+          uploadDate: '3 months ago'
         },
         {
           id: 'science-video-2',
@@ -855,9 +904,23 @@ const enlightenData = {
           subject: 'science',
           thumbnail: 'chemistry',
           duration: '17:45',
-          url: 'https://www.youtube.com/embed/rz4Dd1I_fX0',
+          youtubeId: 'rz4Dd1I_fX0',
           description: 'Learn about the elements and structure of the periodic table in this fascinating video.',
-          image: 'https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=500&auto=format&fit=crop&q=60'
+          author: 'Chemistry101',
+          views: '300K views',
+          uploadDate: '2 months ago'
+        },
+        {
+          id: 'computer-video-1',
+          title: 'Introduction to Python Programming',
+          subject: 'computer',
+          thumbnail: 'python',
+          duration: '26:18',
+          youtubeId: 'kqtD5dpn9C8',
+          description: 'Start your programming journey with this beginner-friendly Python tutorial.',
+          author: 'PythonPro',
+          views: '800K views',
+          uploadDate: '1 month ago'
         },
         {
           id: 'computer-video-2',
@@ -865,9 +928,11 @@ const enlightenData = {
           subject: 'computer',
           thumbnail: 'webdev',
           duration: '28:52',
-          url: 'https://www.youtube.com/embed/qz0aGYrrlhU',
+          youtubeId: 'qz0aGYrrlhU',
           description: 'Build a solid foundation in HTML, CSS, and JavaScript for web development.',
-          image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&auto=format&fit=crop&q=60'
+          author: 'WebDevMaster',
+          views: '400K views',
+          uploadDate: '2 months ago'
         }
       ]
     };
@@ -878,29 +943,36 @@ const enlightenData = {
     // Create media cards
     content.forEach(item => {
       const mediaCard = document.createElement('div');
-      mediaCard.className = 'media-card';
+      mediaCard.className = 'youtube-video-card';
       mediaCard.dataset.mediaId = item.id;
       
-      const subjectLabel = getSubjectName(item.subject);
-      
       mediaCard.innerHTML = `
-        <div class="media-thumbnail" style="background-image: url('${item.image}'); background-size: cover; background-position: center;">
-          <span class="media-duration">${item.duration}</span>
+        <div class="video-thumbnail">
+          <img src="https://img.youtube.com/vi/${item.youtubeId}/mqdefault.jpg" alt="${item.title}">
+          <span class="video-duration">${item.duration}</span>
         </div>
-        <div class="media-content">
-          <span class="media-subject">${subjectLabel}</span>
-          <h3 class="media-title">${item.title}</h3>
-          <p class="media-description">${item.description}</p>
-          <button class="watch-btn">
-            <i class="ph ph-play"></i> Watch Now
-          </button>
+        <div class="video-info">
+          <div class="video-channel-icon">
+            <i class="ph ${item.icon || 'ph-video'}"></i>
+          </div>
+          <div class="video-details">
+            <h3 class="video-title">${item.title}</h3>
+            <div class="video-meta">
+              <span class="channel-name">${item.author}</span>
+              <div class="video-stats">
+                <span>${item.views}</span>
+                <span>•</span>
+                <span>${item.uploadDate}</span>
+              </div>
+            </div>
+          </div>
         </div>
       `;
       
       mediaContainer.appendChild(mediaCard);
       
       // Add click event
-      mediaCard.querySelector('.watch-btn').addEventListener('click', () => {
+      mediaCard.addEventListener('click', () => {
         this.openMedia(item);
       });
     });
@@ -909,83 +981,51 @@ const enlightenData = {
   openMedia(media) {
     const mediaModal = document.getElementById('mediaModal');
     const mediaTitle = document.getElementById('mediaTitle');
-    const customVideoPlayer = document.getElementById('customVideoPlayer');
     const mediaPlayer = document.getElementById('mediaPlayer');
     
     if (mediaModal && mediaTitle) {
       mediaTitle.textContent = media.title;
       mediaModal.style.display = 'flex';
       
-      // Add loading indicator
-      const modalBody = mediaModal.querySelector('.modal-body');
-      const loadingIndicator = document.createElement('div');
-      loadingIndicator.className = 'media-loading-indicator';
-      loadingIndicator.innerHTML = `
-        <div class="loading-animation">
-          <div class="loading-spinner"></div>
-        </div>
-        <div class="loading-text">
-          <h3>Loading ${media.title}...</h3>
-          <p>Your educational content is being prepared</p>
-        </div>
-      `;
-      modalBody.appendChild(loadingIndicator);
+      // Create YouTube embed URL with API key
+      const embedUrl = `https://www.youtube.com/embed/${media.youtubeId}?enablejsapi=1&key=AiZaSyDFko_ouqtmkabLfElMHTU_LAjD35EavUY`;
       
-      // All content is now treated as videos, not movies
-      mediaPlayer.style.display = 'none';
-      customVideoPlayer.style.display = 'block';
+      // Set up player
+      mediaPlayer.src = embedUrl;
+      mediaPlayer.style.display = 'block';
       
-      // Use iframe for YouTube videos
-      if (media.url.includes('youtube.com/embed')) {
-        customVideoPlayer.innerHTML = `
-          <iframe width="100%" height="500" src="${media.url}" frameborder="0" 
-           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-           allowfullscreen></iframe>
-        `;
-        
-        // Remove loading indicator after a short delay
-        setTimeout(() => {
-          const indicator = document.querySelector('.media-loading-indicator');
-          if (indicator) {
-            indicator.classList.add('fade-out');
-            setTimeout(() => indicator.remove(), 500);
-          }
-        }, 1000);
-      } else {
-        // Custom video player setup for non-YouTube videos
-        customVideoPlayer.innerHTML = `
-          <div class="custom-video-container">
-            <video id="mainVideo" controls>
-              <source src="${media.url}" type="video/mp4">
-              Your browser does not support HTML5 video.
-            </video>
-            <div class="custom-video-controls">
-              <button class="custom-play-btn"><i class="ph ph-play"></i></button>
-              <div class="custom-progress">
-                <div class="custom-progress-bar"></div>
-              </div>
-              <div class="custom-time">00:00 / ${media.duration}</div>
-              <button class="custom-volume-btn"><i class="ph ph-speaker-high"></i></button>
-              <button class="custom-fullscreen-btn"><i class="ph ph-arrows-out"></i></button>
+      // Add video info below player
+      const videoInfoSection = document.createElement('div');
+      videoInfoSection.className = 'youtube-video-info';
+      videoInfoSection.innerHTML = `
+        <div class="video-header">
+          <h2>${media.title}</h2>
+          <div class="video-stats">
+            <span>${media.views}</span>
+            <span>•</span>
+            <span>${media.uploadDate}</span>
+          </div>
+        </div>
+        <div class="video-channel">
+          <div class="channel-info">
+            <div class="channel-icon">
+              <i class="ph ${media.icon || 'ph-video'}"></i>
+            </div>
+            <div class="channel-details">
+              <h3>${media.author}</h3>
+              <p>Educational Content</p>
             </div>
           </div>
-        `;
-        
-        // Setup custom video controls
-        setupCustomVideoPlayer();
-        
-        // Update loading indicator removal
-        const video = document.getElementById('mainVideo');
-        if (video) {
-          video.addEventListener('loadeddata', () => {
-            const indicator = document.querySelector('.media-loading-indicator');
-            if (indicator) {
-              indicator.classList.add('fade-out');
-              setTimeout(() => indicator.remove(), 500);
-            }
-          });
-        }
-      }
+          <button class="subscribe-btn">Subscribe</button>
+        </div>
+        <div class="video-description">
+          <p>${media.description}</p>
+        </div>
+      `;
+      
+      // Add to modal
+      const modalBody = mediaModal.querySelector('.modal-body');
+      modalBody.appendChild(videoInfoSection);
     }
 
     // Share with friends functionality
@@ -1463,14 +1503,14 @@ function loadAllCourses() {
   let html = '';
   
   enlightenData.courses.forEach(course => {
-    // Generate a random image URL for the course background
-    const courseImage = generateCourseImage(course.subject);
+    // Generate thumbnail HTML with proper error handling
+    const thumbnailStyle = `background-image: url('${generateCourseImage(course.subject)}'); background-size: cover; background-position: center;`;
     
     html += `
       <div class="course-card" data-course-id="${course.id}">
-        <div class="course-thumbnail" style="background-image: url('${courseImage}'); background-size: cover; background-position: center;">
+        <div class="course-thumbnail" style="${thumbnailStyle}">
           <div class="course-thumbnail-overlay">
-            <i class="${course.icon}"></i>
+            <i class="${course.icon || 'ph ph-book-open'}"></i>
           </div>
         </div>
         <div class="course-content">
@@ -1495,7 +1535,7 @@ function loadAllCourses() {
   
   courseGrid.innerHTML = html;
   
-  // Add click event for course cards
+  // Add click event for course cards and handle errors
   courseGrid.querySelectorAll('.course-card').forEach(card => {
     card.addEventListener('click', function() {
       const courseId = this.getAttribute('data-course-id');
@@ -1506,14 +1546,28 @@ function loadAllCourses() {
         return;
       }
       
-      // If course has progress, open the current lesson
-      if (course.progress > 0) {
-        openLesson(courseId, `${courseId}-${course.currentLesson}`);
-      } else {
-        // Otherwise, open the first lesson
-        openLesson(courseId, `${courseId}-1`);
+      try {
+        // If course has progress, open the current lesson
+        if (course.progress > 0) {
+          openLesson(courseId, `${courseId}-${course.currentLesson}`);
+        } else {
+          // Otherwise, open the first lesson
+          openLesson(courseId, `${courseId}-1`);
+        }
+      } catch (error) {
+        console.error('Error opening course:', error);
+        showNotification('Error', 'Could not open course. Please try again.', 'error');
       }
     });
+    
+    // Add error handling for thumbnail images
+    const thumbnail = card.querySelector('.course-thumbnail');
+    if (thumbnail) {
+      thumbnail.style.backgroundColor = 'var(--surface-hover)';
+      thumbnail.addEventListener('error', function() {
+        this.style.backgroundImage = `url('${generateCourseImage(null)}')`;
+      });
+    }
   });
 }
 
@@ -2007,7 +2061,7 @@ function openLesson(courseId, lessonId) {
         },
         {
           question: "Which data structure follows Last-In-First-Out (LIFO) principle?",
-          options: ["Queue", "Stack", "Array", "Tree"],
+          options: ["Queue", "Stack", "Linked List", "Array"],
           correctAnswer: 1
         },
         {
@@ -2541,20 +2595,12 @@ function showTestQuestion(test, questionIndex) {
     indicator.classList.toggle('current', index === questionIndex);
   });
   
-  // Update navigation buttons
-  const prevQuestionBtn = document.getElementById('prevQuestionBtn');
-  const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+  // Show finish button on last question
   const finishTestBtn = document.getElementById('finishTestBtn');
   
-  prevQuestionBtn.disabled = questionIndex === 0;
-  nextQuestionBtn.disabled = questionIndex === test.questions.length - 1;
-  
-  // Show finish button on last question
   if (questionIndex === test.questions.length - 1) {
-    nextQuestionBtn.style.display = 'none';
     finishTestBtn.style.display = 'block';
   } else {
-    nextQuestionBtn.style.display = 'block';
     finishTestBtn.style.display = 'none';
   }
   
@@ -2583,6 +2629,28 @@ function showTestQuestion(test, questionIndex) {
         option.classList.add('correct');
       }
     });
+  }
+  
+  // Update navigation controls
+  const prevQuestionBtn = document.getElementById('prevQuestionBtn');
+  const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+  
+  if (prevQuestionBtn) {
+    prevQuestionBtn.disabled = questionIndex === 0;
+    prevQuestionBtn.onclick = function() {
+      if (questionIndex > 0) {
+        showTestQuestion(test, questionIndex - 1);
+      }
+    };
+  }
+  
+  if (nextQuestionBtn) {
+    nextQuestionBtn.disabled = questionIndex === test.questions.length - 1;
+    nextQuestionBtn.onclick = function() {
+      if (questionIndex < test.questions.length - 1) {
+        showTestQuestion(test, questionIndex + 1);
+      }
+    };
   }
 }
 
@@ -3000,12 +3068,18 @@ function showSection(sectionName) {
 
 function generateCourseImage(subject) {
   const imageUrls = {
-    math: 'https://images.unsplash.com/photo-1635372722656-389f87a941db?q=80&w=500&auto=format&fit=crop',
-    science: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=500&auto=format&fit=crop',
-    history: 'https://images.unsplash.com/photo-1461360228754-8ecded7900cd?q=80&w=500&auto=format&fit=crop',
-    language: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=500&auto=format&fit=crop',
-    computer: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=500&auto=format&fit=crop'
+    math: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?w=500&auto=format&fit=crop&q=80',
+    science: 'https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=500&auto=format&fit=crop&q=80',
+    history: 'https://images.unsplash.com/photo-1447069387593-a5de0862481e?w=500&auto=format&fit=crop&q=80',
+    language: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=500&auto=format&fit=crop&q=80',
+    computer: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&auto=format&fit=crop&q=80'
   };
   
-  return imageUrls[subject] || 'https://images.unsplash.com/photo-1503676260728-72ae9ae6848d?q=80&w=500&auto=format&fit=crop';
+  // First try subject-specific image
+  if (imageUrls[subject]) {
+    return imageUrls[subject];
+  }
+  
+  // If no subject match, use a generic education image
+  return 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=500&auto=format&fit=crop&q=80';
 }
