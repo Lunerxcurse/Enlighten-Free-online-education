@@ -4,6 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Enlighten - Interactive Learning Platform</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="custom-player.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiIgZmlsbD0iIzNiODJmNiI+PHBhdGggZD0iTTIyMC4xOCwzOS4zOUExMTEuMTIsMTExLjEyLDAsMCwwLDEyOCw4QTExMiwxMTIsMCwwLDAsNDMuMywxOTIuNzhjMTQuOTMsMTQuOTEsNDEuNjMsMzMuMjUsNzcuMiw0Ny4yNmExNiwxNiwwLDAsMCwxNSwwYzM1LjU4LTE0LDYyLjI4LTMyLjM1LDc3LjItNDcuMjZBMTEyLDExMiwwLDAsMCwyMjAuMTgsMzkuMzlaTTY4LDkySDE4OHY0MEg2NFptNTIsMTI4YTgsOCwwLDEsMSw4LThBOCw4LDAsMCwxLDEyMCwyMjBabTQwLTY4YTE2LDE2LDAsMCwwLDE2LTE2Vjc2YTE2LDE2LDAsMCwwLTE2LTE2SDY0QTE2LDE2LDAsMCwwLDQ4LDc2djYwYTE2LDE2LDAsMCwwLDE2LDE2WiI+PC9wYXRoPjwvc3ZnPg==">
@@ -393,12 +394,9 @@
       </div>
       <div class="modal-body">
         <!-- Custom Video Player -->
-        <div id="customVideoPlayer" class="custom-video-player"></div>
+        <div id="customVideoPlayer" class="custom-youtube-player"></div>
         
-        <!-- YouTube/iframe player for movies -->
-        <div class="video-container full-width">
-          <iframe id="mediaPlayer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
+        <!-- Media Controls -->
         <div class="media-controls">
           <button class="media-action-btn" id="shareMediaBtn">
             <i class="ph ph-share-network"></i> Share with Friends
@@ -587,6 +585,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="auth.js"></script>
+  <script src="youtube-player.js"></script>
   <script src="enlighten.js"></script>
   <script>
     // Fix for account link in footer

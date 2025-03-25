@@ -58,7 +58,6 @@ const enlightenData = {
       id: "language101",
       title: "Introduction to Creative Writing",
       subject: "language",
-      description: "Develop creative writing skills through storytelling techniques, character development, and narrative structures.",
       thumbnail: "language",
       icon: "ph-pen-nib",
       level: "beginner",
@@ -120,76 +119,6 @@ const enlightenData = {
       level: "advanced",
       lessons: 14,
       duration: "18 hours",
-      progress: 0,
-      currentLesson: 0,
-      lessons: []
-    },
-    {
-      id: "chemistry401",
-      title: "Organic Chemistry",
-      subject: "science",
-      description: "Dive into the fascinating world of organic chemistry, studying carbon compounds and their reactions.",
-      thumbnail: "science",
-      icon: "ph-atom",
-      level: "advanced",
-      lessons: 16,
-      duration: "24 hours",
-      progress: 0,
-      currentLesson: 0,
-      lessons: []
-    },
-    {
-      id: "algebra301",
-      title: "Advanced Algebra",
-      subject: "math",
-      description: "Explore complex algebraic concepts, equations, and functions for higher-level mathematics.",
-      thumbnail: "math",
-      icon: "ph-function",
-      level: "advanced",
-      lessons: 14,
-      duration: "20 hours",
-      progress: 0,
-      currentLesson: 0,
-      lessons: []
-    },
-    {
-      id: "literature101",
-      title: "World Literature Classics",
-      subject: "language",
-      description: "Journey through the greatest literary works from around the world, analyzing themes and cultural contexts.",
-      thumbnail: "language",
-      icon: "ph-book-open",
-      level: "intermediate",
-      lessons: 12,
-      duration: "15 hours",
-      progress: 0,
-      currentLesson: 0,
-      lessons: []
-    },
-    {
-      id: "python201",
-      title: "Intermediate Python Programming",
-      subject: "computer",
-      description: "Build on your Python fundamentals with advanced concepts including data structures, algorithms, and object-oriented programming.",
-      thumbnail: "computer",
-      icon: "ph-code",
-      level: "intermediate",
-      lessons: 15,
-      duration: "22 hours",
-      progress: 0,
-      currentLesson: 0,
-      lessons: []
-    },
-    {
-      id: "geography101",
-      title: "Introduction to Geography",
-      subject: "history",
-      description: "Explore physical and human geography, understanding the relationship between people and their environment.",
-      thumbnail: "history",
-      icon: "ph-globe",
-      level: "beginner",
-      lessons: 10,
-      duration: "12 hours",
       progress: 0,
       currentLesson: 0,
       lessons: []
@@ -933,6 +862,126 @@ const enlightenData = {
           author: 'WebDevMaster',
           views: '400K views',
           uploadDate: '2 months ago'
+        },
+        {
+          id: 'chemistry-101',
+          title: 'Introduction to Chemistry: Atoms and Molecules',
+          subject: 'science',
+          thumbnail: 'chemistry',
+          duration: '22:15',
+          youtubeId: 'bka20Q9TN6M',
+          description: 'Learn the fundamentals of chemistry starting with atomic structure and molecular bonds.',
+          author: 'Science Explorer',
+          views: '450K views',
+          uploadDate: '2 weeks ago'
+        },
+        {
+          id: 'geometry-basics',
+          title: 'Geometry Fundamentals: Shapes and Angles',
+          subject: 'math',
+          thumbnail: 'geometry',
+          duration: '19:45',
+          youtubeId: 'OmJ-4B-mS-Y',
+          description: 'Master the basics of geometry with this comprehensive guide to shapes, angles, and measurements.',
+          author: 'MathMaster',
+          views: '320K views',
+          uploadDate: '1 month ago'
+        },
+        {
+          id: 'renaissance-art',
+          title: 'The Renaissance: Art and Culture',
+          subject: 'history',
+          thumbnail: 'renaissance',
+          duration: '25:30',
+          youtubeId: '5_JUReD3QoE',
+          description: 'Explore the artistic and cultural revolution of the Renaissance period in Europe.',
+          author: 'History Channel',
+          views: '280K views',
+          uploadDate: '3 weeks ago'
+        },
+        {
+          id: 'creative-writing',
+          title: 'Creative Writing: Crafting Compelling Stories',
+          subject: 'language',
+          thumbnail: 'writing',
+          duration: '23:18',
+          youtubeId: 'N4ZDBOc2tX8',
+          description: 'Learn essential creative writing techniques to craft engaging stories and narratives.',
+          author: 'WritingPro',
+          views: '190K views',
+          uploadDate: '5 days ago'
+        },
+        {
+          id: 'javascript-basics',
+          title: 'JavaScript Fundamentals for Beginners',
+          subject: 'computer',
+          thumbnail: 'javascript',
+          duration: '28:45',
+          youtubeId: 'hdI2bqOjy3c',
+          description: 'Start your JavaScript journey with this beginner-friendly programming tutorial.',
+          author: 'CodeMaster',
+          views: '680K views',
+          uploadDate: '2 weeks ago'
+        },
+        {
+          id: 'biology-cells',
+          title: 'Cell Biology: Structure and Function',
+          subject: 'science',
+          thumbnail: 'biology',
+          duration: '24:10',
+          youtubeId: 'URUJD5NEXC8',
+          description: 'Discover the fascinating world of cells and their essential functions in living organisms.',
+          author: 'BioExplorer',
+          views: '420K views',
+          uploadDate: '1 week ago'
+        },
+        {
+          id: 'calculus-intro',
+          title: 'Introduction to Calculus: Limits and Derivatives',
+          subject: 'math',
+          thumbnail: 'calculus',
+          duration: '26:55',
+          youtubeId: 'EKvHQc3QEow',
+          description: 'Begin your calculus journey with this comprehensive guide to limits and derivatives.',
+          author: 'MathGenius',
+          views: '550K views',
+          uploadDate: '4 days ago'
+        },
+        {
+          id: 'ancient-egypt',
+          title: 'Ancient Egypt: Pyramids and Pharaohs',
+          subject: 'history',
+          thumbnail: 'egypt',
+          duration: '27:20',
+          youtubeId: '1yv_MXNYbAo',
+          description: 'Journey through the fascinating civilization of ancient Egypt and its remarkable achievements.',
+          author: 'HistoryMaster',
+          views: '890K views',
+          uploadDate: '1 month ago'
+        },
+        {
+          id: 'literary-analysis',
+          title: 'Literary Analysis: Understanding Theme and Symbolism',
+          subject: 'language',
+          thumbnail: 'literature',
+          duration: '21:35',
+          youtubeId: 'F0rYMxFOrwc',
+          description: 'Learn how to analyze literature by identifying themes and symbolic elements.',
+          author: 'LitGuide',
+          views: '230K views',
+          uploadDate: '2 weeks ago'
+        },
+        {
+          id: 'data-structures',
+          title: 'Data Structures in Programming',
+          subject: 'computer',
+          thumbnail: 'programming',
+          duration: '29:50',
+          youtubeId: 'RBSGKlAvoiM',
+          description: 'Master essential data structures for efficient programming and algorithm design.',
+          author: 'TechPro',
+          views: '470K views',
+          uploadDate: '1 week ago'
         }
       ]
     };
@@ -982,17 +1031,37 @@ const enlightenData = {
     const mediaModal = document.getElementById('mediaModal');
     const mediaTitle = document.getElementById('mediaTitle');
     const mediaPlayer = document.getElementById('mediaPlayer');
+    const customVideoPlayerContainer = document.getElementById('customVideoPlayer');
     
     if (mediaModal && mediaTitle) {
       mediaTitle.textContent = media.title;
       mediaModal.style.display = 'flex';
       
-      // Create YouTube embed URL with API key
-      const embedUrl = `https://www.youtube.com/embed/${media.youtubeId}?enablejsapi=1&key=AiZaSyDFko_ouqtmkabLfElMHTU_LAjD35EavUY`;
+      // Hide both players initially
+      if (mediaPlayer) mediaPlayer.style.display = 'none';
+      if (customVideoPlayerContainer) customVideoPlayerContainer.innerHTML = '';
       
-      // Set up player
-      mediaPlayer.src = embedUrl;
-      mediaPlayer.style.display = 'block';
+      // Create custom YouTube player
+      if (media.youtubeId) {
+        // Create and initialize custom player
+        customVideoPlayerContainer.style.display = 'block';
+        
+        // Clear previous player if exists
+        if (this.customPlayer) {
+          this.customPlayer.destroy();
+        }
+        
+        // Create new player
+        this.customPlayer = new YouTubeCustomPlayer(
+          media.youtubeId,
+          customVideoPlayerContainer,
+          {
+            title: media.title,
+            autoplay: true,
+            apiKey: 'AiZaSyDFko_ouqtmkabLfElMHTU_LAjD35EavUY'
+          }
+        );
+      }
       
       // Add video info below player
       const videoInfoSection = document.createElement('div');
@@ -1025,6 +1094,8 @@ const enlightenData = {
       
       // Add to modal
       const modalBody = mediaModal.querySelector('.modal-body');
+      modalBody.innerHTML = '';
+      modalBody.appendChild(customVideoPlayerContainer);
       modalBody.appendChild(videoInfoSection);
     }
 
@@ -1503,14 +1574,14 @@ function loadAllCourses() {
   let html = '';
   
   enlightenData.courses.forEach(course => {
-    // Generate thumbnail HTML with proper error handling
-    const thumbnailStyle = `background-image: url('${generateCourseImage(course.subject)}'); background-size: cover; background-position: center;`;
+    // Generate a random image URL for the course background
+    const courseImage = generateCourseImage(course.subject);
     
     html += `
       <div class="course-card" data-course-id="${course.id}">
-        <div class="course-thumbnail" style="${thumbnailStyle}">
+        <div class="course-thumbnail" style="background-image: url('${courseImage}'); background-size: cover; background-position: center;">
           <div class="course-thumbnail-overlay">
-            <i class="${course.icon || 'ph ph-book-open'}"></i>
+            <i class="${course.icon}"></i>
           </div>
         </div>
         <div class="course-content">
@@ -1535,7 +1606,7 @@ function loadAllCourses() {
   
   courseGrid.innerHTML = html;
   
-  // Add click event for course cards and handle errors
+  // Add click event for course cards
   courseGrid.querySelectorAll('.course-card').forEach(card => {
     card.addEventListener('click', function() {
       const courseId = this.getAttribute('data-course-id');
@@ -1546,28 +1617,14 @@ function loadAllCourses() {
         return;
       }
       
-      try {
-        // If course has progress, open the current lesson
-        if (course.progress > 0) {
-          openLesson(courseId, `${courseId}-${course.currentLesson}`);
-        } else {
-          // Otherwise, open the first lesson
-          openLesson(courseId, `${courseId}-1`);
-        }
-      } catch (error) {
-        console.error('Error opening course:', error);
-        showNotification('Error', 'Could not open course. Please try again.', 'error');
+      // If course has progress, open the current lesson
+      if (course.progress > 0) {
+        openLesson(courseId, `${courseId}-${course.currentLesson}`);
+      } else {
+        // Otherwise, open the first lesson
+        openLesson(courseId, `${courseId}-1`);
       }
     });
-    
-    // Add error handling for thumbnail images
-    const thumbnail = card.querySelector('.course-thumbnail');
-    if (thumbnail) {
-      thumbnail.style.backgroundColor = 'var(--surface-hover)';
-      thumbnail.addEventListener('error', function() {
-        this.style.backgroundImage = `url('${generateCourseImage(null)}')`;
-      });
-    }
   });
 }
 
@@ -1674,7 +1731,12 @@ function loadProgress() {
   // Load activity chart
   const activityChart = document.getElementById('activityChart');
   if (activityChart) {
-    new Chart(activityChart, {
+    // Destroy existing chart if it exists
+    if (window.activityChartInstance) {
+      window.activityChartInstance.destroy();
+    }
+    
+    window.activityChartInstance = new Chart(activityChart, {
       type: 'line',
       data: {
         labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -1708,12 +1770,17 @@ function loadProgress() {
   // Load performance chart
   const performanceChart = document.getElementById('performanceChart');
   if (performanceChart) {
-    new Chart(performanceChart, {
+    // Destroy existing chart if it exists
+    if (window.performanceChartInstance) {
+      window.performanceChartInstance.destroy();
+    }
+    
+    window.performanceChartInstance = new Chart(performanceChart, {
       type: 'radar',
       data: {
         labels: ['Mathematics', 'Science', 'History', 'Language Arts', 'Computer Science'],
         datasets: [{
-          label: 'Performance',
+          label: 'Subject Performance',
           data: [85, 70, 60, 90, 75],
           fill: true,
           backgroundColor: 'rgba(59, 130, 246, 0.2)',
@@ -1727,12 +1794,6 @@ function loadProgress() {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: true,
-            position: 'top'
-          }
-        },
         scales: {
           r: {
             angleLines: { display: true },
@@ -1803,10 +1864,14 @@ function loadProgress() {
   updatePerformanceChart();
 }
 
-// Update performance tracking
 function updatePerformanceChart() {
   const performanceChart = document.getElementById('performanceChart');
   if (!performanceChart) return;
+  
+  // Destroy existing chart if it exists
+  if (window.performanceChartInstance) {
+    window.performanceChartInstance.destroy();
+  }
   
   // Calculate performance for each subject
   const subjectPerformance = {
@@ -1817,7 +1882,7 @@ function updatePerformanceChart() {
     'Computer Science': calculateSubjectPerformance('computer')
   };
 
-  new Chart(performanceChart, {
+  window.performanceChartInstance = new Chart(performanceChart, {
     type: 'radar',
     data: {
       labels: Object.keys(subjectPerformance),
@@ -2045,45 +2110,11 @@ function openLesson(courseId, lessonId) {
           correctAnswer: 2
         },
         {
-          question: "What is an algorithm?",
-          options: ["A type of variable", "A step-by-step procedure to solve a problem", "A programming error", "A hardware component"],
-          correctAnswer: 1
-        },
-        {
-          question: "Which symbol is used for single-line comments in JavaScript?",
-          options: ["#", "//", "/*", "<!--"],
-          correctAnswer: 1
-        },
-        {
-          question: "What is the binary representation of the decimal number 9?",
-          options: ["1001", "1010", "1100", "1110"],
+          question: "How do you create a variable with the numeric value 5?",
+          options: ["x = 5", "int x = 5", "x = int(5)", "var x = 5"],
           correctAnswer: 0
-        },
-        {
-          question: "Which data structure follows Last-In-First-Out (LIFO) principle?",
-          options: ["Queue", "Stack", "Linked List", "Array"],
-          correctAnswer: 1
-        },
-        {
-          question: "What is the main function of a database?",
-          options: ["To create websites", "To store and organize data", "To run applications", "To connect to the internet"],
-          correctAnswer: 1
-        },
-        {
-          question: "Which programming paradigm uses 'objects' to represent data?",
-          options: ["Functional Programming", "Object-Oriented Programming", "Procedural Programming", "Logic Programming"],
-          correctAnswer: 1
-        },
-        {
-          question: "What does CSS stand for?",
-          options: ["Computer Style Sheets", "Creative Style System", "Cascading Style Sheets", "Colorful Style Sheets"],
-          correctAnswer: 2
-        },
-        {
-          question: "Which of these is NOT a web browser?",
-          options: ["Chrome", "Firefox", "Safari", "Oracle"],
-          correctAnswer: 3
         }
+        // More questions would be added for a real implementation
       ]
     },
     // Additional courses
@@ -2201,7 +2232,7 @@ function openLesson(courseId, lessonId) {
     },
     history201: {
       title: "Modern World History",
-      content: "<h3>Key Modern Historical Events</h3><p>This lesson covers the major events and movements that shaped our world from the Renaissance to the present day.</p>",
+      content: "<h3>Key Modern Historical Events</h3><p>This lesson explores the major events and movements that shaped our world from the Renaissance to the present day.</p>",
       quiz: [
         {
           question: "When did World War II end?",
@@ -2457,8 +2488,8 @@ function startTest(test) {
       },
       {
         question: "Which country is home to the Great Barrier Reef?",
-        options: ["Brazil", "Mexico", "New Zealand", "Australia"],
-        correctAnswer: 3
+        options: ["Brazil", "Australia", "Thailand", "Mexico"],
+        correctAnswer: 1
       },
       {
         question: "What is the largest organ in the human body?",
@@ -2639,7 +2670,8 @@ function showTestQuestion(test, questionIndex) {
     prevQuestionBtn.disabled = questionIndex === 0;
     prevQuestionBtn.onclick = function() {
       if (questionIndex > 0) {
-        showTestQuestion(test, questionIndex - 1);
+        currentQuestionIndex--;
+        showTestQuestion(test, currentQuestionIndex);
       }
     };
   }
@@ -2648,7 +2680,8 @@ function showTestQuestion(test, questionIndex) {
     nextQuestionBtn.disabled = questionIndex === test.questions.length - 1;
     nextQuestionBtn.onclick = function() {
       if (questionIndex < test.questions.length - 1) {
-        showTestQuestion(test, questionIndex + 1);
+        currentQuestionIndex++;
+        showTestQuestion(test, currentQuestionIndex);
       }
     };
   }
@@ -3068,18 +3101,12 @@ function showSection(sectionName) {
 
 function generateCourseImage(subject) {
   const imageUrls = {
-    math: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?w=500&auto=format&fit=crop&q=80',
-    science: 'https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=500&auto=format&fit=crop&q=80',
-    history: 'https://images.unsplash.com/photo-1447069387593-a5de0862481e?w=500&auto=format&fit=crop&q=80',
-    language: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=500&auto=format&fit=crop&q=80',
-    computer: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&auto=format&fit=crop&q=80'
+    math: 'https://images.unsplash.com/photo-1635372722656-389f87a941db?q=80&w=500&auto=format&fit=crop',
+    science: 'https://images.unsplash.com/photo-1530026405186-389f87a941db?q=80&w=500&auto=format&fit=crop',
+    history: 'https://images.unsplash.com/photo-1461360228754-389f87a941db?q=80&w=500&auto=format&fit=crop',
+    language: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=500&auto=format&fit=crop',
+    computer: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=500&auto=format&fit=crop'
   };
   
-  // First try subject-specific image
-  if (imageUrls[subject]) {
-    return imageUrls[subject];
-  }
-  
-  // If no subject match, use a generic education image
-  return 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=500&auto=format&fit=crop&q=80';
+  return imageUrls[subject] || 'https://images.unsplash.com/photo-1503676260728-72ae9ae6848d?q=80&w=500&auto=format&fit=crop';
 }
