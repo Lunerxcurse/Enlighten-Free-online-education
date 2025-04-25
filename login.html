@@ -544,6 +544,9 @@
                     avatar: 'https://ui-avatars.com/api/?name=Google+User&background=4285F4&color=fff'
                 }));
                 
+                // Reset userRole to trigger role selection modal
+                localStorage.removeItem('userRole');
+                
                 // Show success animation
                 document.querySelector('.auth-form').style.display = 'none';
                 document.querySelector('.oauth-divider').style.display = 'none';
@@ -576,6 +579,9 @@
                     timestamp: new Date().getTime(),
                     avatar: 'https://ui-avatars.com/api/?name=Discord+User&background=5865F2&color=fff'
                 }));
+                
+                // Reset userRole to trigger role selection modal
+                localStorage.removeItem('userRole');
                 
                 // Show success animation
                 document.querySelector('.auth-form').style.display = 'none';

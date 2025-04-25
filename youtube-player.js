@@ -264,6 +264,7 @@ class YouTubeCustomPlayer {
     }
     
     if (this.player) {
+      this.player.stopVideo();  
       this.player.destroy();
     }
     

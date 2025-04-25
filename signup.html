@@ -518,6 +518,9 @@
                         timestamp: new Date().getTime()
                     }));
                     
+                    // Reset userRole to trigger role selection modal
+                    localStorage.removeItem('userRole');
+                    
                     // Show success animation
                     document.querySelector('.auth-form').style.display = 'none';
                     document.querySelector('.auth-title').textContent = 'Account Created!';
