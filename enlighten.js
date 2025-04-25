@@ -778,6 +778,9 @@ const enlightenData = {
     }
   ],
   
+  // Custom media player
+  customPlayer: null,
+  
   updateMediaSection(mediaType = 'video') {
     const mediaContainer = document.getElementById('mediaContainer');
     if (!mediaContainer) return;
@@ -1002,7 +1005,7 @@ const enlightenData = {
         </div>
         <div class="video-info">
           <div class="video-channel-icon">
-            <i class="ph ${item.icon || 'ph-video'}"></i>
+            <i class="${item.icon || 'ph-video'}"></i>
           </div>
           <div class="video-details">
             <h3 class="video-title">${item.title}</h3>
@@ -1041,15 +1044,15 @@ const enlightenData = {
       if (mediaPlayer) mediaPlayer.style.display = 'none';
       if (customVideoPlayerContainer) customVideoPlayerContainer.innerHTML = '';
       
+      // Destroy existing player if there is one
+      if (this.customPlayer) {
+        this.customPlayer.destroy();
+      }
+      
       // Create custom YouTube player
       if (media.youtubeId) {
         // Create and initialize custom player
         customVideoPlayerContainer.style.display = 'block';
-        
-        // Clear previous player if exists
-        if (this.customPlayer) {
-          this.customPlayer.destroy();
-        }
         
         // Create new player
         this.customPlayer = new YouTubeCustomPlayer(
@@ -1078,7 +1081,7 @@ const enlightenData = {
         <div class="video-channel">
           <div class="channel-info">
             <div class="channel-icon">
-              <i class="ph ${media.icon || 'ph-video'}"></i>
+              <i class="${media.icon || 'ph-video'}"></i>
             </div>
             <div class="channel-details">
               <h3>${media.author}</h3>
@@ -1221,6 +1224,11 @@ const enlightenData = {
 
 // DOM ready function
 document.addEventListener('DOMContentLoaded', function() {
+  // Check if first visit
+  if (!localStorage.getItem('userRole')) {
+    showRoleSelectionModal();
+  }
+  
   // Initialize the app
   initApp();
   
@@ -1254,6 +1262,11 @@ function initApp() {
   // Initialize achievements
   enlightenData.initializeAchievements();
   enlightenData.setupAchievementListeners();
+  
+  // Initialize teacher UI if needed
+  if (localStorage.getItem('userRole') === 'teacher') {
+    initTeacherUI();
+  }
 }
 
 // Check login streak
@@ -1346,6 +1359,12 @@ function addEventListeners() {
       const modal = this.closest('.modal');
       if (modal) {
         modal.style.display = 'none';
+        
+        // If this is the media modal, destroy the player
+        if (modal.id === 'mediaModal' && enlightenData.customPlayer) {
+          enlightenData.customPlayer.destroy();
+          enlightenData.customPlayer = null;
+        }
       }
     });
   });
@@ -1544,6 +1563,1256 @@ function addEventListeners() {
     // Always use videos now
     enlightenData.updateMediaSection('video');
   });
+  
+  // Check if we need to add teacher UI
+  if (localStorage.getItem('userRole') === 'teacher') {
+    initTeacherUI();
+  }
+}
+
+// Show role selection modal
+function showRoleSelectionModal() {
+  // Create modal element
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.id = 'roleSelectionModal';
+  modal.style.display = 'flex';
+  modal.style.zIndex = '10000';
+  
+  modal.innerHTML = `
+    <div class="modal-content" style="max-width: 500px; text-align: center; padding: 2rem;">
+      <div class="modal-header">
+        <h2><i class="ph ph-graduation-cap"></i> Welcome to Enlighten</h2>
+      </div>
+      <div class="modal-body" style="padding: 2rem 1.5rem;">
+        <p style="margin-bottom: 2rem; font-size: 1.1rem;">Please select your role to personalize your experience:</p>
+        
+        <div style="display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 1.5rem;">
+          <div class="role-option" data-role="student" style="padding: 1.5rem; border-radius: var(--radius-md); border: 2px solid var(--border); cursor: pointer; flex: 1; max-width: 180px; transition: var(--transition);">
+            <i class="ph ph-student" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
+            <h3>Student</h3>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Access courses, tests, and track your learning progress</p>
+          </div>
+          
+          <div class="role-option" data-role="teacher" style="padding: 1.5rem; border-radius: var(--radius-md); border: 2px solid var(--border); cursor: pointer; flex: 1; max-width: 180px; transition: var(--transition);">
+            <i class="ph ph-chalkboard-teacher" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
+            <h3>Teacher</h3>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Create and manage courses, assign tests, and view student progress</p>
+          </div>
+        </div>
+        
+        <p style="font-size: 0.9rem; color: var(--text-secondary);">You can change your role later in settings</p>
+      </div>
+    </div>
+  `;
+  
+  // Add to body
+  document.body.appendChild(modal);
+  
+  // Add click events for role options
+  modal.querySelectorAll('.role-option').forEach(option => {
+    option.addEventListener('click', function() {
+      const role = this.getAttribute('data-role');
+      localStorage.setItem('userRole', role);
+      
+      // Update UI based on role if needed
+      if (role === 'teacher') {
+        showNotification('Teacher Mode', 'Welcome to Enlighten! You now have access to teacher features.', 'success');
+        initTeacherUI(); // Initialize teacher UI
+      } else {
+        showNotification('Student Mode', 'Welcome to Enlighten! Let\'s start your learning journey.', 'success');
+      }
+      
+      // Remove modal
+      modal.remove();
+    });
+    
+    // Add hover effect
+    option.addEventListener('mouseover', function() {
+      this.style.borderColor = 'var(--primary)';
+      this.style.transform = 'translateY(-5px)';
+      this.style.boxShadow = '0 6px 15px rgba(0, 0, 0, 0.1)';
+    });
+    
+    option.addEventListener('mouseout', function() {
+      this.style.borderColor = 'var(--border)';
+      this.style.transform = 'translateY(0)';
+      this.style.boxShadow = 'none';
+    });
+  });
+}
+
+// Initialize teacher UI with assignment features
+function initTeacherUI() {
+  // Check if the user is a teacher
+  if (localStorage.getItem('userRole') !== 'teacher') return;
+  
+  // Add teacher controls to the dashboard header
+  const dashboardHeader = document.querySelector('.dashboard-header');
+  if (dashboardHeader) {
+    const teacherControls = document.createElement('div');
+    teacherControls.className = 'teacher-controls';
+    teacherControls.innerHTML = `
+      <div class="teacher-welcome">
+        <i class="ph ph-chalkboard-teacher"></i>
+        <span>Teacher Dashboard</span>
+      </div>
+      <div style="display: flex; gap: 1rem;">
+        <button id="manageClassCodeBtn" class="primary-btn">
+          <i class="ph ph-hash"></i>
+          Class Code
+        </button>
+        <button id="createClassBtn" class="primary-btn">
+          <i class="ph ph-users-three"></i>
+          Manage Classes
+        </button>
+      </div>
+    `;
+    dashboardHeader.appendChild(teacherControls);
+    
+    // Add event listener for create class button
+    document.getElementById('createClassBtn').addEventListener('click', showClassManagementModal);
+    
+    // Add event listener for class code button
+    document.getElementById('manageClassCodeBtn').addEventListener('click', showClassCodeModal);
+  }
+  
+  // Add assignment buttons to courses, tests, and videos
+  addAssignmentButtons();
+}
+
+// Add assignment buttons to content items
+function addAssignmentButtons() {
+  // Check if assignment actions already exist
+  if (document.querySelector('.assignment-action')) return;
+  
+  // Add to courses
+  document.querySelectorAll('.course-card').forEach(card => {
+    const courseContent = card.querySelector('.course-content');
+    const assignBtn = document.createElement('button');
+    assignBtn.className = 'assignment-action';
+    assignBtn.innerHTML = '<i class="ph ph-plus-circle"></i> Assign';
+    assignBtn.setAttribute('data-type', 'course');
+    assignBtn.setAttribute('data-id', card.getAttribute('data-course-id'));
+    assignBtn.setAttribute('data-title', card.querySelector('.course-title').textContent);
+    assignBtn.onclick = function(e) {
+      e.stopPropagation(); // Prevent card click
+      showAssignmentModal(this);
+    };
+    courseContent.appendChild(assignBtn);
+  });
+  
+  // Add to tests
+  document.querySelectorAll('.test-card').forEach(card => {
+    const testActions = card.querySelector('.test-card-actions');
+    const assignBtn = document.createElement('button');
+    assignBtn.className = 'assignment-action test-btn';
+    assignBtn.innerHTML = '<i class="ph ph-plus-circle"></i> Assign';
+    assignBtn.setAttribute('data-type', 'test');
+    assignBtn.setAttribute('data-id', card.getAttribute('data-test-id'));
+    assignBtn.setAttribute('data-title', card.querySelector('.test-card-title').textContent);
+    assignBtn.onclick = function(e) {
+      e.stopPropagation(); // Prevent card click
+      showAssignmentModal(this);
+    };
+    testActions.appendChild(assignBtn);
+  });
+  
+  // Add to videos
+  document.querySelectorAll('.youtube-video-card').forEach(card => {
+    const videoInfo = card.querySelector('.video-details');
+    const assignBtn = document.createElement('button');
+    assignBtn.className = 'assignment-action video-assign-btn';
+    assignBtn.innerHTML = '<i class="ph ph-plus-circle"></i> Assign';
+    assignBtn.setAttribute('data-type', 'video');
+    assignBtn.setAttribute('data-id', card.getAttribute('data-media-id'));
+    assignBtn.setAttribute('data-title', card.querySelector('.video-title').textContent);
+    assignBtn.onclick = function(e) {
+      e.stopPropagation(); // Prevent card click
+      showAssignmentModal(this);
+    };
+    videoInfo.appendChild(assignBtn);
+  });
+}
+
+// Show assignment modal
+function showAssignmentModal(button) {
+  const type = button.getAttribute('data-type');
+  const id = button.getAttribute('data-id');
+  const title = button.getAttribute('data-title');
+  
+  // Create or get classes
+  if (!localStorage.getItem('teacherClasses')) {
+    const defaultClasses = [
+      { id: 'class1', name: 'Period 1', students: 28 },
+      { id: 'class2', name: 'Period 2', students: 25 },
+      { id: 'class3', name: 'Period 3', students: 30 }
+    ];
+    localStorage.setItem('teacherClasses', JSON.stringify(defaultClasses));
+  }
+  
+  const classes = JSON.parse(localStorage.getItem('teacherClasses'));
+  const assignments = JSON.parse(localStorage.getItem('teacherAssignments') || '[]');
+  
+  // Create modal element
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.display = 'flex';
+  modal.style.zIndex = '10000'; // Higher than the class management modal
+  
+  modal.innerHTML = `
+    <div class="modal-content" style="max-width: 500px; padding: 2rem;">
+      <div class="modal-header">
+        <h2><i class="ph ph-users-three"></i> Assign to Class</h2>
+        <button class="close-btn" id="closeAssignModal">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 1.5rem;">
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="margin-bottom: 1rem;">Assigning:</h3>
+          <div style="display: flex; align-items: center; gap: 0.8rem; padding: 1rem; background: var(--surface-hover); border-radius: var(--radius-md);">
+            <i class="ph ${type === 'course' ? 'ph-books' : type === 'test' ? 'ph-exam' : 'ph-video'}" style="font-size: 1.5rem; color: var(--primary); margin-top: 0.2rem;"></i>
+            <div>
+              <h4 style="margin-bottom: 0.3rem;">${title}</h4>
+              <p style="color: var(--text-secondary); font-size: 0.9rem;">${type.charAt(0).toUpperCase() + type.slice(1)}</p>
+            </div>
+          </div>
+        </div>
+        
+        <h3 style="margin-bottom: 1rem;">Select Classes:</h3>
+        <div class="class-list" style="display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1.5rem;">
+          ${classes.map(cls => `
+            <label class="class-option" style="display: flex; align-items: center; gap: 0.8rem; padding: 1rem; background: var(--surface); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition);">
+              <input type="checkbox" name="class" value="${cls.id}" style="width: 20px; height: 20px; accent-color: var(--primary);">
+              <div>
+                <h4 style="margin-bottom: 0.3rem;">${cls.name}</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">${cls.students} students</p>
+              </div>
+            </label>
+          `).join('')}
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3>Due Date (Optional):</h3>
+          <input type="date" id="assignmentDueDate" style="padding: 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h3>Add Instructions:</h3>
+          <textarea id="assignmentInstructions" placeholder="Optional instructions for students..." style="width: 100%; padding: 0.8rem; border-radius: var(--radius-md); border: 1px solid var(--border); margin-top: 0.5rem; min-height: 80px;"></textarea>
+        </div>
+        
+        <button id="confirmAssignBtn" class="primary-btn" style="width: 100%;">
+          <i class="ph ph-check"></i>
+          Assign to Selected Classes
+        </button>
+      </div>
+    </div>
+  `;
+  
+  // Add to body
+  document.body.appendChild(modal);
+  
+  // Add hover effect to class options
+  modal.querySelectorAll('.class-option').forEach(option => {
+    option.addEventListener('mouseover', function() {
+      this.style.background = 'var(--surface-hover)';
+    });
+    
+    option.addEventListener('mouseout', function() {
+      this.style.background = 'var(--surface)';
+    });
+  });
+  
+  // Add click event for close button
+  document.getElementById('closeAssignModal').addEventListener('click', function() {
+    modal.remove();
+  });
+  
+  // Add click event for confirm button
+  document.getElementById('confirmAssignBtn').addEventListener('click', function() {
+    // Get selected classes
+    const selectedClasses = Array.from(modal.querySelectorAll('input[name="class"]:checked')).map(input => input.value);
+    
+    if (selectedClasses.length === 0) {
+      showNotification('Error', 'Please select at least one class to assign to.', 'error');
+      return;
+    }
+    
+    // Get due date and instructions
+    const dueDate = document.getElementById('assignmentDueDate').value;
+    const instructions = document.getElementById('assignmentInstructions').value;
+    
+    // Create assignment
+    const assignment = {
+      id: `${type}-${id}-${Date.now()}`,
+      type: type,
+      contentId: id,
+      title: title,
+      dueDate: dueDate,
+      instructions: instructions,
+      assignedDate: new Date().toISOString().split('T')[0],
+      classes: selectedClasses
+    };
+    
+    // Save assignment
+    const assignments = JSON.parse(localStorage.getItem('teacherAssignments') || '[]');
+    assignments.push(assignment);
+    localStorage.setItem('teacherAssignments', JSON.stringify(assignments));
+    
+    // Show success notification
+    const classNames = selectedClasses.map(classId => {
+      const cls = classes.find(c => c.id === classId);
+      return cls ? cls.name : classId;
+    }).join(', ');
+    
+    showNotification('Successfully Assigned', `"${title}" has been assigned to ${classNames}.`, 'success');
+    
+    // Close modal
+    modal.remove();
+  });
+}
+
+// Show class management modal
+function showClassManagementModal() {
+  // Create or get classes
+  if (!localStorage.getItem('teacherClasses')) {
+    const defaultClasses = [
+      { id: 'class1', name: 'Period 1', students: 28 },
+      { id: 'class2', name: 'Period 2', students: 25 },
+      { id: 'class3', name: 'Period 3', students: 30 }
+    ];
+    localStorage.setItem('teacherClasses', JSON.stringify(defaultClasses));
+  }
+  
+  const classes = JSON.parse(localStorage.getItem('teacherClasses'));
+  const assignments = JSON.parse(localStorage.getItem('teacherAssignments') || '[]');
+  
+  // Create modal element
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.display = 'flex';
+  modal.style.zIndex = '10001'; // Higher than the class code modal
+  
+  modal.innerHTML = `
+    <div class="modal-content" style="width: 90%; max-width: 800px; padding: 2rem;">
+      <div class="modal-header">
+        <h2><i class="ph ph-users-three"></i> Class Management</h2>
+        <button class="close-btn" id="closeClassModal">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h3>Your Classes</h3>
+          <button id="addClassBtn" class="secondary-btn">
+            <i class="ph ph-plus"></i> Add New Class
+          </button>
+        </div>
+        
+        <div class="class-table-container" style="overflow-x: auto; margin-bottom: 2rem;">
+          <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr>
+                <th style="text-align: left; padding: 1rem; border-bottom: 1px solid var(--border);">Class Name</th>
+                <th style="text-align: center; padding: 1rem; border-bottom: 1px solid var(--border);">Students</th>
+                <th style="text-align: center; padding: 1rem; border-bottom: 1px solid var(--border);">Assignments</th>
+                <th style="text-align: right; padding: 1rem; border-bottom: 1px solid var(--border);">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${classes.map(cls => {
+                const classAssignments = assignments.filter(a => a.classes.includes(cls.id)).length;
+                return `
+                  <tr>
+                    <td style="padding: 1rem; border-bottom: 1px solid var(--border);">${cls.name}</td>
+                    <td style="text-align: center; padding: 1rem; border-bottom: 1px solid var(--border);">${cls.students}</td>
+                    <td style="text-align: center; padding: 1rem; border-bottom: 1px solid var(--border);">${classAssignments}</td>
+                    <td style="text-align: right; padding: 1rem; border-bottom: 1px solid var(--border);">
+                      <button class="edit-class-btn" data-class-id="${cls.id}" style="background: var(--surface-hover); border: none; padding: 0.5rem; border-radius: var(--radius-sm); margin-right: 0.5rem; cursor: pointer;">
+                        <i class="ph ph-pencil"></i>
+                      </button>
+                      <button class="view-assignments-btn" data-class-id="${cls.id}" style="background: var(--primary); color: white; border: none; padding: 0.5rem; border-radius: var(--radius-sm); cursor: pointer;">
+                        <i class="ph ph-list-checks"></i>
+                      </button>
+                    </td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h3>Recent Assignments</h3>
+          <button id="viewAllAssignmentsBtn" class="secondary-btn">
+            <i class="ph ph-list-checks"></i> View All
+          </button>
+        </div>
+        
+        <div class="assignments-list" style="display: flex; flex-direction: column; gap: 0.8rem;">
+          ${assignments.length > 0 ? assignments.slice(0, 5).map(assignment => {
+            const assignedClasses = assignment.classes.map(classId => {
+              const cls = classes.find(c => c.id === classId);
+              return cls ? cls.name : classId;
+            }).join(', ');
+            
+            const typeIcon = assignment.type === 'course' ? 'ph-books' : assignment.type === 'test' ? 'ph-exam' : 'ph-video';
+            const typeLabel = assignment.type.charAt(0).toUpperCase() + assignment.type.slice(1);
+            
+            return `
+              <div class="assignment-item" style="padding: 1rem; background: var(--surface); border-radius: var(--radius-md); border: 1px solid var(--border);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                  <div style="display: flex; align-items: flex-start; gap: 0.8rem;">
+                    <i class="ph ${typeIcon}" style="font-size: 1.5rem; color: var(--primary); margin-top: 0.2rem;"></i>
+                    <div>
+                      <h4 style="margin-bottom: 0.3rem;">${assignment.title}</h4>
+                      <p style="color: var(--text-secondary); font-size: 0.9rem;">${typeLabel}</p>
+                      ${assignment.instructions ? `
+                        <div style="background: var(--surface-hover); padding: 0.5rem; border-radius: var(--radius-sm); margin-top: 0.5rem; font-size: 0.9rem;">
+                          <strong>Instructions:</strong> ${assignment.instructions}
+                        </div>
+                      ` : ''}
+                    </div>
+                  </div>
+                  <div style="text-align: right;">
+                    <span style="display: block; font-size: 0.9rem; color: var(--text-secondary);">Assigned: ${assignment.assignedDate}</span>
+                    ${assignment.dueDate ? `<span style="display: block; font-size: 0.9rem; color: var(--primary); margin-top: 0.3rem;">Due: ${assignment.dueDate}</span>` : ''}
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('') : `
+            <div style="text-align: center; padding: 2rem; background: var(--surface); border-radius: var(--radius-md); border: 1px solid var(--border);">
+              <i class="ph ph-clipboard-text" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 1rem;"></i>
+              <h3 style="margin-bottom: 0.5rem;">No Assignments</h3>
+              <p style="color: var(--text-secondary);">There are no assignments in this category.</p>
+            </div>
+          `}
+        </div>
+      </div>
+    </div>
+  `;
+  
+  // Add to body
+  document.body.appendChild(modal);
+  
+  // Add click event for close button
+  document.getElementById('closeClassModal').addEventListener('click', function() {
+    modal.remove();
+  });
+  
+  // Add class button
+  document.getElementById('addClassBtn').addEventListener('click', function() {
+    showAddClassModal(classes);
+  });
+  
+  // Edit class buttons
+  modal.querySelectorAll('.edit-class-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const classId = this.getAttribute('data-class-id');
+      const classData = classes.find(c => c.id === classId);
+      
+      if (classData) {
+        showEditClassModal(classData, classes);
+      }
+    });
+  });
+  
+  // View assignments buttons
+  modal.querySelectorAll('.view-assignments-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const classId = this.getAttribute('data-class-id');
+      const classData = classes.find(c => c.id === classId);
+      
+      if (classData) {
+        showClassAssignmentsModal(classData, assignments);
+      }
+    });
+  });
+  
+  // View all assignments button
+  document.getElementById('viewAllAssignmentsBtn').addEventListener('click', function() {
+    showAllAssignmentsModal(assignments, classes);
+  });
+}
+
+// Show add class modal
+function showAddClassModal(existingClasses) {
+  // Create modal element
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.display = 'flex';
+  modal.style.zIndex = '10001'; // Higher than the class management modal
+  
+  modal.innerHTML = `
+    <div class="modal-content" style="max-width: 500px; padding: 2rem;">
+      <div class="modal-header">
+        <h2><i class="ph ph-plus-circle"></i> Add New Class</h2>
+        <button class="close-btn" id="closeAddClassModal">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 1.5rem;">
+        <div style="margin-bottom: 1.5rem;">
+          <label for="className" style="display: block; margin-bottom: 0.5rem;">Class Name:</label>
+          <input type="text" id="className" placeholder="Enter class name" style="width: 100%; padding: 0.8rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface);">
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label for="studentCount" style="display: block; margin-bottom: 0.5rem;">Number of Students:</label>
+          <input type="number" id="studentCount" placeholder="Enter number of students" min="1" style="width: 100%; padding: 0.8rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface);">
+        </div>
+        
+        <div style="display: flex; gap: 1rem;">
+          <button id="saveClassBtn" class="primary-btn" style="flex: 1;">
+            <i class="ph ph-check"></i>
+            Save Class
+          </button>
+          
+          <button id="deleteClassBtn" class="warning-btn" style="flex: 1;">
+            <i class="ph ph-trash"></i>
+            Delete Class
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  // Add to body
+  document.body.appendChild(modal);
+  
+  // Add hover effect to class options
+  modal.querySelectorAll('.class-option').forEach(option => {
+    option.addEventListener('mouseover', function() {
+      this.style.background = 'var(--surface-hover)';
+    });
+    
+    option.addEventListener('mouseout', function() {
+      this.style.background = 'var(--surface)';
+    });
+  });
+  
+  // Add click event for close button
+  document.getElementById('closeAddClassModal').addEventListener('click', function() {
+    modal.remove();
+  });
+  
+  // Add click event for save button
+  document.getElementById('saveClassBtn').addEventListener('click', function() {
+    const className = document.getElementById('className').value.trim();
+    const studentCount = parseInt(document.getElementById('studentCount').value);
+    
+    if (!className) {
+      showNotification('Error', 'Please enter a class name.', 'error');
+      return;
+    }
+    
+    if (isNaN(studentCount) || studentCount < 1) {
+      showNotification('Error', 'Please enter a valid number of students.', 'error');
+      return;
+    }
+    
+    // Create new class
+    const newClass = {
+      id: `class${Date.now()}`,
+      name: className,
+      students: studentCount
+    };
+    
+    // Add to existing classes
+    existingClasses.push(newClass);
+    
+    // Save to localStorage
+    localStorage.setItem('teacherClasses', JSON.stringify(existingClasses));
+    
+    // Show success notification
+    showNotification('Class Added', `${className} has been added successfully.`, 'success');
+    
+    // Close modal
+    modal.remove();
+    
+    // Refresh class management modal
+    document.getElementById('closeClassModal').click();
+    setTimeout(() => {
+      showClassManagementModal();
+    }, 100);
+  });
+}
+
+// Show edit class modal
+function showEditClassModal(classData, existingClasses) {
+  // Create modal element
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.display = 'flex';
+  modal.style.zIndex = '10001'; // Higher than the class management modal
+  
+  modal.innerHTML = `
+    <div class="modal-content" style="max-width: 500px; padding: 2rem;">
+      <div class="modal-header">
+        <h2><i class="ph ph-pencil"></i> Edit Class</h2>
+        <button class="close-btn" id="closeEditClassModal">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 1.5rem;">
+        <div style="margin-bottom: 1.5rem;">
+          <label for="editClassName" style="display: block; margin-bottom: 0.5rem;">Class Name:</label>
+          <input type="text" id="editClassName" value="${classData.name}" style="width: 100%; padding: 0.8rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface);">
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label for="editStudentCount" style="display: block; margin-bottom: 0.5rem;">Number of Students:</label>
+          <input type="number" id="editStudentCount" value="${classData.students}" min="1" style="width: 100%; padding: 0.8rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface);">
+        </div>
+        
+        <div style="display: flex; gap: 1rem;">
+          <button id="updateClassBtn" class="primary-btn" style="flex: 1;">
+            <i class="ph ph-check"></i>
+            Update Class
+          </button>
+          
+          <button id="deleteClassBtn" class="warning-btn" style="flex: 1;">
+            <i class="ph ph-trash"></i>
+            Delete Class
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  // Add to body
+  document.body.appendChild(modal);
+  
+  // Add click event for close button
+  document.getElementById('closeEditClassModal').addEventListener('click', function() {
+    modal.remove();
+  });
+  
+  // Add click event for update button
+  document.getElementById('updateClassBtn').addEventListener('click', (e) => {
+    const lessonId = e.target.getAttribute('data-lesson-id');
+    const className = document.getElementById('editClassName').value.trim();
+    const studentCount = parseInt(document.getElementById('editStudentCount').value);
+    
+    if (!className) {
+      showNotification('Error', 'Please enter a class name', 'error');
+      return;
+    }
+    
+    if (isNaN(studentCount) || studentCount < 1) {
+      showNotification('Error', 'Please enter a valid number of students.', 'error');
+      return;
+    }
+    
+    // Update class
+    const classIndex = existingClasses.findIndex(c => c.id === classData.id);
+    if (classIndex !== -1) {
+      existingClasses[classIndex].name = className;
+      existingClasses[classIndex].students = studentCount;
+      
+      // Save to localStorage
+      localStorage.setItem('teacherClasses', JSON.stringify(existingClasses));
+      
+      // Show success notification
+      showNotification('Class Updated', `${className} has been updated successfully.`, 'success');
+      
+      // Close modal
+      modal.remove();
+      
+      // Refresh class management modal
+      document.getElementById('closeClassModal').click();
+      setTimeout(() => {
+        showClassManagementModal();
+      }, 100);
+    }
+  });
+  
+  // Add click event for delete button
+  document.getElementById('deleteClassBtn').addEventListener('click', function() {
+    if (confirm(`Are you sure you want to delete the class "${classData.name}"?`)) {
+      // Remove class
+      const updatedClasses = existingClasses.filter(c => c.id !== classData.id);
+      
+      // Save to localStorage
+      localStorage.setItem('teacherClasses', JSON.stringify(updatedClasses));
+      
+      // Update assignments to remove this class
+      const assignments = JSON.parse(localStorage.getItem('teacherAssignments') || '[]');
+      const updatedAssignments = assignments.map(assignment => {
+        assignment.classes = assignment.classes.filter(id => id !== classData.id);
+        return assignment;
+      }).filter(assignment => assignment.classes.length > 0);
+      
+      localStorage.setItem('teacherAssignments', JSON.stringify(updatedAssignments));
+      
+      // Show success notification
+      showNotification('Class Deleted', `${classData.name} has been deleted.`, 'success');
+      
+      // Close modal
+      modal.remove();
+      
+      // Refresh class management modal
+      document.getElementById('closeClassModal').click();
+      setTimeout(() => {
+        showClassManagementModal();
+      }, 100);
+    }
+  });
+}
+
+function showAddLessonModal() {
+  // Create modal element
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.display = 'flex';
+  modal.style.zIndex = '10002'; // Higher than class code modal
+  
+  modal.innerHTML = `
+    <div class="modal-content" style="max-width: 600px; padding: 2rem;">
+      <div class="modal-header">
+        <h2><i class="ph ph-plus-circle"></i> Add New Lesson</h2>
+        <button class="close-btn" id="closeAddLessonModal">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 1.5rem;">
+        <div style="margin-bottom: 1.5rem;">
+          <label for="lessonTitle" style="display: block; margin-bottom: 0.5rem;">Lesson Title:</label>
+          <input type="text" id="lessonTitle" placeholder="Enter lesson title" style="width: 100%; padding: 0.8rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface);">
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label for="lessonDescription" style="display: block; margin-bottom: 0.5rem;">Description:</label>
+          <textarea id="lessonDescription" placeholder="Enter lesson description" style="width: 100%; padding: 0.8rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface); min-height: 100px;"></textarea>
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label for="lessonContent" style="display: block; margin-bottom: 0.5rem;">Lesson Content:</label>
+          <textarea id="lessonContent" placeholder="Enter lesson content (supports basic HTML)" style="width: 100%; padding: 0.8rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface); min-height: 200px;"></textarea>
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label style="display: block; margin-bottom: 0.5rem;">Add Resources:</label>
+          <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+            <button id="addLinkBtn" class="secondary-btn" style="flex: 1; justify-content: center;">
+              <i class="ph ph-link"></i> Add Link
+            </button>
+            <button id="addCodeBtn" class="secondary-btn" style="flex: 1; justify-content: center;">
+              <i class="ph ph-code"></i> Add Code
+            </button>
+            <button id="addFileBtn" class="secondary-btn" style="flex: 1; justify-content: center;">
+              <i class="ph ph-file"></i> Add File
+            </button>
+          </div>
+          <div id="resourcesContainer" style="border: 1px dashed var(--border); padding: 1rem; border-radius: var(--radius-md); margin-top: 0.5rem; min-height: 50px; display: none;">
+            <div id="resourcesList" style="margin-bottom: 0.5rem;"></div>
+          </div>
+        </div>
+        
+        <button id="saveNewLessonBtn" class="primary-btn" style="width: 100%;">
+          <i class="ph ph-check"></i> Save Lesson
+        </button>
+      </div>
+    </div>
+  `;
+  
+  // Add to body
+  document.body.appendChild(modal);
+  
+  // Setup close button
+  document.getElementById('closeAddLessonModal').addEventListener('click', () => {
+    modal.remove();
+  });
+  
+  // Initialize resources array
+  const resources = [];
+  
+  // Add link button
+  document.getElementById('addLinkBtn').addEventListener('click', () => {
+    const linkUrl = prompt('Enter link URL:');
+    const linkTitle = prompt('Enter link title:');
+    
+    if (linkUrl && linkTitle) {
+      resources.push({
+        type: 'link',
+        url: linkUrl,
+        title: linkTitle
+      });
+      updateResourcesList();
+    }
+  });
+  
+  // Add code button
+  document.getElementById('addCodeBtn').addEventListener('click', () => {
+    const language = prompt('Enter code language (e.g., javascript, python, html):');
+    const code = prompt('Enter code:');
+    
+    if (language && code) {
+      resources.push({
+        type: 'code',
+        language: language,
+        content: code
+      });
+      updateResourcesList();
+    }
+  });
+  
+  // Add file button
+  document.getElementById('addFileBtn').addEventListener('click', () => {
+    const fileUrl = prompt('Enter file URL:');
+    const fileTitle = prompt('Enter file title:');
+    
+    if (fileUrl && fileTitle) {
+      resources.push({
+        type: 'file',
+        url: fileUrl,
+        title: fileTitle
+      });
+      updateResourcesList();
+    }
+  });
+  
+  // Function to update resources list
+  function updateResourcesList() {
+    const resourcesList = document.getElementById('resourcesList');
+    const resourcesContainer = document.getElementById('resourcesContainer');
+    
+    if (resources.length > 0) {
+      resourcesContainer.style.display = 'block';
+      
+      let html = '';
+      resources.forEach((resource, index) => {
+        let icon = '';
+        let title = '';
+        
+        switch (resource.type) {
+          case 'link':
+            icon = 'ph-link';
+            title = resource.title;
+            break;
+          case 'code':
+            icon = 'ph-code';
+            title = `Code snippet (${resource.language})`;
+            break;
+          case 'file':
+            icon = 'ph-file';
+            title = resource.title;
+            break;
+        }
+        
+        html += `
+          <div style="display: flex; justify-content: space-between; align-items: center; background: var(--surface-hover); padding: 0.5rem; border-radius: var(--radius-sm); margin-bottom: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <i class="ph ${icon}"></i>
+              <span>${title}</span>
+            </div>
+            <button class="remove-resource-btn" data-index="${index}" style="background: var(--error); color: white; border: none; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+              <i class="ph ph-x" style="font-size: 0.8rem;"></i>
+            </button>
+          </div>
+        `;
+      });
+      
+      resourcesList.innerHTML = html;
+      
+      // Add click events for remove buttons
+      resourcesList.querySelectorAll('.remove-resource-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const index = parseInt(btn.getAttribute('data-index'));
+          resources.splice(index, 1);
+          updateResourcesList();
+        });
+      });
+    } else {
+      resourcesContainer.style.display = 'none';
+      resourcesList.innerHTML = '';
+    }
+  }
+  
+  // Setup save button
+  document.getElementById('saveNewLessonBtn').addEventListener('click', () => {
+    const title = document.getElementById('lessonTitle').value.trim();
+    const description = document.getElementById('lessonDescription').value.trim();
+    const content = document.getElementById('lessonContent').value.trim();
+    
+    if (!title) {
+      showNotification('Error', 'Please enter a lesson title', 'error');
+      return;
+    }
+    
+    // Create new lesson object
+    const lesson = {
+      id: 'lesson-' + Date.now(),
+      title,
+      description,
+      content,
+      resources: resources.length > 0 ? resources : undefined,
+      dateCreated: new Date().toISOString()
+    };
+    
+    // Save lesson
+    saveTeacherLesson(lesson);
+    
+    // Close modal
+    modal.remove();
+  });
+}
+
+function showEditLessonModal(lesson) {
+  // Create modal element
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.display = 'flex';
+  modal.style.zIndex = '10002'; // Higher than class code modal
+  
+  modal.innerHTML = `
+    <div class="modal-content" style="max-width: 600px; padding: 2rem;">
+      <div class="modal-header">
+        <h2><i class="ph ph-pencil"></i> Edit Lesson</h2>
+        <button class="close-btn" id="closeEditLessonModal">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 1.5rem;">
+        <div style="margin-bottom: 1.5rem;">
+          <label for="editLessonTitle" style="display: block; margin-bottom: 0.5rem;">Lesson Title:</label>
+          <input type="text" id="editLessonTitle" value="${lesson.title}" style="width: 100%; padding: 0.8rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface);">
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label for="editLessonDescription" style="display: block; margin-bottom: 0.5rem;">Description:</label>
+          <textarea id="editLessonDescription" style="width: 100%; padding: 0.8rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface); min-height: 100px;">${lesson.description}</textarea>
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label for="editLessonContent" style="display: block; margin-bottom: 0.5rem;">Lesson Content:</label>
+          <textarea id="editLessonContent" style="width: 100%; padding: 0.8rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface); min-height: 200px;">${lesson.content}</textarea>
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label style="display: block; margin-bottom: 0.5rem;">Resources:</label>
+          <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+            <button id="addLinkBtn" class="secondary-btn" style="flex: 1; justify-content: center;">
+              <i class="ph ph-link"></i> Add Link
+            </button>
+            <button id="addCodeBtn" class="secondary-btn" style="flex: 1; justify-content: center;">
+              <i class="ph ph-code"></i> Add Code
+            </button>
+            <button id="addFileBtn" class="secondary-btn" style="flex: 1; justify-content: center;">
+              <i class="ph ph-file"></i> Add File
+            </button>
+          </div>
+          <div id="resourcesContainer" style="border: 1px dashed var(--border); padding: 1rem; border-radius: var(--radius-md); margin-top: 0.5rem; min-height: 50px;">
+            <div id="resourcesList" style="margin-bottom: 0.5rem;"></div>
+          </div>
+        </div>
+        
+        <button id="updateLessonBtn" data-lesson-id="${lesson.id}" class="primary-btn" style="width: 100%;">
+          <i class="ph ph-check"></i> Update Lesson
+        </button>
+      </div>
+    </div>
+  `;
+  
+  // Add to body
+  document.body.appendChild(modal);
+  
+  // Setup close button
+  document.getElementById('closeEditLessonModal').addEventListener('click', () => {
+    modal.remove();
+  });
+  
+  // Initialize resources array
+  const resources = lesson.resources || [];
+  
+  // Add link button
+  document.getElementById('addLinkBtn').addEventListener('click', () => {
+    const linkUrl = prompt('Enter link URL:');
+    const linkTitle = prompt('Enter link title:');
+    
+    if (linkUrl && linkTitle) {
+      resources.push({
+        type: 'link',
+        url: linkUrl,
+        title: linkTitle
+      });
+      updateResourcesList();
+    }
+  });
+  
+  // Add code button
+  document.getElementById('addCodeBtn').addEventListener('click', () => {
+    const language = prompt('Enter code language (e.g., javascript, python, html):');
+    const code = prompt('Enter code:');
+    
+    if (language && code) {
+      resources.push({
+        type: 'code',
+        language: language,
+        content: code
+      });
+      updateResourcesList();
+    }
+  });
+  
+  // Add file button
+  document.getElementById('addFileBtn').addEventListener('click', () => {
+    const fileUrl = prompt('Enter file URL:');
+    const fileTitle = prompt('Enter file title:');
+    
+    if (fileUrl && fileTitle) {
+      resources.push({
+        type: 'file',
+        url: fileUrl,
+        title: fileTitle
+      });
+      updateResourcesList();
+    }
+  });
+  
+  // Function to update resources list
+  function updateResourcesList() {
+    const resourcesList = document.getElementById('resourcesList');
+    const resourcesContainer = document.getElementById('resourcesContainer');
+    
+    if (resources.length > 0) {
+      let html = '';
+      resources.forEach((resource, index) => {
+        let icon = '';
+        let title = '';
+        
+        switch (resource.type) {
+          case 'link':
+            icon = 'ph-link';
+            title = resource.title;
+            break;
+          case 'code':
+            icon = 'ph-code';
+            title = `Code snippet (${resource.language})`;
+            break;
+          case 'file':
+            icon = 'ph-file';
+            title = resource.title;
+            break;
+        }
+        
+        html += `
+          <div style="display: flex; justify-content: space-between; align-items: center; background: var(--surface-hover); padding: 0.5rem; border-radius: var(--radius-sm); margin-bottom: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <i class="ph ${icon}"></i>
+              <span>${title}</span>
+            </div>
+            <button class="remove-resource-btn" data-index="${index}" style="background: var(--error); color: white; border: none; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+              <i class="ph ph-x" style="font-size: 0.8rem;"></i>
+            </button>
+          </div>
+        `;
+      });
+      
+      resourcesList.innerHTML = html;
+      
+      // Add click events for remove buttons
+      resourcesList.querySelectorAll('.remove-resource-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const index = parseInt(btn.getAttribute('data-index'));
+          resources.splice(index, 1);
+          updateResourcesList();
+        });
+      });
+    } else {
+      resourcesList.innerHTML = '<p style="color: var(--text-secondary);">No resources added yet.</p>';
+    }
+  }
+  
+  // Initial resources list update
+  updateResourcesList();
+  
+  // Setup update button
+  document.getElementById('updateLessonBtn').addEventListener('click', (e) => {
+    const lessonId = e.target.getAttribute('data-lesson-id');
+    const title = document.getElementById('editLessonTitle').value.trim();
+    const description = document.getElementById('editLessonDescription').value.trim();
+    const content = document.getElementById('editLessonContent').value.trim();
+    
+    if (!title) {
+      showNotification('Error', 'Please enter a lesson title', 'error');
+      return;
+    }
+    
+    // Update lesson object
+    const updatedLesson = {
+      id: lessonId,
+      title,
+      description,
+      content,
+      resources: resources.length > 0 ? resources : undefined,
+      dateCreated: lesson.dateCreated,
+      dateUpdated: new Date().toISOString()
+    };
+    
+    // Update lesson
+    updateTeacherLesson(updatedLesson);
+    
+    // Close modal
+    modal.remove();
+  });
+}
+
+function showLessonViewModal(lesson, teacherName) {
+  // Create modal element
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.display = 'flex';
+  modal.style.zIndex = '10002'; // Higher than class code modal
+  
+  // Prepare resources HTML if available
+  let resourcesHtml = '';
+  if (lesson.resources && lesson.resources.length > 0) {
+    resourcesHtml = `
+      <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+        <h3 style="margin-bottom: 1rem; color: var(--primary);">Resources</h3>
+        <div class="resources-list" style="display: flex; flex-direction: column; gap: 0.8rem;">
+    `;
+    
+    lesson.resources.forEach(resource => {
+      switch (resource.type) {
+        case 'link':
+          resourcesHtml += `
+            <div style="background: var(--surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
+              <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                <i class="ph ph-link" style="color: var(--primary); font-size: 1.2rem;"></i>
+                <h4>${resource.title}</h4>
+              </div>
+              <a href="${resource.url}" target="_blank" style="color: var(--primary); display: block; word-break: break-all; text-decoration: none; margin-left: 2rem;" rel="noopener noreferrer">
+                ${resource.url}
+                <i class="ph ph-arrow-square-out" style="margin-left: 0.3rem;"></i>
+              </a>
+            </div>
+          `;
+          break;
+        case 'code':
+          resourcesHtml += `
+            <div style="background: var(--surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
+              <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                <i class="ph ph-code" style="color: var(--primary); font-size: 1.2rem;"></i>
+                <h4>Code Snippet (${resource.language})</h4>
+              </div>
+              <pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: var(--radius-sm); overflow-x: auto; margin-top: 0.5rem; font-family: monospace;">${resource.content}</pre>
+              <button class="copy-code-btn" data-code="${encodeURIComponent(resource.content)}" style="background: var(--surface-hover); border: none; padding: 0.5rem; border-radius: var(--radius-sm); margin-top: 0.5rem; cursor: pointer; display: flex; align-items: center; gap: 0.3rem;">
+                <i class="ph ph-copy"></i> Copy Code
+              </button>
+            </div>
+          `;
+          break;
+        case 'file':
+          resourcesHtml += `
+            <div style="background: var(--surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
+              <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                <i class="ph ph-file" style="color: var(--primary); font-size: 1.2rem;"></i>
+                <h4>${resource.title}</h4>
+              </div>
+              <a href="${resource.url}" target="_blank" style="color: var(--primary); display: flex; align-items: center; gap: 0.5rem; text-decoration: none; margin-left: 2rem;" rel="noopener noreferrer">
+                <i class="ph ph-download"></i> Download File
+              </a>
+            </div>
+          `;
+          break;
+      }
+    });
+    
+    resourcesHtml += `
+        </div>
+      </div>
+    `;
+  }
+  
+  modal.innerHTML = `
+    <div class="modal-content" style="max-width: 800px; padding: 0;">
+      <div class="modal-header">
+        <h2><i class="ph ph-book-open"></i> ${lesson.title}</h2>
+        <button class="close-btn" id="closeLessonViewModal">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 0;">
+        <div style="background: var(--primary); color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center;">
+          <span>From: ${teacherName}</span>
+          <span>Date: ${formatDate(lesson.dateCreated)}</span>
+        </div>
+        
+        <div style="padding: 2rem;">
+          <div style="margin-bottom: 1.5rem;">
+            <p style="background: var(--surface-hover); padding: 1rem; border-radius: var(--radius-md); border-left: 4px solid var(--primary);">${lesson.description}</p>
+          </div>
+          
+          <div class="lesson-view-content" style="line-height: 1.6;">
+            ${lesson.content}
+          </div>
+          
+          ${resourcesHtml}
+        </div>
+      </div>
+    </div>
+  `;
+  
+  // Add to body
+  document.body.appendChild(modal);
+  
+  // Setup close button
+  document.getElementById('closeLessonViewModal').addEventListener('click', () => {
+    modal.remove();
+  });
+  
+  // Add copy code functionality
+  modal.querySelectorAll('.copy-code-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const code = decodeURIComponent(btn.getAttribute('data-code'));
+      navigator.clipboard.writeText(code).then(() => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="ph ph-check"></i> Copied!';
+        btn.style.background = 'var(--primary)';
+        btn.style.color = 'white';
+        
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.style.background = 'var(--surface-hover)';
+          btn.style.color = 'var(--text)';
+        }, 2000);
+      });
+    });
+  });
+  
+  // Style the lesson content
+  const lessonContent = modal.querySelector('.lesson-view-content');
+  if (lessonContent) {
+    // Add some basic styling to the HTML content
+    lessonContent.querySelectorAll('h3').forEach(h => {
+      h.style.color = 'var(--primary)';
+      h.style.marginBottom = '1rem';
+      h.style.marginTop = '1.5rem';
+    });
+    
+    lessonContent.querySelectorAll('h4').forEach(h => {
+      h.style.marginBottom = '0.8rem';
+      h.style.marginTop = '1.2rem';
+    });
+    
+    lessonContent.querySelectorAll('p').forEach(p => {
+      p.style.marginBottom = '1rem';
+    });
+    
+    lessonContent.querySelectorAll('ul, ol').forEach(list => {
+      list.style.marginBottom = '1rem';
+      list.style.paddingLeft = '1.5rem';
+    });
+    
+    lessonContent.querySelectorAll('li').forEach(item => {
+      item.style.marginBottom = '0.5rem';
+    });
+  }
 }
 
 // Load user dashboard data
@@ -1731,12 +3000,7 @@ function loadProgress() {
   // Load activity chart
   const activityChart = document.getElementById('activityChart');
   if (activityChart) {
-    // Destroy existing chart if it exists
-    if (window.activityChartInstance) {
-      window.activityChartInstance.destroy();
-    }
-    
-    window.activityChartInstance = new Chart(activityChart, {
+    new Chart(activityChart, {
       type: 'line',
       data: {
         labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -1770,17 +3034,12 @@ function loadProgress() {
   // Load performance chart
   const performanceChart = document.getElementById('performanceChart');
   if (performanceChart) {
-    // Destroy existing chart if it exists
-    if (window.performanceChartInstance) {
-      window.performanceChartInstance.destroy();
-    }
-    
-    window.performanceChartInstance = new Chart(performanceChart, {
+    new Chart(performanceChart, {
       type: 'radar',
       data: {
         labels: ['Mathematics', 'Science', 'History', 'Language Arts', 'Computer Science'],
         datasets: [{
-          label: 'Subject Performance',
+          label: 'Performance',
           data: [85, 70, 60, 90, 75],
           fill: true,
           backgroundColor: 'rgba(59, 130, 246, 0.2)',
@@ -1794,6 +3053,12 @@ function loadProgress() {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top'
+          }
+        },
         scales: {
           r: {
             angleLines: { display: true },
@@ -1864,14 +3129,10 @@ function loadProgress() {
   updatePerformanceChart();
 }
 
+// Update performance tracking
 function updatePerformanceChart() {
   const performanceChart = document.getElementById('performanceChart');
   if (!performanceChart) return;
-  
-  // Destroy existing chart if it exists
-  if (window.performanceChartInstance) {
-    window.performanceChartInstance.destroy();
-  }
   
   // Calculate performance for each subject
   const subjectPerformance = {
@@ -1882,7 +3143,7 @@ function updatePerformanceChart() {
     'Computer Science': calculateSubjectPerformance('computer')
   };
 
-  window.performanceChartInstance = new Chart(performanceChart, {
+  new Chart(performanceChart, {
     type: 'radar',
     data: {
       labels: Object.keys(subjectPerformance),
@@ -2105,7 +3366,7 @@ function openLesson(courseId, lessonId) {
           correctAnswer: 0
         },
         {
-          question: "Which of these is NOT a programming language?",
+          question: "Which of the following is NOT a programming language?",
           options: ["Java", "Python", "HTTP", "C++"],
           correctAnswer: 2
         },
@@ -2336,7 +3597,7 @@ function openLesson(courseId, lessonId) {
           <h4 class="question-text">${index + 1}. ${question.question}</h4>
           <div class="answer-options">
             ${question.options.map((option, optIndex) => `
-              <label class="answer-option ${userAnswers[index] === optIndex ? 'selected' : ''}">
+              <label class="answer-option">
                 <input type="radio" name="question_${index}" value="${optIndex}" ${userAnswers[index] === optIndex ? 'checked' : ''}>
                 ${option}
               </label>
@@ -2507,7 +3768,7 @@ function startTest(test) {
         correctAnswer: 0
       },
       {
-        question: "Which of these is NOT a programming language?",
+        question: "Which of the following is NOT a programming language?",
         options: ["Java", "Python", "HTTP", "C++"],
         correctAnswer: 2
       },
@@ -3109,4 +4370,104 @@ function generateCourseImage(subject) {
   };
   
   return imageUrls[subject] || 'https://images.unsplash.com/photo-1503676260728-72ae9ae6848d?q=80&w=500&auto=format&fit=crop';
+}
+
+function showClassCodeModal() {
+  // Get or generate class codes
+  if (!localStorage.getItem('teacherClassCodes')) {
+    const classCode = generateClassCode();
+    const defaultClassCodes = [
+      { 
+        teacherId: 'default', 
+        code: classCode,
+        lessons: [],
+        students: []
+      }
+    ];
+    localStorage.setItem('teacherClassCodes', JSON.stringify(defaultClassCodes));
+  }
+  
+  const classCodes = JSON.parse(localStorage.getItem('teacherClassCodes'));
+  const currentClassCode = classCodes[0]; // Use first class code for default
+  
+  // Create modal element
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.display = 'flex';
+  modal.style.zIndex = '10002'; // High z-index to prevent being covered
+  
+  modal.innerHTML = `
+    <div class="modal-content" style="max-width: 500px; padding: 2rem;">
+      <div class="modal-header">
+        <h2><i class="ph ph-hash"></i> Class Code</h2>
+        <button class="close-btn" id="closeClassCodeModal">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 1.5rem;">
+        <div class="class-code-display">
+          ${currentClassCode.code}
+          <button class="class-code-copy" title="Copy Class Code">
+            <i class="ph ph-copy"></i>
+          </button>
+        </div>
+        
+        <div style="margin-top: 1.5rem;">
+          <h3 style="margin-bottom: 1rem;">How to Use Your Class Code</h3>
+          <ol style="padding-left: 1.5rem; margin-bottom: 1.5rem;">
+            <li style="margin-bottom: 0.5rem;">Share this unique class code with your students</li>
+            <li style="margin-bottom: 0.5rem;">Students will enter this code to join your class</li>
+            <li>Students can access lessons you assign</li>
+          </ol>
+        </div>
+        
+        <div style="margin-top: 1.5rem;">
+          <button id="regenerateCodeBtn" class="secondary-btn" style="width: 100%;">
+            <i class="ph ph-arrows-clockwise"></i> Generate New Class Code
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  // Add to body
+  document.body.appendChild(modal);
+  
+  // Close button functionality
+  document.getElementById('closeClassCodeModal').addEventListener('click', function() {
+    modal.remove();
+  });
+  
+  // Copy class code functionality
+  modal.querySelector('.class-code-copy').addEventListener('click', function() {
+    const classcode = currentClassCode.code;
+    navigator.clipboard.writeText(classcode).then(() => {
+      showNotification('Class Code Copied!', 'Your unique class code has been copied.', 'success');
+    });
+  });
+  
+  // Regenerate code functionality
+  document.getElementById('regenerateCodeBtn').addEventListener('click', function() {
+    const newClassCode = generateClassCode();
+    
+    // Update class codes
+    const classCodes = JSON.parse(localStorage.getItem('teacherClassCodes') || '[]');
+    classCodes[0].code = newClassCode;
+    localStorage.setItem('teacherClassCodes', JSON.stringify(classCodes));
+    
+    // Update display
+    modal.querySelector('.class-code-display').textContent = newClassCode;
+    
+    showNotification('New Class Code Generated', 'Your class code has been regenerated.', 'success');
+  });
+}
+
+// Utility function to generate class code
+function generateClassCode() {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let result = '';
+  for (let i = 0; i < 6; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
 }

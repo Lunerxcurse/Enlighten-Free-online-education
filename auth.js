@@ -73,6 +73,16 @@ class Auth {
   
   // Add method to check if achievements and stats need to be initialized
   initializeUserData() {
+    // Check if role needs to be selected
+    if (!localStorage.getItem('userRole') && this.isLoggedIn() && !window.location.pathname.includes('login.html') && !window.location.pathname.includes('signup.html')) {
+      // Will trigger role selection modal
+      setTimeout(() => {
+        if (typeof showRoleSelectionModal === 'function') {
+          showRoleSelectionModal();
+        }
+      }, 500);
+    }
+    
     if (window.achievements) {
       // Update achievements completed stats
       const achievementsProgress = window.achievements.getProgress();
