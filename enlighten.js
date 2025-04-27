@@ -1266,6 +1266,8 @@ function initApp() {
   // Initialize teacher UI if needed
   if (localStorage.getItem('userRole') === 'teacher') {
     initTeacherUI();
+  } else if (localStorage.getItem('userRole') === 'student') {
+    initStudentUI();
   }
 }
 
@@ -1621,6 +1623,7 @@ function showRoleSelectionModal() {
         initTeacherUI(); // Initialize teacher UI
       } else {
         showNotification('Student Mode', 'Welcome to Enlighten! Let\'s start your learning journey.', 'success');
+        initStudentUI(); // Initialize student UI
       }
       
       // Remove modal
@@ -2263,6 +2266,142 @@ function showEditClassModal(classData, existingClasses) {
   });
 }
 
+// Show class assignments modal
+function showClassAssignmentsModal(classData, assignments) {
+  // Create modal element
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.display = 'flex';
+  modal.style.zIndex = '10002'; // Higher than the class management modal
+  
+  modal.innerHTML = `
+    <div class="modal-content" style="max-width: 800px; padding: 2rem;">
+      <div class="modal-header">
+        <h2><i class="ph ph-list-checks"></i> ${classData.name} - Assignments</h2>
+        <button class="close-btn" id="closeClassAssignmentsModal">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 1.5rem;">
+        <div style="margin-bottom: 1.5rem;">
+          <h3>Assigned Lessons</h3>
+          <div class="lesson-list" id="assignedLessonsList">
+            ${assignments.length > 0 ? assignments.map(assignment => {
+              const lesson = JSON.parse(localStorage.getItem('teacherLessons') || '[]').find(l => l.id === assignment.id);
+              if (!lesson) return '';
+              
+              return `
+                <div class="lesson-item" data-lesson-id="${lesson.id}">
+                  <div class="lesson-header">
+                    <h4>${lesson.title}</h4>
+                    <div class="lesson-actions">
+                      <button class="lesson-action-btn edit-lesson-btn" title="Edit Lesson">
+                        <i class="ph ph-pencil"></i>
+                      </button>
+                      <button class="lesson-action-btn view-lesson-btn" title="View Lesson">
+                        <i class="ph ph-eye"></i>
+                      </button>
+                      <button class="lesson-action-btn unassign-lesson-btn" title="Unassign Lesson" data-class-id="${classData.id}">
+                        <i class="ph ph-minus-circle"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <p>${lesson.description}</p>
+                  <div style="display: flex; justify-content: space-between; margin-top: 0.8rem; font-size: 0.9rem; color: var(--text-secondary);">
+                    <span>Created: ${formatDate(lesson.dateCreated)}</span>
+                    ${lesson.dateUpdated ? `<span>Updated: ${formatDate(lesson.dateUpdated)}</span>` : ''}
+                  </div>
+                </div>
+              `;
+            }).join('') : `
+              <div style="text-align: center; padding: 2rem; background: var(--surface); border-radius: var(--radius-md); border: 1px solid var(--border);">
+                <i class="ph ph-book" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 1rem;"></i>
+                <h3 style="margin-bottom: 0.5rem;">No Lessons Assigned</h3>
+                <p style="color: var(--text-secondary);">Click "Assign Lesson" to assign lessons to this class.</p>
+              </div>
+            `}
+          </div>
+        </div>
+        
+        <div style="margin-top: 2rem;">
+          <h3>Class Information</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+            <div style="background: var(--surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
+              <h4 style="margin-bottom: 0.5rem; color: var(--primary);">Students</h4>
+              <p style="font-size: 1.5rem; font-weight: 600;">${classData.students}</p>
+            </div>
+            <div style="background: var(--surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
+              <h4 style="margin-bottom: 0.5rem; color: var(--primary);">Class Code</h4>
+              <p style="font-size: 1.5rem; font-weight: 600;">${JSON.parse(localStorage.getItem('teacherClassCodes') || '[]').find(c => c.id === classData.id)?.code || 'N/A'}</p>
+            </div>
+            <div style="background: var(--surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
+              <h4 style="margin-bottom: 0.5rem; color: var(--primary);">Assigned Lessons</h4>
+              <p style="font-size: 1.5rem; font-weight: 600;">${assignments.length}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  // Add to body
+  document.body.appendChild(modal);
+  
+  // Add click event for close button
+  document.getElementById('closeClassAssignmentsModal').addEventListener('click', function() {
+    modal.remove();
+  });
+  
+  // Add click event for edit lesson button
+  modal.querySelectorAll('.edit-lesson-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const lessonId = this.closest('.lesson-item').getAttribute('data-lesson-id');
+      const lesson = JSON.parse(localStorage.getItem('teacherLessons') || '[]').find(l => l.id === lessonId);
+      
+      if (lesson) {
+        showEditLessonModal(lesson);
+      }
+    });
+  });
+  
+  // Add click event for view lesson button
+  modal.querySelectorAll('.view-lesson-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const lessonId = this.closest('.lesson-item').getAttribute('data-lesson-id');
+      const lesson = JSON.parse(localStorage.getItem('teacherLessons') || '[]').find(l => l.id === lessonId);
+      
+      if (lesson) {
+        showLessonViewModal(lesson, classData.name + ' Teacher');
+      }
+    });
+  });
+  
+  // Add click event for unassign lesson button
+  modal.querySelectorAll('.unassign-lesson-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const lessonId = this.closest('.lesson-item').getAttribute('data-lesson-id');
+      const classId = this.getAttribute('data-class-id');
+      
+      if (confirm('Are you sure you want to unassign this lesson from the class?')) {
+        unassignLessonFromClass(lessonId, classId);
+        this.closest('.lesson-item').remove();
+        
+        // If all lessons removed, show empty state
+        if (modal.querySelectorAll('.lesson-item').length === 0) {
+          document.getElementById('assignedLessonsList').innerHTML = `
+            <div style="text-align: center; padding: 2rem; background: var(--surface); border-radius: var(--radius-md); border: 1px solid var(--border);">
+              <i class="ph ph-book" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 1rem;"></i>
+              <h3 style="margin-bottom: 0.5rem;">No Lessons Assigned</h3>
+              <p style="color: var(--text-secondary);">Click "Assign Lesson" to assign lessons to this class.</p>
+            </div>
+          `;
+        }
+      }
+    });
+  });
+}
+
+// Show add lesson modal
 function showAddLessonModal() {
   // Create modal element
   const modal = document.createElement('div');
@@ -2381,8 +2520,6 @@ function showAddLessonModal() {
     const resourcesContainer = document.getElementById('resourcesContainer');
     
     if (resources.length > 0) {
-      resourcesContainer.style.display = 'block';
-      
       let html = '';
       resources.forEach((resource, index) => {
         let icon = '';
@@ -2461,6 +2598,7 @@ function showAddLessonModal() {
   });
 }
 
+// Show edit lesson modal
 function showEditLessonModal(lesson) {
   // Create modal element
   const modal = document.createElement('div');
@@ -2661,6 +2799,7 @@ function showEditLessonModal(lesson) {
   });
 }
 
+// Show lesson view modal
 function showLessonViewModal(lesson, teacherName) {
   // Create modal element
   const modal = document.createElement('div');
@@ -2812,6 +2951,294 @@ function showLessonViewModal(lesson, teacherName) {
     lessonContent.querySelectorAll('li').forEach(item => {
       item.style.marginBottom = '0.5rem';
     });
+  }
+}
+
+// Save teacher lesson
+function saveTeacherLesson(lesson) {
+  const lessons = JSON.parse(localStorage.getItem('teacherLessons') || '[]');
+  lessons.push(lesson);
+  localStorage.setItem('teacherLessons', JSON.stringify(lessons));
+  showNotification('Lesson Added', 'Your lesson has been created successfully.', 'success');
+}
+
+// Update teacher lesson
+function updateTeacherLesson(updatedLesson) {
+  const lessons = JSON.parse(localStorage.getItem('teacherLessons') || '[]');
+  const index = lessons.findIndex(l => l.id === updatedLesson.id);
+  if (index !== -1) {
+    lessons[index] = updatedLesson;
+    localStorage.setItem('teacherLessons', JSON.stringify(lessons));
+    showNotification('Lesson Updated', 'Your lesson has been updated successfully.', 'success');
+  } else {
+    showNotification('Error', 'Lesson not found.', 'error');
+  }
+}
+
+// Show join class modal
+function showJoinClassModal() {
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.display = 'flex';
+  modal.style.zIndex = '10002'; // High z-index to prevent being covered
+  
+  modal.innerHTML = `
+    <div class="modal-content" style="max-width: 500px; padding: 2rem;">
+      <div class="modal-header">
+        <h2><i class="ph ph-hash"></i> Join a Class</h2>
+        <button class="close-btn" id="closeJoinClassModal">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 1.5rem;">
+        <div style="margin-bottom: 1.5rem;">
+          <p>Enter the class code provided by your teacher to join their class and access assigned lessons.</p>
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label for="classCodeInput" style="display: block; margin-bottom: 0.5rem;">Class Code:</label>
+          <input type="text" id="classCodeInput" class="class-code-input" placeholder="Enter 6-digit code" maxlength="6">
+        </div>
+        
+        <button id="joinClassBtn" class="primary-btn" style="width: 100%;">
+          <i class="ph ph-check"></i> Join Class
+        </button>
+      </div>
+    </div>
+  `;
+  
+  // Add to body
+  document.body.appendChild(modal);
+  
+  // Close button functionality
+  document.getElementById('closeJoinClassModal').addEventListener('click', function() {
+    modal.remove();
+  });
+  
+  // Join class functionality
+  document.getElementById('joinClassBtn').addEventListener('click', function() {
+    const classCode = document.getElementById('classCodeInput').value.trim().toUpperCase();
+    
+    if (!classCode || classCode.length !== 6) {
+      showNotification('Invalid Code', 'Please enter a valid 6-digit class code.', 'error');
+      return;
+    }
+    
+    joinClass(classCode);
+    modal.remove();
+  });
+  
+  // Auto-capitalize input
+  document.getElementById('classCodeInput').addEventListener('input', function() {
+    this.value = this.value.toUpperCase();
+  });
+}
+
+// Join a class
+function joinClass(classCode) {
+  const allClassCodes = JSON.parse(localStorage.getItem('teacherClassCodes') || '[]');
+  const matchingClass = allClassCodes.find(c => c.code === classCode);
+  
+  if (!matchingClass) {
+    showNotification('Class Not Found', 'The class code you entered is invalid or expired.', 'error');
+    return;
+  }
+  
+  let joinedClasses = JSON.parse(localStorage.getItem('studentJoinedClasses') || '[]');
+  
+  // Check if already joined
+  if (joinedClasses.some(c => c.code === classCode)) {
+    showNotification('Already Joined', 'You have already joined this class.', 'info');
+    showStudentDashboard();
+    return;
+  }
+  
+  // Add to joined classes
+  joinedClasses.push({
+    code: classCode,
+    joinedDate: new Date().toISOString()
+  });
+  
+  localStorage.setItem('studentJoinedClasses', JSON.stringify(joinedClasses));
+  
+  // Add student to the class's student list
+  matchingClass.students = matchingClass.students || [];
+  const userData = JSON.parse(localStorage.getItem('enlightenUserData') || '{}');
+  const studentId = userData.name || 'Anonymous Student';
+  
+  if (!matchingClass.students.includes(studentId)) {
+    matchingClass.students.push(studentId);
+    localStorage.setItem('teacherClassCodes', JSON.stringify(allClassCodes));
+  }
+  
+  showNotification('Class Joined', 'You have successfully joined the class!', 'success');
+  showStudentDashboard();
+}
+
+// Show student dashboard
+function showStudentDashboard() {
+  const joinedClasses = JSON.parse(localStorage.getItem('studentJoinedClasses') || '[]');
+  
+  if (joinedClasses.length === 0) {
+    showNotification('No Classes', 'You haven\'t joined any classes yet.', 'info');
+    return;
+  }
+  
+  // Create dashboard modal
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.display = 'flex';
+  modal.style.zIndex = '10002';
+  
+  const allClassCodes = JSON.parse(localStorage.getItem('teacherClassCodes') || '[]');
+  const allTeacherLessons = JSON.parse(localStorage.getItem('teacherLessons') || '[]');
+  
+  let classesHTML = '';
+  
+  for (const joinedClass of joinedClasses) {
+    const classDetails = allClassCodes.find(c => c.code === joinedClass.code);
+    
+    if (!classDetails) continue;
+    
+    // Find lessons for this class
+    const classLessons = allTeacherLessons.filter(lesson => 
+      classDetails.lessons && classDetails.lessons.includes(lesson.id)
+    );
+    
+    let lessonsHTML = '';
+    
+    if (classLessons.length > 0) {
+      lessonsHTML = classLessons.map(lesson => `
+        <div class="student-lesson-item" style="padding: 1rem; background: var(--surface); border-radius: var(--radius-md); border: 1px solid var(--border); margin-bottom: 0.8rem; cursor: pointer;" data-lesson-id="${lesson.id}">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+              <i class="ph ph-book-open" style="color: var(--primary); font-size: 1.2rem;"></i>
+              <div>
+                <h4 style="margin-bottom: 0.2rem;">${lesson.title}</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">${formatDate(lesson.dateCreated)}</p>
+              </div>
+            </div>
+            <button class="view-lesson-btn" style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: var(--radius-md); cursor: pointer;">
+              <i class="ph ph-eye"></i> View
+            </button>
+          </div>
+        </div>
+      `).join('');
+    } else {
+      lessonsHTML = `
+        <div style="padding: 2rem; text-align: center; background: var(--surface); border-radius: var(--radius-md); border: 1px solid var(--border);">
+          <i class="ph ph-book" style="font-size: 2rem; color: var(--text-secondary); margin-bottom: 1rem;"></i>
+          <h3 style="margin-bottom: 0.5rem;">No Lessons Yet</h3>
+          <p style="color: var(--text-secondary);">Your teacher hasn't assigned any lessons yet.</p>
+        </div>
+      `;
+    }
+    
+    classesHTML += `
+      <div class="class-section" style="margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3>${classDetails.code} Class</h3>
+          <span style="background: var(--primary); color: white; padding: 0.3rem 0.8rem; border-radius: 30px; font-size: 0.8rem;">
+            Joined: ${formatDate(joinedClass.joinedDate)}
+          </span>
+        </div>
+        <div class="class-lessons">
+          ${lessonsHTML}
+        </div>
+      </div>
+    `;
+  }
+  
+  modal.innerHTML = `
+    <div class="modal-content" style="width: 90%; max-width: 800px; padding: 2rem;">
+      <div class="modal-header">
+        <h2><i class="ph ph-graduation-cap"></i> My Classes</h2>
+        <div class="modal-controls">
+          <button id="joinAnotherClassBtn" class="secondary-btn" style="margin-right: 1rem;">
+            <i class="ph ph-plus"></i> Join Another Class
+          </button>
+          <button class="close-btn" id="closeStudentDashboardModal">
+            <i class="ph ph-x"></i>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body" style="padding: 1.5rem;">
+        ${classesHTML}
+      </div>
+    </div>
+  `;
+  
+  // Add to body
+  document.body.appendChild(modal);
+  
+  // Add close button functionality
+  document.getElementById('closeStudentDashboardModal').addEventListener('click', function() {
+    modal.remove();
+  });
+  
+  // Add join another class button functionality
+  document.getElementById('joinAnotherClassBtn').addEventListener('click', function() {
+    modal.remove();
+    showJoinClassModal();
+  });
+  
+  // Add view lesson functionality to all view buttons
+  modal.querySelectorAll('.view-lesson-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation(); // Prevent lesson item click
+      const lessonId = this.closest('.student-lesson-item').getAttribute('data-lesson-id');
+      const lesson = allTeacherLessons.find(l => l.id === lessonId);
+      
+      if (lesson) {
+        modal.style.display = 'none';
+        showLessonViewModal(lesson, 'Your Teacher');
+      }
+    });
+  });
+  
+  // Add click functionality to lesson items
+  modal.querySelectorAll('.student-lesson-item').forEach(item => {
+    item.addEventListener('click', function() {
+      const lessonId = this.getAttribute('data-lesson-id');
+      const lesson = allTeacherLessons.find(l => l.id === lessonId);
+      
+      if (lesson) {
+        modal.style.display = 'none';
+        showLessonViewModal(lesson, 'Your Teacher');
+      }
+    });
+  });
+}
+
+// Initialize student UI
+function initStudentUI() {
+  const dashboardHeader = document.querySelector('.dashboard-header');
+  if (dashboardHeader) {
+    const studentControls = document.createElement('div');
+    studentControls.className = 'teacher-controls'; // Reuse the same style
+    studentControls.innerHTML = `
+      <div class="teacher-welcome">
+        <i class="ph ph-student"></i>
+        <span>Student Dashboard</span>
+      </div>
+      <div style="display: flex; gap: 1rem;">
+        <button id="joinClassBtn" class="primary-btn">
+          <i class="ph ph-plus-circle"></i>
+          Join Class
+        </button>
+        <button id="myClassesBtn" class="primary-btn">
+          <i class="ph ph-books"></i>
+          My Classes
+        </button>
+      </div>
+    `;
+    dashboardHeader.appendChild(studentControls);
+    
+    // Add event listener for join class button
+    document.getElementById('joinClassBtn').addEventListener('click', showJoinClassModal);
+    
+    // Add event listener for my classes button
+    document.getElementById('myClassesBtn').addEventListener('click', showStudentDashboard);
   }
 }
 
@@ -3350,7 +3777,7 @@ function openLesson(courseId, lessonId) {
           correctAnswer: 1
         },
         {
-          question: "Which genre focuses on solving a crime or mystery?",
+          question: "What is the most common genre of fiction?",
           options: ["Romance", "Science Fiction", "Detective Fiction", "Fantasy"],
           correctAnswer: 2
         }
@@ -3887,13 +4314,28 @@ function showTestQuestion(test, questionIndex) {
     indicator.classList.toggle('current', index === questionIndex);
   });
   
-  // Show finish button on last question
-  const finishTestBtn = document.getElementById('finishTestBtn');
+  // Update navigation controls
+  const prevQuestionBtn = document.getElementById('prevQuestionBtn');
+  const nextQuestionBtn = document.getElementById('nextQuestionBtn');
   
-  if (questionIndex === test.questions.length - 1) {
-    finishTestBtn.style.display = 'block';
-  } else {
-    finishTestBtn.style.display = 'none';
+  if (prevQuestionBtn) {
+    prevQuestionBtn.disabled = questionIndex === 0;
+    prevQuestionBtn.onclick = function() {
+      if (questionIndex > 0) {
+        currentQuestionIndex--;
+        showTestQuestion(test, currentQuestionIndex);
+      }
+    };
+  }
+  
+  if (nextQuestionBtn) {
+    nextQuestionBtn.disabled = questionIndex === test.questions.length - 1;
+    nextQuestionBtn.onclick = function() {
+      if (questionIndex < test.questions.length - 1) {
+        currentQuestionIndex++;
+        showTestQuestion(test, currentQuestionIndex);
+      }
+    };
   }
   
   // Add click event for answer options
@@ -3924,27 +4366,10 @@ function showTestQuestion(test, questionIndex) {
   }
   
   // Update navigation controls
-  const prevQuestionBtn = document.getElementById('prevQuestionBtn');
-  const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+  const finishTestBtn = document.getElementById('finishTestBtn');
   
-  if (prevQuestionBtn) {
-    prevQuestionBtn.disabled = questionIndex === 0;
-    prevQuestionBtn.onclick = function() {
-      if (questionIndex > 0) {
-        currentQuestionIndex--;
-        showTestQuestion(test, currentQuestionIndex);
-      }
-    };
-  }
-  
-  if (nextQuestionBtn) {
-    nextQuestionBtn.disabled = questionIndex === test.questions.length - 1;
-    nextQuestionBtn.onclick = function() {
-      if (questionIndex < test.questions.length - 1) {
-        currentQuestionIndex++;
-        showTestQuestion(test, currentQuestionIndex);
-      }
-    };
+  if (finishTestBtn) {
+    finishTestBtn.style.display = questionIndex === test.questions.length - 1 ? 'block' : 'none';
   }
 }
 
@@ -4077,87 +4502,6 @@ function calculateTestScore(test) {
   });
   
   return Math.round((correctAnswers / test.questions.length) * 100);
-}
-
-// Submit a lesson quiz
-function submitLessonQuiz(quizQuestions, answers) {
-  let correctAnswers = 0;
-  let answeredQuestions = 0;
-  
-  // Check each question
-  quizQuestions.forEach((question, index) => {
-    const selectedOption = answers[index];
-    
-    if (selectedOption !== null) {
-      answeredQuestions++;
-      if (selectedOption === question.correctAnswer) {
-        correctAnswers++;
-      }
-    }
-  });
-  
-  // Check if all questions are answered
-  if (answeredQuestions < quizQuestions.length) {
-    showNotification('Please Answer All Questions', 'You need to answer all questions before submitting.', 'warning');
-    return;
-  }
-  
-  // Calculate score
-  const score = Math.round((correctAnswers / quizQuestions.length) * 100);
-  
-  // Update result UI
-  document.getElementById('quizScore').textContent = `${score}%`;
-  
-  // Set result feedback
-  const resultFeedback = document.getElementById('resultFeedback');
-  
-  if (score >= 80) {
-    resultFeedback.textContent = 'Excellent! You have mastered this lesson.';
-  } else if (score >= 60) {
-    resultFeedback.textContent = 'Good job! You understand most of the concepts.';
-  } else {
-    resultFeedback.textContent = 'You may need to review this lesson for better understanding.';
-  }
-  
-  // Hide quiz, show result
-  document.getElementById('lessonQuiz').style.display = 'none';
-  document.getElementById('lessonResult').style.display = 'block';
-  
-  // Setup result buttons
-  document.getElementById('retryQuizBtn').onclick = function() {
-    document.getElementById('lessonResult').style.display = 'none';
-    document.getElementById('lessonQuiz').style.display = 'block';
-    
-    // Reset all answers
-    document.querySelectorAll('input[type="radio"]').forEach(radio => {
-      radio.checked = false;
-    });
-    
-    document.querySelectorAll('.answer-option').forEach(option => {
-      option.classList.remove('selected');
-    });
-  };
-  
-  document.getElementById('nextLessonBtnResult').onclick = function() {
-    const nextBtn = document.getElementById('nextLessonBtn');
-    if (!nextBtn.disabled) {
-      nextBtn.click();
-    } else {
-      document.getElementById('courseModal').style.display = 'none';
-    }
-  };
-  
-  // Update user stats
-  enlightenData.user.completedLessons++;
-  
-  // Save user data
-  saveUserData();
-  
-  // Update dashboard stats
-  document.getElementById('completedLessons').textContent = enlightenData.user.completedLessons;
-  
-  // Show notification
-  showNotification('Quiz Completed', `You scored ${score}% on this quiz.`, score >= 60 ? 'success' : 'warning');
 }
 
 // Show a notification
@@ -4369,25 +4713,11 @@ function generateCourseImage(subject) {
     computer: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=500&auto=format&fit=crop'
   };
   
-  return imageUrls[subject] || 'https://images.unsplash.com/photo-1503676260728-72ae9ae6848d?q=80&w=500&auto=format&fit=crop';
+  return imageUrls[subject] || 'https://images.unsplash.com/photo-1503676260728-52c61a468e7d?q=80&w=500&auto=format&fit=crop';
 }
 
 function showClassCodeModal() {
-  // Get or generate class codes
-  if (!localStorage.getItem('teacherClassCodes')) {
-    const classCode = generateClassCode();
-    const defaultClassCodes = [
-      { 
-        teacherId: 'default', 
-        code: classCode,
-        lessons: [],
-        students: []
-      }
-    ];
-    localStorage.setItem('teacherClassCodes', JSON.stringify(defaultClassCodes));
-  }
-  
-  const classCodes = JSON.parse(localStorage.getItem('teacherClassCodes'));
+  const classCodes = JSON.parse(localStorage.getItem('teacherClassCodes') || '[]');
   const currentClassCode = classCodes[0]; // Use first class code for default
   
   // Create modal element
@@ -4416,7 +4746,7 @@ function showClassCodeModal() {
           <h3 style="margin-bottom: 1rem;">How to Use Your Class Code</h3>
           <ol style="padding-left: 1.5rem; margin-bottom: 1.5rem;">
             <li style="margin-bottom: 0.5rem;">Share this unique class code with your students</li>
-            <li style="margin-bottom: 0.5rem;">Students will enter this code to join your class</li>
+            <li style="margin-bottom: 0.5rem;">Students will enter this code to join your class and access assigned lessons.</li>
             <li>Students can access lessons you assign</li>
           </ol>
         </div>
