@@ -22,8 +22,9 @@ class Auth {
     }
     
     localStorage.removeItem('userSession');
+    localStorage.removeItem('userRole'); 
     this.userSession = null;
-    window.location.href = 'login.html';
+    window.location.href = 'signup.html';
   }
 
   checkAuth() {

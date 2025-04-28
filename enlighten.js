@@ -1508,7 +1508,7 @@ function addEventListeners() {
         
         // Refresh the page after a short delay
         setTimeout(() => {
-          window.location.reload();
+          window.location.href = 'signup.html';
         }, 1500);
       }
     });
@@ -2371,7 +2371,7 @@ function showClassAssignmentsModal(classData, assignments) {
       const lesson = JSON.parse(localStorage.getItem('teacherLessons') || '[]').find(l => l.id === lessonId);
       
       if (lesson) {
-        showLessonViewModal(lesson, classData.name + ' Teacher');
+        showLessonViewModal(lesson, 'Your Teacher');
       }
     });
   });
@@ -2821,41 +2821,47 @@ function showLessonViewModal(lesson, teacherName) {
         case 'link':
           resourcesHtml += `
             <div style="background: var(--surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
-              <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+              <div style="display: flex; align-items: center; gap: 0.8rem;">
                 <i class="ph ph-link" style="color: var(--primary); font-size: 1.2rem;"></i>
-                <h4>${resource.title}</h4>
+                <div>
+                  <h4>${resource.title}</h4>
+                  <a href="${resource.url}" target="_blank" style="color: var(--primary); display: block; word-break: break-all; text-decoration: none; margin-left: 2rem;" rel="noopener noreferrer">
+                    ${resource.url}
+                    <i class="ph ph-arrow-square-out" style="margin-left: 0.3rem;"></i>
+                  </a>
+                </div>
               </div>
-              <a href="${resource.url}" target="_blank" style="color: var(--primary); display: block; word-break: break-all; text-decoration: none; margin-left: 2rem;" rel="noopener noreferrer">
-                ${resource.url}
-                <i class="ph ph-arrow-square-out" style="margin-left: 0.3rem;"></i>
-              </a>
             </div>
           `;
           break;
         case 'code':
           resourcesHtml += `
             <div style="background: var(--surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
-              <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+              <div style="display: flex; align-items: center; gap: 0.8rem;">
                 <i class="ph ph-code" style="color: var(--primary); font-size: 1.2rem;"></i>
-                <h4>Code Snippet (${resource.language})</h4>
+                <div>
+                  <h4>Code Snippet (${resource.language})</h4>
+                  <pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: var(--radius-sm); overflow-x: auto; margin-top: 0.5rem; font-family: monospace;">${resource.content}</pre>
+                  <button class="copy-code-btn" data-code="${encodeURIComponent(resource.content)}" style="background: var(--surface-hover); border: none; padding: 0.5rem; border-radius: var(--radius-sm); margin-top: 0.5rem; cursor: pointer; display: flex; align-items: center; gap: 0.3rem;">
+                    <i class="ph ph-copy"></i> Copy Code
+                  </button>
+                </div>
               </div>
-              <pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: var(--radius-sm); overflow-x: auto; margin-top: 0.5rem; font-family: monospace;">${resource.content}</pre>
-              <button class="copy-code-btn" data-code="${encodeURIComponent(resource.content)}" style="background: var(--surface-hover); border: none; padding: 0.5rem; border-radius: var(--radius-sm); margin-top: 0.5rem; cursor: pointer; display: flex; align-items: center; gap: 0.3rem;">
-                <i class="ph ph-copy"></i> Copy Code
-              </button>
             </div>
           `;
           break;
         case 'file':
           resourcesHtml += `
             <div style="background: var(--surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
-              <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+              <div style="display: flex; align-items: center; gap: 0.8rem;">
                 <i class="ph ph-file" style="color: var(--primary); font-size: 1.2rem;"></i>
-                <h4>${resource.title}</h4>
+                <div>
+                  <h4>${resource.title}</h4>
+                  <a href="${resource.url}" target="_blank" style="color: var(--primary); display: flex; align-items: center; gap: 0.5rem; text-decoration: none; margin-left: 2rem;" rel="noopener noreferrer">
+                    <i class="ph ph-download"></i> Download File
+                  </a>
+                </div>
               </div>
-              <a href="${resource.url}" target="_blank" style="color: var(--primary); display: flex; align-items: center; gap: 0.5rem; text-decoration: none; margin-left: 2rem;" rel="noopener noreferrer">
-                <i class="ph ph-download"></i> Download File
-              </a>
             </div>
           `;
           break;
@@ -3109,7 +3115,7 @@ function showStudentDashboard() {
     
     if (classLessons.length > 0) {
       lessonsHTML = classLessons.map(lesson => `
-        <div class="student-lesson-item" style="padding: 1rem; background: var(--surface); border-radius: var(--radius-md); border: 1px solid var(--border); margin-bottom: 0.8rem; cursor: pointer;" data-lesson-id="${lesson.id}">
+        <div class="student-lesson-item" data-lesson-id="${lesson.id}" style="padding: 1rem; background: var(--surface); border-radius: var(--radius-md); border: 1px solid var(--border); margin-bottom: 0.8rem; cursor: pointer;">
           <div style="display: flex; justify-content: space-between; align-items: center;">
             <div style="display: flex; align-items: center; gap: 0.8rem;">
               <i class="ph ph-book-open" style="color: var(--primary); font-size: 1.2rem;"></i>

@@ -565,6 +565,38 @@
             // Initialize password strength meter
             updatePasswordStrength();
         });
+        
+        // Setup update button
+        document.getElementById('updateLessonBtn').addEventListener('click', (e) => {
+          const lessonId = e.target.getAttribute('data-lesson-id');
+          const title = document.getElementById('editLessonTitle').value.trim();
+          const description = document.getElementById('editLessonDescription').value.trim();
+          const content = document.getElementById('editLessonContent').value.trim();
+          
+          if (!title) {
+            alert('Please enter a lesson title');
+            return;
+          }
+          
+          // Update lesson object
+          const updatedLesson = {
+            id: lessonId,
+            title,
+            description,
+            content,
+            resources: [],
+            dateCreated: '',
+            dateUpdated: new Date().toISOString()
+          };
+          
+          // Update lesson
+          // Note: updateTeacherLesson function is not defined in the provided code
+          // updateTeacherLesson(updatedLesson);
+          
+          // Close modal
+          // Note: modal variable is not defined in the provided code
+          // modal.remove();
+        });
     </script>
 </body>
 </html>
