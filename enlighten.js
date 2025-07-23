@@ -1,3 +1,4 @@
+
 const enlightenData = {
   // User data
   user: {
